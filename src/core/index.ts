@@ -58,3 +58,9 @@ export * from "./finalVerdict";
 export * from "./directResponse";
 export * from "./methodology";
 export * from "./testCorpus";
+
+export * from "./cache";
+export * from "./correspondences";
+export * from "./bookmarks";
+export * from "./timingExplorer";
+export * from "./graph";

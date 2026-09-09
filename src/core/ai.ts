@@ -87,3 +87,24 @@ export function analysisMessages(analysis: AbsoluteAnalysis): AiMessage[] {
     }
   ];
 }
+
+export interface LocalAiOptions {
+  endpoint:string;
+  model:string;
+  id?:string;
+}
+
+export const LOCAL_AI_PRESETS = {
+  ollama:{endpoint:"http://127.0.0.1:11434/v1",model:"",label:"Ollama OpenAI-compatible endpoint"},
+  lmStudio:{endpoint:"http://127.0.0.1:1234/v1",model:"",label:"LM Studio OpenAI-compatible endpoint"}
+} as const;
+
+export function createLocalAiProvider(options:LocalAiOptions):AiProvider {
+  const endpoint=options.endpoint.trim();
+  const model=options.model.trim();
+  if(!/^https?:\/\/(localhost|127\.0\.0\.1|\[::1\])(?::\d+)?(?:\/|$)/i.test(endpoint)) {
+    throw new Error("Local AI endpoint must use localhost, 127.0.0.1 or ::1.");
+  }
+  if(!model) throw new Error("Local AI model name is required.");
+  return new OpenAiCompatibleProvider({id:options.id ?? "local-ai",endpoint,model});
+}

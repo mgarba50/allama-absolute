@@ -8,6 +8,8 @@ import type { PractitionerNote } from "./notes";
 import type { RecordedOutcome } from "./outcomes";
 import type { PractitionerOverride } from "./override";
 import type { Evidence, Verdict } from "./types";
+import type { MethodologyProfile } from "./methodology";
+import type { ProtocolBookmark } from "./bookmarks";
 
 export interface SqliteByteStore {
   load(): Promise<Uint8Array | null>;
@@ -441,6 +443,43 @@ export class SqliteCaseRepository implements CaseRepository {
       outcomes:this.listOutcomes(caseId),
       overrides:this.listOverrides(caseId)
     };
+  }
+
+
+  getMethodologyProfile(id: string): MethodologyProfile | null {
+    const row=queryRows(this.database,"SELECT profile_json FROM methodology_profiles WHERE id=?",[id])[0];
+    return row ? safeJson<MethodologyProfile>(row.profile_json,null as unknown as MethodologyProfile) : null;
+  }
+
+  async saveMethodologyProfile(profile: MethodologyProfile,updatedAt=new Date().toISOString()): Promise<void> {
+    this.database.run(
+      "INSERT INTO methodology_profiles(id,name,version,profile_json,updated_at) VALUES(?,?,?,?,?) "+
+      "ON CONFLICT(id) DO UPDATE SET name=excluded.name,version=excluded.version,profile_json=excluded.profile_json,updated_at=excluded.updated_at",
+      [profile.id,profile.name,profile.version,JSON.stringify(profile),updatedAt]
+    );
+    await this.flush();
+  }
+
+  listProtocolBookmarks(): ProtocolBookmark[] {
+    return queryRows(this.database,"SELECT * FROM protocol_bookmarks ORDER BY updated_at DESC").map((row)=>({
+      id:String(row.id),name:String(row.name),protocolId:String(row.protocol_id),
+      configuration:safeJson<ProtocolBookmark["configuration"]>(row.configuration_json,{enabledModules:[],weights:{},options:{}}),
+      createdAt:String(row.created_at),updatedAt:String(row.updated_at)
+    }));
+  }
+
+  async saveProtocolBookmark(bookmark: ProtocolBookmark): Promise<void> {
+    this.database.run(
+      "INSERT INTO protocol_bookmarks(id,name,protocol_id,configuration_json,created_at,updated_at) VALUES(?,?,?,?,?,?) "+
+      "ON CONFLICT(id) DO UPDATE SET name=excluded.name,protocol_id=excluded.protocol_id,configuration_json=excluded.configuration_json,updated_at=excluded.updated_at",
+      [bookmark.id,bookmark.name,bookmark.protocolId,JSON.stringify(bookmark.configuration),bookmark.createdAt,bookmark.updatedAt]
+    );
+    await this.flush();
+  }
+
+  async deleteProtocolBookmark(id:string):Promise<void> {
+    this.database.run("DELETE FROM protocol_bookmarks WHERE id=?",[id]);
+    await this.flush();
   }
 
   exportDatabase(): Uint8Array {

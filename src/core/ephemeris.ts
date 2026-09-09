@@ -5,6 +5,7 @@ import {
   GeoVector,
   MoonPhase
 } from "astronomy-engine";
+import { LruCache } from "./cache";
 
 export interface CelestialPosition {
   body: string;
@@ -37,6 +38,8 @@ export const ARABIC_LUNAR_MANSIONS = [
   "الفرغ المؤخر","بطن الحوت"
 ] as const;
 
+const POSITION_CACHE = new LruCache<CelestialPosition>(512);
+
 const CLASSICAL_BODIES = [
   Body.Sun,Body.Moon,Body.Mercury,Body.Venus,Body.Mars,Body.Jupiter,Body.Saturn
 ] as const;
@@ -49,6 +52,9 @@ function normalizeDegrees(value: number): number {
 
 export function geocentricPosition(body: ClassicalBody,date: Date): CelestialPosition {
   if (!Number.isFinite(date.getTime())) throw new Error("Invalid ephemeris date.");
+  const cacheKey=String(body)+"|"+date.toISOString();
+  const cached=POSITION_CACHE.get(cacheKey);
+  if(cached) return cached;
 
   let longitude: number;
   let latitude: number;
@@ -68,7 +74,7 @@ export function geocentricPosition(body: ClassicalBody,date: Date): CelestialPos
   }
 
   const zodiacIndex = Math.floor(longitude / 30);
-  return {
+  const result={
     body,
     longitude,
     latitude,
@@ -76,6 +82,8 @@ export function geocentricPosition(body: ClassicalBody,date: Date): CelestialPos
     zodiacIndex,
     zodiacName:ZODIAC_NAMES[zodiacIndex]
   };
+  POSITION_CACHE.set(cacheKey,result);
+  return result;
 }
 
 export function classicalPlanetPositions(date: Date): CelestialPosition[] {

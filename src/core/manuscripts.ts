@@ -1,3 +1,5 @@
+import { LruCache } from "./cache";
+
 export interface ManuscriptDocument {
   id: string;
   title: string;
@@ -19,14 +21,17 @@ function tokens(text: string): string[] {
 
 export class ManuscriptIndex {
   private documents = new Map<string,ManuscriptDocument>();
+  private searchCache = new LruCache<ManuscriptHit[]>(128);
 
   add(document: ManuscriptDocument): void {
     if (!document.id || !document.title) throw new Error("Document id and title are required.");
     this.documents.set(document.id,document);
+    this.searchCache.clear();
   }
 
   remove(id: string): void {
     this.documents.delete(id);
+    this.searchCache.clear();
   }
 
   list(): ManuscriptDocument[] {
@@ -34,9 +39,12 @@ export class ManuscriptIndex {
   }
 
   search(query: string,limit = 10): ManuscriptHit[] {
+    const cacheKey=query.trim().toLowerCase()+"|"+limit;
+    const cached=this.searchCache.get(cacheKey);
+    if(cached) return cached;
     const queryTokens = new Set(tokens(query));
     if (!queryTokens.size) return [];
-    return this.list().map((document) => {
+    const results=this.list().map((document) => {
       const haystack = tokens(document.title + " " + (document.author ?? "") + " " + document.text);
       const frequencies = new Map<string,number>();
       for (const token of haystack) frequencies.set(token,(frequencies.get(token) ?? 0) + 1);
@@ -48,5 +56,7 @@ export class ManuscriptIndex {
       const excerpt = document.text.slice(start,start + 300);
       return { document, score, excerpt };
     }).filter((hit) => hit.score > 0).sort((a,b) => b.score - a.score).slice(0,limit);
+    this.searchCache.set(cacheKey,results);
+    return results;
   }
 }
