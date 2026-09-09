@@ -68,3 +68,5 @@ export * from "./graph";
 export * from "./researchMetrics";
 
 export * from "./astronomyValidation";
+
+export * from "./personality";

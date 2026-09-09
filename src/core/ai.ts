@@ -1,4 +1,5 @@
 import type { AbsoluteAnalysis } from "./analysis";
+import { SYSTEM_PERSONALITY_DIRECTIVE, assertSovereignResponseStyle } from "./personality";
 
 export interface AiMessage {
   role: "system" | "user" | "assistant";
@@ -51,6 +52,7 @@ export class OpenAiCompatibleProvider implements AiProvider {
     };
     const text = payload.choices?.[0]?.message?.content;
     if (!text) throw new Error("AI provider returned no text.");
+    assertSovereignResponseStyle(text);
     return { text, provider:this.options.id, model:this.options.model };
   }
 }
@@ -79,7 +81,7 @@ export function analysisMessages(analysis: AbsoluteAnalysis): AiMessage[] {
   return [
     {
       role:"system",
-      content:"You are the optional synthesis layer of ALLAMA ABSOLUTE. Never invent figures, arithmetic, planetary positions, sources, case statistics, or missing observations. Explicitly distinguish deterministic calculation, traditional interpretation, AI synthesis, and empirical evidence. If data is absent, say it is absent."
+      content:"You are the optional synthesis layer of ALLAMA ABSOLUTE. "+SYSTEM_PERSONALITY_DIRECTIVE+" Never invent figures, arithmetic, planetary positions, sources, case statistics, or missing observations. Explicitly distinguish deterministic calculation, traditional interpretation, AI synthesis, and empirical evidence. If data is absent, say it is absent."
     },
     {
       role:"user",

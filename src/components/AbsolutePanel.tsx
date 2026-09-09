@@ -7,7 +7,7 @@ import {
   renderDirectResponse,
   renderScholarMarkdown,
   runAbsoluteAnalysis,
-  runAnalyticalCouncil,
+  runHundredPerspectiveCouncil,
   runDeepSearch,
   type DirectResponseMode,
   type Locale
@@ -26,7 +26,7 @@ export function AbsolutePanel({ question,motherIds,latitude,longitude,momentText
   const t=(en:string,arabic:string)=>ar?arabic:en;
   const analysis = useMemo(() => runAbsoluteAnalysis({question,motherIds,timestamp:new Date(momentText),latitude,longitude}),[question,motherIds.join("|"),latitude,longitude,momentText]);
   const deep=useMemo(()=>runDeepSearch({analysis}),[analysis]);
-  const council=useMemo(()=>runAnalyticalCouncil(analysis,deep),[analysis,deep]);
+  const council=useMemo(()=>runHundredPerspectiveCouncil(analysis,deep),[analysis,deep]);
   const finalVerdict=useMemo(()=>buildFinalVerdict(analysis,{deepSearch:deep,council}),[analysis,deep,council]);
   const significators=identifySignificators(analysis.question);
   const verdict=analysis.traditionalVerdict;
@@ -57,8 +57,8 @@ export function AbsolutePanel({ question,motherIds,latitude,longitude,momentText
     </div>
     {analysis.migration.length>0&&<article className="panel"><h3>{t("Figure migration","انتقال الأشكال")}</h3><div className="migration-list">{analysis.migration.map((item)=><span key={item.figure.id}>{item.figure.latin}: {t("houses","البيوت")} {item.houses.join(" → ")}</span>)}</div></article>}
     <article className="panel">
-      <div className="section-heading"><div><span className="metric-label">{t("Analytical Council","المجلس التحليلي")}</span><h3>{council.verdict} · {(council.confidence*100).toFixed(1)}%</h3></div><span className="status">{council.consensus}</span></div>
-      {council.perspectives.map((p)=><div className="record-row" key={p.id}><strong>{p.label} · {p.direction>0?"+":p.direction<0?"−":"·"} {(p.confidence*100).toFixed(0)}%</strong><span>{p.rationale}</span></div>)}
+      <div className="section-heading"><div><span className="metric-label">{t("100-Perspective Analytical Council","المجلس التحليلي ذو المائة منظور")}</span><h3>{council.verdict} · {(council.confidence*100).toFixed(1)}%</h3></div><span className="status">{council.consensus}</span></div>
+      {council.perspectives.slice(0,20).map((p)=><div className="record-row" key={p.id}><strong>{p.label} · {p.direction>0?"+":p.direction<0?"−":"·"} {(p.confidence*100).toFixed(0)}%</strong><span>{p.rationale}</span></div>)}
       {council.strongestObjection&&<p className="notice">{t("Strongest objection","أقوى اعتراض")}: {council.strongestObjection.label}</p>}
     </article>
     <article className="panel">

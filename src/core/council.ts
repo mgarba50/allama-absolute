@@ -149,3 +149,53 @@ export function runAnalyticalCouncil(
     minorityOpinion,consensus,strongestObjection
   };
 }
+
+const COUNCIL_VARIANTS = [
+  {id:"balanced",label:"Balanced",scale:1,minimum:0},
+  {id:"strict",label:"Strict Evidence",scale:1.08,minimum:0.35},
+  {id:"primary",label:"Primary Testimony",scale:1.15,minimum:0.2},
+  {id:"contrary",label:"Contrary Challenge",scale:0.95,minimum:0.15},
+  {id:"high-signal",label:"High Signal",scale:1.2,minimum:0.5},
+  {id:"broad",label:"Broad Context",scale:0.9,minimum:0},
+  {id:"conservative",label:"Conservative",scale:0.85,minimum:0.4},
+  {id:"structural",label:"Structural Emphasis",scale:1.1,minimum:0.25},
+  {id:"independence",label:"Independence Emphasis",scale:1,minimum:0.3},
+  {id:"objection",label:"Strongest Objection",scale:0.92,minimum:0.2}
+] as const;
+
+export function hundredAnalyticalLenses(): AnalyticalLens[] {
+  return CORE_ANALYTICAL_LENSES.flatMap((base) =>
+    COUNCIL_VARIANTS.map((variant,index) => {
+      const priorities=Object.fromEntries(
+        Object.entries(base.priorities).map(([category,weight]) => [
+          category,
+          Number(weight) * variant.scale * (
+            variant.id==="contrary" && category==="contradiction" ? 1.35 :
+            variant.id==="structural" && ["repetition","migration","judge-ancestry","line-dependency","opposition"].includes(category) ? 1.25 :
+            variant.id==="independence" && category==="correlation" ? 1.5 :
+            variant.id==="objection" && category==="contradiction" ? 1.55 :
+            1
+          )
+        ])
+      ) as AnalyticalLens["priorities"];
+      return {
+        ...base,
+        id:`${base.id}-${String(index+1).padStart(2,"0")}`,
+        label:`${base.label} · ${variant.label}`,
+        priorities,
+        minimumStrength:Math.max(base.minimumStrength ?? 0,variant.minimum),
+        skeptical:base.skeptical || variant.id==="contrary" || variant.id==="objection",
+        description:`${base.description} Computational variant: ${variant.label}; this is an analytical perspective, not a claimed historical authority.`
+      };
+    })
+  );
+}
+
+export function runHundredPerspectiveCouncil(
+  analysis:AbsoluteAnalysis,
+  deep:DeepSearchResult,
+  additionalLenses:readonly AnalyticalLens[]=[]
+):AnalyticalCouncilResult {
+  const hundred=hundredAnalyticalLenses();
+  return runAnalyticalCouncil(analysis,deep,[...hundred.slice(CORE_ANALYTICAL_LENSES.length),...additionalLenses]);
+}
