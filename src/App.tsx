@@ -106,13 +106,19 @@ export default function App() {
         setView("absolute");
         return;
       case "compare":
-        return "Comparison is available as an engine API but is not exposed as a shell command yet.";
+        setView("celestial");
+        return;
       case "lock":
-        return "Blind-lock operations require a trial record and are not executed from the global shell.";
+        setView("research");
+        return;
       case "outcome":
-        return "Outcome recording requires a selected case and cannot run without case context.";
+        setView("cases");
+        return;
+      case "graphs":
+      case "settings":
+        return "This command target is being wired into the dedicated practitioner surfaces.";
       default:
-        return "Unknown command. Supported here: /cast, /judge, /reverse, /house N, /abjad TEXT, /hour, /moon, /deep.";
+        return "Unknown command. Supported: /cast, /judge, /reverse, /house N, /abjad TEXT, /hour, /moon, /deep, /compare, /lock, /outcome.";
     }
   }
 

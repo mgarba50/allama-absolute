@@ -95,6 +95,7 @@ describe("SQLite practitioner repository", () => {
 
     expect(repository.integrityCheck()).toBe("ok");
     expect(repository.databaseHealth().userVersion).toBe(3);
+    expect(repository.referenceDataCounts()).toEqual(expect.objectContaining({figures:16,houses:12,abjad_methods:1}));
     expect(repository.listCasts(record.id)).toHaveLength(1);
     expect(repository.listNotes(record.id)[0]?.body).toContain("signed agreement");
     expect(repository.listPredictions(record.id)).toHaveLength(1);

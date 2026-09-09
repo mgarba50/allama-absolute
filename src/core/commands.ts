@@ -10,6 +10,8 @@ export type AbsoluteCommand =
   | { type:"compare" }
   | { type:"lock" }
   | { type:"outcome" }
+  | { type:"graphs" }
+  | { type:"settings" }
   | { type:"unknown"; raw:string };
 
 export function parseCommand(input: string): AbsoluteCommand {
@@ -31,5 +33,7 @@ export function parseCommand(input: string): AbsoluteCommand {
   if (command === "compare") return { type:"compare" };
   if (command === "lock") return { type:"lock" };
   if (command === "outcome") return { type:"outcome" };
+  if (command === "graphs" || command === "graph") return { type:"graphs" };
+  if (command === "settings" || command === "config") return { type:"settings" };
   return { type:"unknown", raw:trimmed };
 }

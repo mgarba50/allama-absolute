@@ -1,7 +1,7 @@
 import initSqlJs, { type Database } from "sql.js";
 import wasmUrl from "sql.js/dist/sql-wasm.wasm?url";
 import schema from "../../database/schema.sql?raw";
-import { figureFromId } from "./figures";
+import { FIGURES, figureFromId } from "./figures";
 import { generateShield } from "./raml";
 import type { CaseRepository, CaseState, CastRecord } from "./cases";
 import type { PractitionerNote } from "./notes";
@@ -10,6 +10,9 @@ import type { PractitionerOverride } from "./override";
 import type { Evidence, Verdict } from "./types";
 import type { MethodologyProfile } from "./methodology";
 import type { ProtocolBookmark } from "./bookmarks";
+import { HOUSES } from "./houses";
+import { ABJAD_KABIR, DEFAULT_NORMALIZATION } from "./abjad";
+import { ARABIC_LUNAR_MANSIONS } from "./ephemeris";
 
 export interface SqliteByteStore {
   load(): Promise<Uint8Array | null>;
@@ -184,6 +187,7 @@ export class SqliteCaseRepository implements CaseRepository {
     repository.prepareLegacySchema();
     database.run(schema);
     repository.migrate();
+    repository.seedReferenceData();
     await repository.flush();
     return repository;
   }
@@ -207,6 +211,50 @@ export class SqliteCaseRepository implements CaseRepository {
     this.database.run("PRAGMA foreign_keys = ON");
     this.database.run("PRAGMA user_version = 3");
     this.database.run("INSERT OR IGNORE INTO schema_migrations(version,applied_at) VALUES(3,datetime('now'))");
+  }
+
+  private seedReferenceData(): void {
+    this.database.run("BEGIN");
+    try {
+      for (const figure of FIGURES) {
+        this.database.run(
+          "INSERT OR REPLACE INTO figures(id,latin_name,arabic_name,pattern,element,planet,quality,payload_json) VALUES(?,?,?,?,?,?,?,?)",
+          [figure.id,figure.latin,figure.arabic,figure.pattern.join(""),figure.element,figure.planet,figure.quality,JSON.stringify({keywords:figure.keywords})]
+        );
+      }
+      for (const house of HOUSES) {
+        this.database.run(
+          "INSERT OR REPLACE INTO houses(id,name_en,name_ar,payload_json) VALUES(?,?,?,?)",
+          [house.number,house.name,house.nameAr,JSON.stringify({keywords:house.keywords,keywordsAr:house.keywordsAr})]
+        );
+      }
+      this.database.run(
+        "INSERT OR REPLACE INTO abjad_methods(id,name,version,mapping_json,normalization_json) VALUES(?,?,?,?,?)",
+        ["kabir-standard","Abjad al-Kabir",1,JSON.stringify(ABJAD_KABIR),JSON.stringify(DEFAULT_NORMALIZATION)]
+      );
+      ARABIC_LUNAR_MANSIONS.forEach((name,index) => {
+        this.database.run(
+          "INSERT OR REPLACE INTO correspondence_tables(id,family,key_text,value_json,version) VALUES(?,?,?,?,?)",
+          ["lunar-mansion-equal-arc-"+String(index+1).padStart(2,"0"),"lunar-mansion-equal-arc-28",String(index+1),JSON.stringify({arabicName:name,index:index+1}),1]
+        );
+      });
+      this.database.run(
+        "INSERT OR REPLACE INTO correspondence_tables(id,family,key_text,value_json,version) VALUES(?,?,?,?,?)",
+        ["planetary-hour-order","planetary-hours","chaldean-order",JSON.stringify(["Saturn","Jupiter","Mars","Sun","Venus","Mercury","Moon"]),1]
+      );
+      this.database.run("COMMIT");
+    } catch (error) {
+      this.database.run("ROLLBACK");
+      throw error;
+    }
+  }
+
+  referenceDataCounts(): Readonly<Record<string,number>> {
+    const names=["figures","houses","abjad_methods","correspondence_tables"];
+    return Object.fromEntries(names.map((name)=>{
+      const row=queryRows(this.database,`SELECT COUNT(*) AS count FROM ${name}`)[0];
+      return [name,Number(row?.count ?? 0)];
+    }));
   }
 
   private async flush(): Promise<void> {
@@ -564,6 +612,7 @@ export class SqliteCaseRepository implements CaseRepository {
       this.prepareLegacySchema();
       this.database.run(schema);
       this.migrate();
+      this.seedReferenceData();
       if (this.integrityCheck() !== "ok") throw new Error("Imported database failed post-migration integrity check.");
       await this.flush();
       previous.close();
