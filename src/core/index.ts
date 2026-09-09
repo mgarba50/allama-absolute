@@ -36,6 +36,7 @@ export * from "./research";
 export * from "./commands";
 export * from "./remote";
 export * from "./cases";
+export * from "./sqlite";
 export * from "./caseSearch";
 export * from "./notes";
 export * from "./comparison";

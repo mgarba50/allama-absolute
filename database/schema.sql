@@ -13,8 +13,11 @@ CREATE TABLE IF NOT EXISTS cases (
   question_normalized TEXT,
   domain TEXT,
   created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL,
   status TEXT NOT NULL DEFAULT 'open',
-  blind_mode INTEGER NOT NULL DEFAULT 0
+  blind_mode INTEGER NOT NULL DEFAULT 0,
+  timeline_json TEXT NOT NULL DEFAULT '[]',
+  metadata_json TEXT NOT NULL DEFAULT '{}'
 );
 
 CREATE TABLE IF NOT EXISTS casts (
@@ -112,3 +115,9 @@ CREATE TABLE IF NOT EXISTS calibration (
   value REAL NOT NULL,
   computed_at TEXT NOT NULL
 );
+
+CREATE INDEX IF NOT EXISTS idx_cases_created_at ON cases(created_at);
+CREATE INDEX IF NOT EXISTS idx_cases_updated_at ON cases(updated_at);
+CREATE INDEX IF NOT EXISTS idx_casts_case_id ON casts(case_id);
+CREATE INDEX IF NOT EXISTS idx_predictions_case_id ON predictions(case_id);
+CREATE INDEX IF NOT EXISTS idx_outcomes_case_id ON outcomes(case_id);
