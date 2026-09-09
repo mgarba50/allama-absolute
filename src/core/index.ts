@@ -42,6 +42,7 @@ export * from "./notes";
 export * from "./comparison";
 export * from "./whatIf";
 export * from "./protocols";
+export * from "./protocolCoverage";
 export * from "./ai";
 export * from "./override";
 export * from "./council";

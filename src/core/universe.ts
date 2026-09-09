@@ -1,4 +1,5 @@
 import universeDocument from "../../ABSOLUTE_777_UNIVERSE.json";
+import { protocolCoverageForQuestion } from "./protocolCoverage";
 
 export interface UniverseQuestion {
   id: string;
@@ -75,16 +76,12 @@ export function matchUniverseQuestion(query: string, topN = 5): UniverseMatch[] 
 }
 
 export function routeUniverseCategory(category: string): { houses: number[]; modules: string[]; decisionType: "YES_NO" | "COMPARISON" | "TIMING" | "LOCATION" | "OPEN" } {
-  const lower = category.toLowerCase();
-  if (lower.includes("debt") || lower.includes("money")) return { houses:[1,2,7,8], modules:["raml","houses","timing"], decisionType:"YES_NO" };
-  if (lower.includes("marriage") || lower.includes("relationship") || lower.includes("partner")) return { houses:[1,5,7], modules:["raml","houses","abjad"], decisionType:"YES_NO" };
-  if (lower.includes("business") || lower.includes("trade") || lower.includes("contract")) return { houses:[1,2,7,10], modules:["raml","houses","timing"], decisionType:"YES_NO" };
-  if (lower.includes("employment") || lower.includes("career")) return { houses:[1,2,6,10], modules:["raml","houses","timing"], decisionType:"YES_NO" };
-  if (lower.includes("travel") || lower.includes("return")) return { houses:[1,3,9], modules:["raml","houses","timing","celestial"], decisionType:"TIMING" };
-  if (lower.includes("location") || lower.includes("remote") || lower.includes("lost")) return { houses:[1,2,4,7,9], modules:["raml","houses","remote-lab"], decisionType:"LOCATION" };
-  if (lower.includes("timing") || lower.includes("electional")) return { houses:[1], modules:["raml","timing","celestial"], decisionType:"TIMING" };
-  if (lower.includes("comparison") || lower.includes("candidate") || lower.includes("multiple choice") || lower.includes("competition")) return { houses:[1,7,10], modules:["raml","comparison"], decisionType:"COMPARISON" };
-  if (lower.includes("health") || lower.includes("pregnancy")) return { houses:[1,5,6,8], modules:["raml","houses"], decisionType:"OPEN" };
-  if (lower.includes("legal")) return { houses:[1,7,9,10], modules:["raml","houses"], decisionType:"OPEN" };
-  return { houses:[1], modules:["raml","houses"], decisionType:"OPEN" };
+  const synthetic: UniverseQuestion = { id:"CATEGORY",difficulty:"STANDARD/ADVANCED",category,question:category,core_burden:[] };
+  const coverage = protocolCoverageForQuestion(synthetic);
+  const decisionType =
+    coverage.outputShape === "comparison" ? "COMPARISON" :
+    coverage.outputShape === "timing-windows" ? "TIMING" :
+    coverage.outputShape === "ranked-hypotheses" && coverage.id === "location-lost-remote" ? "LOCATION" :
+    coverage.outputShape === "binary" ? "YES_NO" : "OPEN";
+  return { houses:[...coverage.houses],modules:[...coverage.requiredModules,...coverage.optionalModules],decisionType };
 }
