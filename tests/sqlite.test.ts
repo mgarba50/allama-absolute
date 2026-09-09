@@ -94,8 +94,8 @@ describe("SQLite practitioner repository", () => {
     });
 
     expect(repository.integrityCheck()).toBe("ok");
-    expect(repository.databaseHealth().userVersion).toBe(3);
-    expect(repository.referenceDataCounts()).toEqual(expect.objectContaining({figures:16,houses:12,abjad_methods:1}));
+    expect(repository.databaseHealth().userVersion).toBe(4);
+    expect(repository.referenceDataCounts()).toEqual(expect.objectContaining({figures:16,houses:12,abjad_methods:1,correspondence_tables:29}));
     expect(repository.listCasts(record.id)).toHaveLength(1);
     expect(repository.listNotes(record.id)[0]?.body).toContain("signed agreement");
     expect(repository.listPredictions(record.id)).toHaveLength(1);
@@ -171,7 +171,7 @@ describe("SQLite practitioner repository", () => {
     const migrated = repository.getCase("LEGACY-1");
     expect(migrated?.updatedAt).toBe("2026-09-01T00:00:00.000Z");
     expect(migrated?.timeline).toEqual([]);
-    expect(repository.databaseHealth().userVersion).toBe(3);
+    expect(repository.databaseHealth().userVersion).toBe(4);
     expect(repository.integrityCheck()).toBe("ok");
     repository.close();
   });
