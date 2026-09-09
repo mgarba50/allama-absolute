@@ -1,4 +1,5 @@
 import type { QuestionProfile } from "./types";
+import { matchUniverseQuestion, routeUniverseCategory } from "./universe";
 
 type Rule = {
   domain: string;
@@ -37,17 +38,48 @@ export function classifyQuestion(input: string): QuestionProfile {
 
   const winner = ranked[0]?.hits ? ranked[0].rule : null;
   const notes: string[] = [];
-  if (!winner) notes.push("No deterministic domain rule matched; practitioner review is required.");
-  if (winner?.highStakes) notes.push("Traditional symbolic analysis must not replace medical, legal, financial, or safety-critical professional judgment.");
 
+  if (winner) {
+    if (winner.highStakes) notes.push("Traditional symbolic analysis must not replace medical, legal, financial, or safety-critical professional judgment.");
+    return {
+      raw: input,
+      normalized,
+      domain: winner.domain,
+      houses: winner.houses,
+      modules: winner.modules,
+      decisionType: winner.decisionType ?? "OPEN",
+      highStakes: Boolean(winner.highStakes),
+      notes
+    };
+  }
+
+  const universeMatch = matchUniverseQuestion(normalized, 1)[0];
+  if (universeMatch && universeMatch.score >= 0.08) {
+    const route = routeUniverseCategory(universeMatch.entry.category);
+    const highStakes = /health|legal|pregnancy/i.test(universeMatch.entry.category);
+    notes.push("Matched against 777-question universe: " + universeMatch.entry.id + " at lexical score " + universeMatch.score.toFixed(3) + ".");
+    if (highStakes) notes.push("Traditional symbolic analysis must not replace medical, legal, financial, or safety-critical professional judgment.");
+    return {
+      raw: input,
+      normalized,
+      domain: universeMatch.entry.category,
+      houses: route.houses,
+      modules: route.modules,
+      decisionType: route.decisionType,
+      highStakes,
+      notes
+    };
+  }
+
+  notes.push("No deterministic domain rule or 777-universe match was strong enough; practitioner review is required.");
   return {
     raw: input,
     normalized,
-    domain: winner?.domain ?? "General / Unclassified",
-    houses: winner?.houses ?? [1],
-    modules: winner?.modules ?? ["raml","houses"],
-    decisionType: winner?.decisionType ?? "OPEN",
-    highStakes: Boolean(winner?.highStakes),
+    domain: "General / Unclassified",
+    houses: [1],
+    modules: ["raml","houses"],
+    decisionType: "OPEN",
+    highStakes: false,
     notes
   };
 }
