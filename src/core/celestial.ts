@@ -26,16 +26,24 @@ export function dayRuler(date: Date): Planet {
   return DAY_RULERS[date.getDay()];
 }
 
-export function planetaryHoursForDate(date: Date, latitude: number, longitude: number): PlanetaryHour[] {
-  const times = SunCalc.getTimes(date, latitude, longitude);
-  const nextTimes = SunCalc.getTimes(addDays(date, 1), latitude, longitude);
-  const sunrise = times.sunrise;
-  const sunset = times.sunset;
-  const nextSunrise = nextTimes.sunrise;
+export interface SolarBoundaryTimes {
+  sunrise: Date;
+  sunset: Date;
+  nextSunrise: Date;
+}
 
-  if (![sunrise, sunset, nextSunrise].every((d) => d instanceof Date && Number.isFinite(d.getTime()))) {
-    throw new Error("Planetary hours are unavailable for this date/location.");
+export function solarBoundaryTimes(date: Date,latitude:number,longitude:number):SolarBoundaryTimes {
+  const times=SunCalc.getTimes(date,latitude,longitude);
+  const nextTimes=SunCalc.getTimes(addDays(date,1),latitude,longitude);
+  const sunrise=times.sunrise, sunset=times.sunset, nextSunrise=nextTimes.sunrise;
+  if (![sunrise,sunset,nextSunrise].every((d)=>d instanceof Date&&Number.isFinite(d.getTime()))) {
+    throw new Error("Solar boundaries are unavailable for this date/location.");
   }
+  return {sunrise,sunset,nextSunrise};
+}
+
+export function planetaryHoursForDate(date: Date, latitude: number, longitude: number): PlanetaryHour[] {
+  const {sunrise,sunset,nextSunrise}=solarBoundaryTimes(date,latitude,longitude);
 
   const ruler = dayRuler(sunrise);
   const startIndex = rulerIndex(ruler);

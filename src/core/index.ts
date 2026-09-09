@@ -66,3 +66,5 @@ export * from "./timingExplorer";
 export * from "./graph";
 
 export * from "./researchMetrics";
+
+export * from "./astronomyValidation";
