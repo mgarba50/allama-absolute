@@ -41,11 +41,13 @@ const CLASSICAL_BODIES = [
   Body.Sun,Body.Moon,Body.Mercury,Body.Venus,Body.Mars,Body.Jupiter,Body.Saturn
 ] as const;
 
+type ClassicalBody = (typeof CLASSICAL_BODIES)[number];
+
 function normalizeDegrees(value: number): number {
   return ((value % 360) + 360) % 360;
 }
 
-export function geocentricPosition(body: typeof CLASSICAL_BODIES[number], date: Date): CelestialPosition {
+export function geocentricPosition(body: ClassicalBody,date: Date): CelestialPosition {
   if (!Number.isFinite(date.getTime())) throw new Error("Invalid ephemeris date.");
 
   let longitude: number;
