@@ -1,15 +1,17 @@
 {
   "name": "allama-absolute",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "test": "vitest run",
+    "test:watch": "vitest",
     "audit": "node scripts/audit.mjs"
   },
   "dependencies": {
+    "astronomy-engine": "^2.1.19",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "suncalc": "^1.9.0"
