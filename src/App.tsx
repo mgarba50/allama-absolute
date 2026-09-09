@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   FIGURES,
   calculateAbjad,
@@ -7,16 +7,22 @@ import {
   downloadText,
   entropyMothers,
   generateShield,
+  localeDirection,
   moonPhase,
+  parseCommand,
   toJson,
-  validateShield
+  translate,
+  validateShield,
+  type Locale
 } from "./core";
 import { AbsolutePanel } from "./components/AbsolutePanel";
+import { CommandPalette } from "./components/CommandPalette";
 import { FigureGlyph } from "./components/FigureGlyph";
+import { HouseMap } from "./components/HouseMap";
 import { ReverseTrace } from "./components/ReverseTrace";
 import { TapCaster } from "./components/TapCaster";
 
-type View = "dashboard" | "absolute" | "cast" | "reverse" | "abjad" | "question" | "celestial";
+type View = "dashboard" | "absolute" | "cast" | "houses" | "reverse" | "abjad" | "question" | "celestial";
 
 function NavigationButton(props: { id: View; current: View; label: string; onSelect: (id: View) => void }) {
   return (
@@ -28,6 +34,8 @@ function NavigationButton(props: { id: View; current: View; label: string; onSel
 
 export default function App() {
   const [view,setView] = useState<View>("dashboard");
+  const [locale,setLocale] = useState<Locale>("en");
+  const [selectedHouse,setSelectedHouse] = useState(1);
   const [motherIds,setMotherIds] = useState(["via","populus","fortuna-major","conjunctio"]);
   const mothers = motherIds.map((id) => FIGURES.find((figure) => figure.id === id) ?? FIGURES[0]);
   const shield = useMemo(() => generateShield(mothers),[motherIds.join("|")]);
@@ -48,6 +56,11 @@ export default function App() {
   },[momentText,latitude,longitude]);
   const moon = useMemo(() => moonPhase(moment),[momentText]);
 
+  useEffect(() => {
+    document.documentElement.lang = locale;
+    document.documentElement.dir = localeDirection(locale);
+  },[locale]);
+
   const labels = ["M1","M2","M3","M4","D1","D2","D3","D4","N1","N2","N3","N4","RW","LW","JUDGE","RECONCILER"];
   const shieldFigures = [...shield.mothers,...shield.daughters,...shield.nieces,shield.rightWitness,shield.leftWitness,shield.judge,shield.reconciler];
 
@@ -64,6 +77,53 @@ export default function App() {
     setView("cast");
   }
 
+  function executeCommand(raw: string): string | void {
+    const command = parseCommand(raw);
+    switch (command.type) {
+      case "cast":
+        setView("cast");
+        return;
+      case "judge":
+      case "reverse":
+        setView("reverse");
+        return;
+      case "house":
+        setSelectedHouse(command.house);
+        setView("houses");
+        return;
+      case "abjad":
+        if (!command.text.trim()) return "Use /abjad followed by Arabic text.";
+        setAbjadText(command.text);
+        setView("abjad");
+        return;
+      case "hour":
+      case "moon":
+        setView("celestial");
+        return;
+      case "deep":
+        setView("absolute");
+        return;
+      case "compare":
+        return "Comparison is available as an engine API but is not exposed as a shell command yet.";
+      case "lock":
+        return "Blind-lock operations require a trial record and are not executed from the global shell.";
+      case "outcome":
+        return "Outcome recording requires a selected case and cannot run without case context.";
+      default:
+        return "Unknown command. Supported here: /cast, /judge, /reverse, /house N, /abjad TEXT, /hour, /moon, /deep.";
+    }
+  }
+
+  const pageTitle =
+    view === "dashboard" ? translate(locale,"dashboard") :
+    view === "absolute" ? translate(locale,"absolute") :
+    view === "cast" ? translate(locale,"cast") :
+    view === "houses" ? translate(locale,"houses") :
+    view === "reverse" ? translate(locale,"reverse") :
+    view === "abjad" ? translate(locale,"abjad") :
+    view === "question" ? translate(locale,"question") :
+    translate(locale,"celestial");
+
   return (
     <div className="shell">
       <aside>
@@ -72,13 +132,19 @@ export default function App() {
           <div><strong>ALLAMA ABSOLUTE</strong><small>Sovereign Symbolic Intelligence Engine</small></div>
         </div>
 
-        <NavigationButton id="dashboard" current={view} label="Command Center" onSelect={setView} />
-        <NavigationButton id="absolute" current={view} label="Ω Sovereign Analysis" onSelect={setView} />
-        <NavigationButton id="cast" current={view} label="Raml Shield" onSelect={setView} />
-        <NavigationButton id="reverse" current={view} label="Reverse Judge" onSelect={setView} />
-        <NavigationButton id="abjad" current={view} label="Abjad Lab" onSelect={setView} />
-        <NavigationButton id="question" current={view} label="Question Intelligence" onSelect={setView} />
-        <NavigationButton id="celestial" current={view} label="Celestial" onSelect={setView} />
+        <NavigationButton id="dashboard" current={view} label={translate(locale,"dashboard")} onSelect={setView} />
+        <NavigationButton id="absolute" current={view} label={translate(locale,"absolute")} onSelect={setView} />
+        <NavigationButton id="cast" current={view} label={translate(locale,"cast")} onSelect={setView} />
+        <NavigationButton id="houses" current={view} label={translate(locale,"houses")} onSelect={setView} />
+        <NavigationButton id="reverse" current={view} label={translate(locale,"reverse")} onSelect={setView} />
+        <NavigationButton id="abjad" current={view} label={translate(locale,"abjad")} onSelect={setView} />
+        <NavigationButton id="question" current={view} label={translate(locale,"question")} onSelect={setView} />
+        <NavigationButton id="celestial" current={view} label={translate(locale,"celestial")} onSelect={setView} />
+
+        <div className="locale-switch">
+          <button className={locale === "en" ? "active" : ""} onClick={() => setLocale("en")}>English</button>
+          <button className={locale === "ar" ? "active" : ""} onClick={() => setLocale("ar")}>العربية</button>
+        </div>
 
         <div className="aside-note">
           Deterministic calculation, traditional interpretation, AI inference and empirical evidence remain separate by design.
@@ -88,11 +154,13 @@ export default function App() {
       <main>
         <header>
           <div>
-            <p className="eyebrow">PRIVATE PRACTITIONER LABORATORY</p>
-            <h1>{view === "dashboard" ? "Command Center" : view === "absolute" ? "Ω ALLAMA ABSOLUTE" : view.toUpperCase()}</h1>
+            <p className="eyebrow">{translate(locale,"laboratory")}</p>
+            <h1>{pageTitle}</h1>
           </div>
-          <span className="status">LOCAL-FIRST CORE</span>
+          <span className="status">{translate(locale,"localCore")}</span>
         </header>
+
+        <CommandPalette onCommand={executeCommand} />
 
         {view === "dashboard" && (
           <section className="grid">
@@ -101,8 +169,8 @@ export default function App() {
               <h2>Ω ALLAMA ABSOLUTE</h2>
               <p>The machine calculates first, reasons second, challenges itself third, and writes the verdict last.</p>
               <div className="hero-actions">
-                <button onClick={() => setView("absolute")}>Run Ω Analysis</button>
-                <button className="secondary" onClick={() => setView("cast")}>Open Casting Chamber</button>
+                <button onClick={() => setView("absolute")}>{translate(locale,"runAnalysis")}</button>
+                <button className="secondary" onClick={() => setView("cast")}>{translate(locale,"castingChamber")}</button>
               </div>
             </article>
 
@@ -186,6 +254,8 @@ export default function App() {
             </div>
           </section>
         )}
+
+        {view === "houses" && <HouseMap shield={shield} selectedHouse={selectedHouse} onSelect={setSelectedHouse} />}
 
         {view === "reverse" && <ReverseTrace shield={shield} />}
 
