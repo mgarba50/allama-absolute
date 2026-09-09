@@ -1,0 +1,6223 @@
+{
+  "engine": "ALLAMA_ABSOLUTE",
+  "test_suite": "ABSOLUTE_777_TEST_CASES",
+  "version": "1.0",
+  "cases": [
+    {
+      "id": "ABS-Q001",
+      "category": "Debt",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q002",
+      "category": "Remote State",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q003",
+      "category": "Truth Testing",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q004",
+      "category": "Marriage",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q005",
+      "category": "Location",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q006",
+      "category": "Business",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q007",
+      "category": "Partnership",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q008",
+      "category": "Hidden Cause",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q009",
+      "category": "Travel",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q010",
+      "category": "Wrong Question Detection",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q011",
+      "category": "Employment",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q012",
+      "category": "Employment",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q013",
+      "category": "Relationship",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q014",
+      "category": "Lost Object",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q015",
+      "category": "Lost Object Reconstruction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q016",
+      "category": "Timing",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q017",
+      "category": "Candidate Comparison",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q018",
+      "category": "Client/Contract",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q019",
+      "category": "Communication",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q020",
+      "category": "Blind Claim Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q021",
+      "category": "Property",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q022",
+      "category": "Property",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q023",
+      "category": "Money",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q024",
+      "category": "Education",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q025",
+      "category": "Past Reconstruction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q026",
+      "category": "Reputation",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q027",
+      "category": "Secret Relationship",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q028",
+      "category": "Secret Relationship",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q029",
+      "category": "Family",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q030",
+      "category": "Hidden Actor",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q031",
+      "category": "Trade",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q032",
+      "category": "Trade",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q033",
+      "category": "Trade",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q034",
+      "category": "Competition",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q035",
+      "category": "Competition Dynamics",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q036",
+      "category": "Multiple Choice",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q037",
+      "category": "Multiple Choice",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q038",
+      "category": "Multiple Choice",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q039",
+      "category": "Abjad",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q040",
+      "category": "Abjad Collision",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q041",
+      "category": "Planetary Timing",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q042",
+      "category": "Electional Timing",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q043",
+      "category": "Electional Timing",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q044",
+      "category": "Return",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q045",
+      "category": "Return/Location",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q046",
+      "category": "Leadership",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q047",
+      "category": "Leadership",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q048",
+      "category": "Leadership",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q049",
+      "category": "Legal",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q050",
+      "category": "Contested Claims",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q051",
+      "category": "Health Symbolism",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q052",
+      "category": "Health Symbolism",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q053",
+      "category": "Health Symbolism",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q054",
+      "category": "Pregnancy/Family Expansion",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q055",
+      "category": "Timing + Family",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q056",
+      "category": "Hidden Motive",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q057",
+      "category": "Hidden Motive",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q058",
+      "category": "Hidden Motive",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q059",
+      "category": "Missing Person",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q060",
+      "category": "Missing Person State",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q061",
+      "category": "Client Reliability",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q062",
+      "category": "Client Reliability",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q063",
+      "category": "Client Reliability",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q064",
+      "category": "Journey Choice",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q065",
+      "category": "Journey State",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q066",
+      "category": "Land",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q067",
+      "category": "Land",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q068",
+      "category": "Land",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q069",
+      "category": "Meeting",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q070",
+      "category": "Meeting Dynamics",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q071",
+      "category": "Social Standing",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q072",
+      "category": "Social Standing",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q073",
+      "category": "Network Influence",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q074",
+      "category": "Dream Follow-Up",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q075",
+      "category": "Dream/Reality Separation",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q076",
+      "category": "No-Name Mode",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q077",
+      "category": "No-Name Mode",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q078",
+      "category": "Method Selection",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q079",
+      "category": "Environment",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q080",
+      "category": "Scene Reconstruction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q081",
+      "category": "Future Branching",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q082",
+      "category": "Future Branching",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q083",
+      "category": "Future Branching",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q084",
+      "category": "Business Partner",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q085",
+      "category": "Partnership Autopsy",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q086",
+      "category": "Object Direction",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q087",
+      "category": "Object Scene",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q088",
+      "category": "Object Recovery",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q089",
+      "category": "Examiner/Decision",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q090",
+      "category": "Decision Pipeline",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q091",
+      "category": "Rival",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q092",
+      "category": "Rival",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q093",
+      "category": "Rival",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q094",
+      "category": "Past Event",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q095",
+      "category": "Past Event Reconstruction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q096",
+      "category": "Meta-Diagnostic",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q097",
+      "category": "Meta-Diagnostic",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q098",
+      "category": "Meta-Diagnostic",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q099",
+      "category": "Absolute Benchmark",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q100",
+      "category": "Absolute Benchmark",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q101",
+      "category": "Relationship Timing",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q102",
+      "category": "Relationship Cause",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q103",
+      "category": "Relationship State",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q104",
+      "category": "Relationship Hidden Variable",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q105",
+      "category": "Marriage Timing",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q106",
+      "category": "Marriage Obstacle",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q107",
+      "category": "Marriage Decision",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q108",
+      "category": "Marriage Premise Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q109",
+      "category": "Hidden Motive",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q110",
+      "category": "Hidden Motive",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q111",
+      "category": "Hidden Motive Layers",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q112",
+      "category": "Hidden Motive Without Story",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q113",
+      "category": "Contact",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q114",
+      "category": "Contact",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q115",
+      "category": "Contact Pattern",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q116",
+      "category": "Contact False Premise",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q117",
+      "category": "Business Expansion",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q118",
+      "category": "Business Expansion",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q119",
+      "category": "Business Expansion Strategy",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q120",
+      "category": "Business Hidden Constraint",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q121",
+      "category": "Investment",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q122",
+      "category": "Investment",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q123",
+      "category": "Investment Choice",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q124",
+      "category": "Investment Narrative Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q125",
+      "category": "Debt Timing",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q126",
+      "category": "Debt Behavior",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q127",
+      "category": "Debt Capacity",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q128",
+      "category": "Debt Hidden Actor",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q129",
+      "category": "Contract",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q130",
+      "category": "Contract",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q131",
+      "category": "Contract Hidden Decision-Maker",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q132",
+      "category": "Contract False Progress",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q133",
+      "category": "Shipment",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q134",
+      "category": "Shipment",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q135",
+      "category": "Shipment State",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q136",
+      "category": "Shipment Claim Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q137",
+      "category": "Property Rent",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q138",
+      "category": "Property Tenant",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q139",
+      "category": "Property Conflict",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q140",
+      "category": "Property Hidden Claim",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q141",
+      "category": "Employment Stability",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q142",
+      "category": "Employment Stability",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q143",
+      "category": "Employment Politics",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q144",
+      "category": "Employment Hidden Sponsor",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q145",
+      "category": "Authority",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q146",
+      "category": "Authority",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q147",
+      "category": "Authority Network",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q148",
+      "category": "Authority False Target",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q149",
+      "category": "Rivalry",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q150",
+      "category": "Rivalry",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q151",
+      "category": "Rivalry Strategy",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q152",
+      "category": "Rival Bluff",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q153",
+      "category": "Enemy/Opposition",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q154",
+      "category": "Enemy/Opposition",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q155",
+      "category": "Opposition Source",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q156",
+      "category": "False Enemy",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q157",
+      "category": "Legal Timing",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q158",
+      "category": "Legal Outcome Path",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q159",
+      "category": "Legal Actor",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q160",
+      "category": "Legal Claim Integrity",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q161",
+      "category": "Travel Destination",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q162",
+      "category": "Travel Destination",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q163",
+      "category": "Travel State",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q164",
+      "category": "Travel Destination Challenge",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q165",
+      "category": "Missing Person Return",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q166",
+      "category": "Missing Person",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q167",
+      "category": "Missing Person State",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q168",
+      "category": "Missing Person Premise",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q169",
+      "category": "Lost Object Location",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q170",
+      "category": "Lost Object Location",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q171",
+      "category": "Lost Object Movement",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q172",
+      "category": "Lost Object Hidden Chain",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q173",
+      "category": "Timing",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q174",
+      "category": "Timing",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q175",
+      "category": "Timing Conditions",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q176",
+      "category": "Timing Conflict",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q177",
+      "category": "Multiple Choice",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q178",
+      "category": "Multiple Choice",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q179",
+      "category": "Multiple Choice",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q180",
+      "category": "Null Candidate",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q181",
+      "category": "Education",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q182",
+      "category": "Education",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q183",
+      "category": "Education Outcome",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q184",
+      "category": "Education Premise Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q185",
+      "category": "Reputation",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q186",
+      "category": "Reputation",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q187",
+      "category": "Reputation Source",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q188",
+      "category": "Reputation False Narrative",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q189",
+      "category": "Abjad Compatibility",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q190",
+      "category": "Abjad Method Comparison",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q191",
+      "category": "Abjad Weighting",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q192",
+      "category": "Abjad False Precision",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q193",
+      "category": "Blind Test",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q194",
+      "category": "Blind Test",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q195",
+      "category": "Blind Test",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q196",
+      "category": "Absolute Benchmark",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q197",
+      "category": "Meta Diagnostic",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q198",
+      "category": "Meta Diagnostic",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q199",
+      "category": "Meta Diagnostic",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q200",
+      "category": "Absolute Benchmark",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q201",
+      "category": "Family Dynamics",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q202",
+      "category": "Family Dynamics",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q203",
+      "category": "Family Influence",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q204",
+      "category": "Family False Narrative",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q205",
+      "category": "Children",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q206",
+      "category": "Children",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q207",
+      "category": "Children",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q208",
+      "category": "Child Situation Without Story",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q209",
+      "category": "Family Expansion",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q210",
+      "category": "Family Expansion Timing",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q211",
+      "category": "Family Expansion Conflict",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q212",
+      "category": "Family Expansion False Certainty",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q213",
+      "category": "Health Symbolism",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q214",
+      "category": "Health Symbolism",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q215",
+      "category": "Health Symbolism",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q216",
+      "category": "Health Symbolism Contradiction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q217",
+      "category": "Dream Follow-Up",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q218",
+      "category": "Dream Follow-Up",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q219",
+      "category": "Dream Follow-Up",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q220",
+      "category": "Dream Premise Collapse",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q221",
+      "category": "Reputation",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q222",
+      "category": "Reputation",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q223",
+      "category": "Reputation",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q224",
+      "category": "Reputation Hidden Engine",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q225",
+      "category": "Leadership",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q226",
+      "category": "Leadership",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q227",
+      "category": "Leadership Network",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q228",
+      "category": "Leadership Hidden Authority",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q229",
+      "category": "Environment",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q230",
+      "category": "Environment",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q231",
+      "category": "Environment",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q232",
+      "category": "Environment Reconstruction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q233",
+      "category": "Current Activity",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q234",
+      "category": "Current Activity",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q235",
+      "category": "Current Activity",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q236",
+      "category": "Current Activity Blind Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q237",
+      "category": "Location Distance",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q238",
+      "category": "Location Distance",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q239",
+      "category": "Location Direction",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q240",
+      "category": "Location Contradiction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q241",
+      "category": "Truth Testing",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q242",
+      "category": "Truth Testing",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q243",
+      "category": "Truth Testing",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q244",
+      "category": "Truth Testing Blind First",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q245",
+      "category": "Hidden Situation",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q246",
+      "category": "Hidden Situation",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q247",
+      "category": "Hidden Situation",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q248",
+      "category": "Hidden Situation Open Set",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q249",
+      "category": "Past Event",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q250",
+      "category": "Past Event",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q251",
+      "category": "Past Event",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q252",
+      "category": "Past Event Reconstruction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q253",
+      "category": "Future Scenario",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q254",
+      "category": "Future Scenario",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q255",
+      "category": "Future Scenario",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q256",
+      "category": "Future Branch Dependency",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q257",
+      "category": "Multiple Candidates",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q258",
+      "category": "Multiple Candidates",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q259",
+      "category": "Multiple Candidates",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q260",
+      "category": "Unknown Candidate",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q261",
+      "category": "Timing",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q262",
+      "category": "Timing",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q263",
+      "category": "Timing",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q264",
+      "category": "Timing False Precision",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q265",
+      "category": "No-Name Mode",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q266",
+      "category": "No-Name Mode",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q267",
+      "category": "No-Name Mode",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q268",
+      "category": "No-Name Method Conflict",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q269",
+      "category": "Abjad",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q270",
+      "category": "Abjad",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q271",
+      "category": "Abjad",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q272",
+      "category": "Abjad Method Failure",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q273",
+      "category": "Client Chaos",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q274",
+      "category": "Client Chaos",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q275",
+      "category": "Client Chaos",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q276",
+      "category": "Client Chaos",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q277",
+      "category": "Hidden Obstacle",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q278",
+      "category": "Hidden Obstacle",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q279",
+      "category": "Hidden Obstacle",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q280",
+      "category": "Hidden Obstacle Chain",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q281",
+      "category": "Remote State",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q282",
+      "category": "Remote State",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q283",
+      "category": "Remote State",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q284",
+      "category": "Remote State Absolute Benchmark",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q285",
+      "category": "Claim Testing",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q286",
+      "category": "Claim Testing",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q287",
+      "category": "Claim Testing",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q288",
+      "category": "Claim Testing Absolute Benchmark",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q289",
+      "category": "Meta Diagnostic",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q290",
+      "category": "Meta Diagnostic",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q291",
+      "category": "Meta Diagnostic",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q292",
+      "category": "Meta Diagnostic",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q293",
+      "category": "Method Selection",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q294",
+      "category": "Method Selection",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q295",
+      "category": "Method Selection",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q296",
+      "category": "Method Selection",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q297",
+      "category": "Absolute Self-Test",
+      "difficulty": "STANDARD/ADVANCED",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q298",
+      "category": "Absolute Self-Test",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q299",
+      "category": "Absolute Self-Test",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q300",
+      "category": "Absolute Benchmark",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q301",
+      "category": "Cascading Cause",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q302",
+      "category": "Split Truth",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q303",
+      "category": "Hidden Controller",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q304",
+      "category": "Event Already Happened",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q305",
+      "category": "Parallel Realities",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q306",
+      "category": "Cause of Cause",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q307",
+      "category": "Circular Causation",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q308",
+      "category": "Local Truth, Global Error",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q309",
+      "category": "Conditional Yes",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q310",
+      "category": "Two-Layer Deception",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q311",
+      "category": "Role Collision",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q312",
+      "category": "Wrong Significator Risk",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q313",
+      "category": "Shared Cause Across Two Cases",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q314",
+      "category": "Hidden Dependency",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q315",
+      "category": "Delayed Revelation",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q316",
+      "category": "Reverse Motive",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q317",
+      "category": "False Binary",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q318",
+      "category": "Third Event Controls Two People",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q319",
+      "category": "Hidden Sequence",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q320",
+      "category": "Reality Model Selection",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q321",
+      "category": "Hidden Intermediary",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q322",
+      "category": "Intermediary Distortion",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q323",
+      "category": "Two Timelines",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q324",
+      "category": "Apparent Contradiction",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q325",
+      "category": "Conditional Reversal",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q326",
+      "category": "Dependency Cascade",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q327",
+      "category": "Hidden Resource",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q328",
+      "category": "False Scarcity",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q329",
+      "category": "Split Motive",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q330",
+      "category": "Self-Deception",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q331",
+      "category": "Client Contamination",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q332",
+      "category": "Narrative Decoupling",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q333",
+      "category": "Role Switching",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q334",
+      "category": "Ally-to-Rival Transition",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q335",
+      "category": "Rival-to-Ally Transition",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q336",
+      "category": "Indirect Benefit",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q337",
+      "category": "Delayed Damage",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q338",
+      "category": "Outcome Layering",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q339",
+      "category": "Mixed Success",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q340",
+      "category": "Success That Is Actually Failure",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q341",
+      "category": "Failure That Protects",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q342",
+      "category": "Hidden Tradeoff",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q343",
+      "category": "Mutually Exclusive Outcomes",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q344",
+      "category": "Competing Beneficiaries",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q345",
+      "category": "Question Ownership",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q346",
+      "category": "Wrong Querent Frame",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q347",
+      "category": "Nested Turned Houses",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q348",
+      "category": "Triple-Derived Relationship",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q349",
+      "category": "Derived-House Collision",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q350",
+      "category": "Significator Collision",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q351",
+      "category": "Repeated Figure Overload",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q352",
+      "category": "Figure Migration Story",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q353",
+      "category": "Judge Misleading Alone",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q354",
+      "category": "Witness Conflict Anatomy",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q355",
+      "category": "Reverse Judge Root Cause",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q356",
+      "category": "Hidden Mother Dominance",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q357",
+      "category": "Derived Agreement Illusion",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q358",
+      "category": "Element Bridge",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q359",
+      "category": "Elemental Bottleneck",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q360",
+      "category": "Elemental Phase Shift",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q361",
+      "category": "Planetary Hour Relevance",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q362",
+      "category": "Celestial Override Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q363",
+      "category": "Geographic Context Shift",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q364",
+      "category": "Local Solar Time Conflict",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q365",
+      "category": "Moving Subject Coordinates",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q366",
+      "category": "Multiple Celestial Frames",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q367",
+      "category": "Lunar Support vs Raml Opposition",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q368",
+      "category": "Planetary Timing False Confirmation",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q369",
+      "category": "Abjad Name Ambiguity",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q370",
+      "category": "Arabic Orthographic Sensitivity",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q371",
+      "category": "Multiple Names, One Person",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q372",
+      "category": "Abjad Overfit Detection",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q373",
+      "category": "Historical School Conflict",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q374",
+      "category": "Manuscript Minority Rule",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q375",
+      "category": "Source Contamination",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q376",
+      "category": "Practitioner Rule Conflict",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q377",
+      "category": "Practitioner Bias Check",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q378",
+      "category": "Success Memory Bias",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q379",
+      "category": "Confidence Inflation",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q380",
+      "category": "Confidence Collapse Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q381",
+      "category": "Blind Remote Scene",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q382",
+      "category": "Blind Activity + Object Context",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q383",
+      "category": "Blind Social Configuration",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q384",
+      "category": "Blind Movement Sequence",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q385",
+      "category": "Remote Claim Adversarial Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q386",
+      "category": "Remote False Context",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q387",
+      "category": "Remote State Open Set",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q388",
+      "category": "Remote State Fine vs Coarse Accuracy",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q389",
+      "category": "Outcome Calibration",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q390",
+      "category": "Partial Hit Inflation",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q391",
+      "category": "Prediction Specificity Penalty",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q392",
+      "category": "Base Rate Awareness",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q393",
+      "category": "Method Tournament",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q394",
+      "category": "Overcomplexity Detection",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q395",
+      "category": "Out-of-Sample Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q396",
+      "category": "Rule Retirement Candidate",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q397",
+      "category": "Rare Rule Preservation",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q398",
+      "category": "Regime Shift",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q399",
+      "category": "Absolute Self-Opposition",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q400",
+      "category": "Reality Reconstruction",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q401",
+      "category": "Cross-Case Similarity",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q402",
+      "category": "Cross-Case Contamination",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q403",
+      "category": "Shared Actor Across Cases",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q404",
+      "category": "Shared Cause, Different Symptoms",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q405",
+      "category": "Recursive Question",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q406",
+      "category": "Recursive Motive",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q407",
+      "category": "Recursive Belief",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q408",
+      "category": "Recursive Deception",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q409",
+      "category": "Multi-Location Subject",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q410",
+      "category": "Location Transition",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q411",
+      "category": "Moving Coordinate Frame",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q412",
+      "category": "Split Location Reality",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q413",
+      "category": "Incomplete Reveal",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q414",
+      "category": "Staged Reveal",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q415",
+      "category": "Ambiguous Reveal",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q416",
+      "category": "Delayed Ground Truth",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q417",
+      "category": "Adversarial Client",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q418",
+      "category": "Adversarial Client",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q419",
+      "category": "Adversarial Narrative",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q420",
+      "category": "Adversarial Framing Attack",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q421",
+      "category": "Merged Case Detection",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q422",
+      "category": "Merged Relationship/Business Case",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q423",
+      "category": "Accidental Case Fusion",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q424",
+      "category": "One Question, Two Realities",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q425",
+      "category": "Counterfactual",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q426",
+      "category": "Counterfactual Intervention",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q427",
+      "category": "Counterfactual Causality",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q428",
+      "category": "Counterfactual Misattribution",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q429",
+      "category": "Event Topology",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q430",
+      "category": "Event Cycle",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q431",
+      "category": "Hidden Cycle Entry Point",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q432",
+      "category": "Multi-Cycle Interaction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q433",
+      "category": "Unknown Question Domain",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q434",
+      "category": "Unknown Question Domain",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q435",
+      "category": "Unknown Question Benchmark",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q436",
+      "category": "Unknown Question Open Set",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q437",
+      "category": "Hidden Time Reference",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q438",
+      "category": "Multiple Time Horizons",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q439",
+      "category": "Timing Layer Conflict",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q440",
+      "category": "Event-Time vs Awareness-Time",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q441",
+      "category": "Hidden Intermediary Chain",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q442",
+      "category": "Multi-Hop Influence",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q443",
+      "category": "Influence Without Contact",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q444",
+      "category": "Phantom Influencer Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q445",
+      "category": "Strategic Delay",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q446",
+      "category": "Strategic Silence",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q447",
+      "category": "Strategic Truth",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q448",
+      "category": "Strategic Error",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q449",
+      "category": "Multiple Causes",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q450",
+      "category": "Cause Weighting",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q451",
+      "category": "Necessary vs Sufficient Cause",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q452",
+      "category": "Cause Removal Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q453",
+      "category": "Delayed Consequence",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q454",
+      "category": "Long-Lag Cause",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q455",
+      "category": "False Recent Cause",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q456",
+      "category": "Cause Replacement",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q457",
+      "category": "Person-State Split",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q458",
+      "category": "Willing but Blocked",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q459",
+      "category": "Able but Unwilling",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q460",
+      "category": "Mixed Agency",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q461",
+      "category": "False Memory",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q462",
+      "category": "Memory Reconstruction",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q463",
+      "category": "Confidence Without Certainty",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q464",
+      "category": "Competing Memories",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q465",
+      "category": "Repeated Question",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q466",
+      "category": "Genuine Change vs Result Shopping",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q467",
+      "category": "Recast Divergence",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q468",
+      "category": "Recast Stability Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q469",
+      "category": "Hidden Commitment",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q470",
+      "category": "Decision Pending Execution",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q471",
+      "category": "Decision Reversal Risk",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q472",
+      "category": "Public vs Private Position",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q473",
+      "category": "Hidden Threshold",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q474",
+      "category": "Threshold Proximity",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q475",
+      "category": "Multiple Thresholds",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q476",
+      "category": "Wrong Threshold Assumption",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q477",
+      "category": "Information Asymmetry",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q478",
+      "category": "Hidden Knowledge",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q479",
+      "category": "Information Source",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q480",
+      "category": "Knowledge Without Action",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q481",
+      "category": "False Urgency",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q482",
+      "category": "Urgency Source",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q483",
+      "category": "Deadline Reality Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q484",
+      "category": "Urgency Reversal",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q485",
+      "category": "Hidden Agreement",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q486",
+      "category": "Coordination Strength",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q487",
+      "category": "Secret Coalition",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q488",
+      "category": "False Coalition",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q489",
+      "category": "Two-Step Outcome",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q490",
+      "category": "Three-Step Outcome",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q491",
+      "category": "Hidden Intermediate",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q492",
+      "category": "Branching Middle Event",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q493",
+      "category": "Outcome Attribution",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q494",
+      "category": "Outcome Responsibility",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q495",
+      "category": "Distributed Responsibility",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q496",
+      "category": "Emergent Failure",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q497",
+      "category": "Absolute Self-Check",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q498",
+      "category": "Absolute Self-Check",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q499",
+      "category": "Absolute Self-Check",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q500",
+      "category": "Adversarial Reality Maze",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q501",
+      "category": "Unknown Identity",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q502",
+      "category": "Identity by Role",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q503",
+      "category": "Identity Collision",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q504",
+      "category": "Wrong Person Entirely",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q505",
+      "category": "Decoy Information",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q506",
+      "category": "Intentional Decoy",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q507",
+      "category": "Multiple Decoys",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q508",
+      "category": "Decoy Dominance Trap",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q509",
+      "category": "Nested Strategy",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q510",
+      "category": "Second-Order Strategy",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q511",
+      "category": "Third-Order Strategy",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q512",
+      "category": "Strategic Misperception",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q513",
+      "category": "Competing Futures",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q514",
+      "category": "Diverging Futures",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q515",
+      "category": "Future Collapse",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q516",
+      "category": "Future Reversal",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q517",
+      "category": "Event Synchronization",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q518",
+      "category": "Synchronized Cause",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q519",
+      "category": "False Synchrony",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q520",
+      "category": "Distributed Synchronization",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q521",
+      "category": "Hidden Sequence",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q522",
+      "category": "Sequence with Missing Step",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q523",
+      "category": "Sequence Loop",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q524",
+      "category": "Multiple Valid Orders",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q525",
+      "category": "Remote Identity State",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q526",
+      "category": "Remote Relational Scene",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q527",
+      "category": "Remote Scene with Decoy Story",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q528",
+      "category": "Remote Identity Mismatch",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q529",
+      "category": "Hidden Location Type",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q530",
+      "category": "Location Subtype",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q531",
+      "category": "Location Function vs Appearance",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q532",
+      "category": "Multi-Use Location",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q533",
+      "category": "Directional Intent",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q534",
+      "category": "Directional Stage",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q535",
+      "category": "Direction Reversal",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q536",
+      "category": "Symbolic vs Geographic Direction Conflict",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q537",
+      "category": "Hidden Timing Trigger",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q538",
+      "category": "Multiple Clocks",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q539",
+      "category": "Timing Reset",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q540",
+      "category": "False Delay",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q541",
+      "category": "Hidden Progress",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q542",
+      "category": "Progress Without Outcome",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q543",
+      "category": "Cosmetic Progress",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q544",
+      "category": "Progress Reversal Risk",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q545",
+      "category": "Hidden Decision Tree",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q546",
+      "category": "Decision Dependency",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q547",
+      "category": "Decision Gatekeeper",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q548",
+      "category": "Decision Already Locked",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q549",
+      "category": "Hidden Agreement",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q550",
+      "category": "Agreement Scope",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q551",
+      "category": "Agreement with Secret Condition",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q552",
+      "category": "Agreement That Is Not Binding",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q553",
+      "category": "Hidden Refusal",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q554",
+      "category": "Polite Refusal vs Delay",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q555",
+      "category": "False Hope Structure",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q556",
+      "category": "Conditional Refusal",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q557",
+      "category": "Hidden Competition",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q558",
+      "category": "Unknown Competitor Strength",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q559",
+      "category": "Competitor Without Awareness",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q560",
+      "category": "False Rival Assumption",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q561",
+      "category": "Hidden Authority Chain",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q562",
+      "category": "Multiple Veto Holders",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q563",
+      "category": "Informal Power",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q564",
+      "category": "Authority Bluff",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q565",
+      "category": "Hidden Financial Flow",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q566",
+      "category": "Money Path",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q567",
+      "category": "Money Misclassification",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q568",
+      "category": "Circular Financial Dependency",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q569",
+      "category": "Hidden Document State",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q570",
+      "category": "Document Responsibility",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q571",
+      "category": "Document Process Mirage",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q572",
+      "category": "Document Hidden Defect",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q573",
+      "category": "Hidden Communication Channel",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q574",
+      "category": "Communication Asymmetry",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q575",
+      "category": "Parallel Communication Networks",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q576",
+      "category": "Message Drift",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q577",
+      "category": "Hidden Emotional Driver",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q578",
+      "category": "Emotion vs Strategy",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q579",
+      "category": "Mixed Emotional State",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q580",
+      "category": "Emotional Misattribution",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q581",
+      "category": "Hidden Opportunity Cost",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q582",
+      "category": "Better Alternative Hidden",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q583",
+      "category": "Opportunity Trap",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q584",
+      "category": "False Best Option",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q585",
+      "category": "Hidden Exit",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q586",
+      "category": "Exit Timing",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q587",
+      "category": "Sunk-Cost Trap",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q588",
+      "category": "Exit That Triggers Opportunity",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q589",
+      "category": "Hidden Outcome Recipient",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q590",
+      "category": "Misaligned Incentives",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q591",
+      "category": "Perverse Incentive",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q592",
+      "category": "Outcome Hijacking",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q593",
+      "category": "Hidden Constraint",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q594",
+      "category": "Constraint Interaction",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q595",
+      "category": "Constraint Substitution",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q596",
+      "category": "Constraint Mirage",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q597",
+      "category": "Absolute Meta-Test",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q598",
+      "category": "Absolute Meta-Test",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q599",
+      "category": "Absolute Meta-Test",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q600",
+      "category": "The Sovereign Decoy Labyrinth",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q601",
+      "category": "Hidden Assumption",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q602",
+      "category": "Assumption Failure",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q603",
+      "category": "Assumption Hierarchy",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q604",
+      "category": "Invisible Assumption",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q605",
+      "category": "Hidden Consequence",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q606",
+      "category": "Consequence Chain",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q607",
+      "category": "Delayed Consequence Branch",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q608",
+      "category": "Beneficial Consequence of Bad Event",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q609",
+      "category": "Hidden Dependency",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q610",
+      "category": "Dependency Direction Error",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q611",
+      "category": "Mutual Dependence Trap",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q612",
+      "category": "Dependency Escape",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q613",
+      "category": "Hidden Third Option",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q614",
+      "category": "Hidden Fourth Option",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q615",
+      "category": "Outcome Topology",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q616",
+      "category": "Impossible Desired Outcome",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q617",
+      "category": "Hidden Threshold",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q618",
+      "category": "Threshold Competition",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q619",
+      "category": "Threshold Trap",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q620",
+      "category": "Threshold Cascade",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q621",
+      "category": "Hidden Information",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q622",
+      "category": "Information Value",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q623",
+      "category": "Misleading Information Advantage",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q624",
+      "category": "Knowledge Cascade",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q625",
+      "category": "Hidden Commitment",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q626",
+      "category": "Weak Commitment",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q627",
+      "category": "Commitment Under Pressure",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q628",
+      "category": "Commitment Reversal Trigger",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q629",
+      "category": "Hidden Delay Type",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q630",
+      "category": "Delay Beneficiary",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q631",
+      "category": "Manufactured Delay",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q632",
+      "category": "Delay as Signal",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q633",
+      "category": "Hidden Agreement",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q634",
+      "category": "Coordination Without Communication",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q635",
+      "category": "False Conspiracy Pattern",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q636",
+      "category": "Real Coalition with Weak Evidence",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q637",
+      "category": "Hidden Actor Priority",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q638",
+      "category": "Multiple Hidden Actors",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q639",
+      "category": "Hidden Actor Role Split",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q640",
+      "category": "Hidden Actor False Positive",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q641",
+      "category": "Remote State Sequence",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q642",
+      "category": "Remote Activity Change",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q643",
+      "category": "Remote Scene Transition",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q644",
+      "category": "Remote Transition Without Clock Cue",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q645",
+      "category": "Remote Direction Change",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q646",
+      "category": "Remote Origin vs Destination",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q647",
+      "category": "Remote Multi-Stop Journey",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q648",
+      "category": "Remote False Movement",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q649",
+      "category": "Blind Object Context",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q650",
+      "category": "Blind Object Combination",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q651",
+      "category": "Blind Scene Composition",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q652",
+      "category": "Blind Scene Alternative Model",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q653",
+      "category": "Hidden Timing Anchor",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q654",
+      "category": "Timing Anchor Ambiguity",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q655",
+      "category": "Multiple Start Times",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q656",
+      "category": "Timing Origin Reconstruction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q657",
+      "category": "Hidden End State",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q658",
+      "category": "Formal vs Real End",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q659",
+      "category": "End Before Announcement",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q660",
+      "category": "Apparent End, Hidden Continuation",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q661",
+      "category": "Hidden Price",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q662",
+      "category": "Cost Transfer",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q663",
+      "category": "Deferred Cost",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q664",
+      "category": "Non-Financial Cost Dominance",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q665",
+      "category": "Hidden Benefit",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q666",
+      "category": "Indirect Benefit",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q667",
+      "category": "Benefit to Wrong Actor",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q668",
+      "category": "Benefit That Changes Incentives",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q669",
+      "category": "Hidden Risk",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q670",
+      "category": "Risk Trigger",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q671",
+      "category": "Cascading Risk",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q672",
+      "category": "Risk That Cancels Benefit",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q673",
+      "category": "Hidden Leverage",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q674",
+      "category": "Leverage Fragility",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q675",
+      "category": "Fake Leverage",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q676",
+      "category": "Leverage Reversal",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q677",
+      "category": "Hidden Weakness",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q678",
+      "category": "Weakness Concealment",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q679",
+      "category": "Weakness Interaction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q680",
+      "category": "Weakness Substitution",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q681",
+      "category": "Hidden Strength",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q682",
+      "category": "Strength Under Pressure",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q683",
+      "category": "Strength from Constraint",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q684",
+      "category": "Strength Misread as Weakness",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q685",
+      "category": "Hidden Outcome Driver",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q686",
+      "category": "Outcome Driver Competition",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q687",
+      "category": "Driver Changes Midstream",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q688",
+      "category": "Driver Misidentification",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q689",
+      "category": "Absolute Self-Doubt",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q690",
+      "category": "Absolute Rival Model",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q691",
+      "category": "Absolute Model Duel",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q692",
+      "category": "Absolute Humility Threshold",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q693",
+      "category": "Hidden Correlation",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q694",
+      "category": "Correlation Cluster",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q695",
+      "category": "Confidence After De-Correlation",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q696",
+      "category": "False Consensus",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q697",
+      "category": "Hidden Model Bias",
+      "difficulty": "HARD",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q698",
+      "category": "Category Bias",
+      "difficulty": "HARDER",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q699",
+      "category": "Overfitting Detection",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q700",
+      "category": "The Research-Grade Sovereign Trial",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q701",
+      "category": "Question Behind the Question",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q702",
+      "category": "Hidden Emotional Objective",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q703",
+      "category": "Goal Misalignment",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q704",
+      "category": "Question Replacement",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q705",
+      "category": "Observer Effect",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q706",
+      "category": "Prediction Changes Behavior",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q707",
+      "category": "Self-Fulfilling Forecast",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q708",
+      "category": "Self-Defeating Forecast",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q709",
+      "category": "Prediction Leakage",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q710",
+      "category": "Forecast Contamination",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q711",
+      "category": "Consultation Timing Effect",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q712",
+      "category": "Consultation Creates the Event",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q713",
+      "category": "Two Correct Opposite Answers",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q714",
+      "category": "Perspective-Dependent Truth",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q715",
+      "category": "Role-Dependent Contradiction",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q716",
+      "category": "Local Truth vs Global Truth",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q717",
+      "category": "Competing Reality Models",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q718",
+      "category": "Model Equivalence",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q719",
+      "category": "Unidentifiable Cause",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q720",
+      "category": "Minimal Reality Model",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q721",
+      "category": "Model Mutation",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q722",
+      "category": "Evidence That Breaks the Model",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q723",
+      "category": "Model Survival After Falsification",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q724",
+      "category": "No Surviving Model",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q725",
+      "category": "Hidden Causal Direction",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q726",
+      "category": "Reverse Causation Trap",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q727",
+      "category": "Reciprocal Causation",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q728",
+      "category": "Emergent Outcome",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q729",
+      "category": "Hidden System State",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q730",
+      "category": "Tipping Point",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q731",
+      "category": "Irreversible Threshold",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q732",
+      "category": "False Point of No Return",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q733",
+      "category": "Hidden Stability",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q734",
+      "category": "Hidden Instability",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q735",
+      "category": "Event Attractor",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q736",
+      "category": "Outcome Resistance",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q737",
+      "category": "Fragile Verdict",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q738",
+      "category": "Robust Verdict",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q739",
+      "category": "Recursive Client Strategy",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q740",
+      "category": "Strategic Expectation Loop",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q741",
+      "category": "Bluff Inside Bluff",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q742",
+      "category": "Prediction About Prediction",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q743",
+      "category": "Hidden Objective Change",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q744",
+      "category": "Goal Reversal",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q745",
+      "category": "Conflicting Internal Goals",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q746",
+      "category": "Unstable Querent Objective",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q747",
+      "category": "Hidden Value Conflict",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q748",
+      "category": "Decision Without Dominant Value",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q749",
+      "category": "Branch-Dependent Identity",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q750",
+      "category": "Future Actor Emergence",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q751",
+      "category": "Unknown Unknown",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q752",
+      "category": "Unknown-Unknown Discipline",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q753",
+      "category": "Residual Explanation Test",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q754",
+      "category": "Mystery Preservation",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q755",
+      "category": "Cross-Domain Causal Chain",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q756",
+      "category": "Domain Hierarchy",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q757",
+      "category": "Domain Feedback",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q758",
+      "category": "Domain Decoupling",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q759",
+      "category": "Remote-State Multi-Window",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q760",
+      "category": "Remote-State Transition Graph",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q761",
+      "category": "Remote-State Decoy Reveal",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q762",
+      "category": "Remote-State Confidence Calibration",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q763",
+      "category": "Remote Specificity Ceiling",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q764",
+      "category": "Remote Method Ablation",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q765",
+      "category": "Practitioner vs Absolute",
+      "difficulty": "HARDEST",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q766",
+      "category": "Combined Intelligence Test",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q767",
+      "category": "Practitioner Override Audit",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q768",
+      "category": "Machine Override Audit",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q769",
+      "category": "Mutual Failure Analysis",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q770",
+      "category": "Unseen-Case Tournament",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q771",
+      "category": "The Anti-Flattery Test",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q772",
+      "category": "The Anti-Drama Test",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q773",
+      "category": "The Anti-Mystery Test",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q774",
+      "category": "The Anti-Certainty Test",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q775",
+      "category": "The Anti-Complexity Test",
+      "difficulty": "ABSOLUTE-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q776",
+      "category": "The Impossible Consultation",
+      "difficulty": "OMEGA-CLASS",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    },
+    {
+      "id": "ABS-Q777",
+      "category": "Ultimate Sovereign Benchmark",
+      "difficulty": "OMEGA EDGE",
+      "validation_required": true,
+      "expected_modules": [],
+      "status": "architecture_mapping_required"
+    }
+  ]
+}
