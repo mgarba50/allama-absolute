@@ -169,3 +169,14 @@ html[dir="rtl"] .case-item{text-align:right}
 .file-button{display:inline-flex;align-items:center;border:1px solid #b5965d;color:#d6c49d;border-radius:8px;padding:10px 14px;font-weight:700;cursor:pointer}
 .file-button input{display:none}
 @media(max-width:1000px){.vault-layout{grid-template-columns:1fr}.vault-list{position:static}.case-list{max-height:none}}
+
+.research-lab h4{margin:20px 0 8px;color:#c8a96a}
+.metric-bars{display:grid;gap:9px;margin-top:14px}
+.metric-bar{display:grid;grid-template-columns:minmax(120px,1.1fr) 2fr minmax(90px,.8fr);gap:10px;align-items:center;font-size:11px}
+.metric-bar>span{overflow:hidden;text-overflow:ellipsis}
+.metric-bar>strong{text-align:right}
+html[dir="rtl"] .metric-bar>strong{text-align:left}
+.bar-track{height:9px;border:1px solid #463a28;border-radius:10px;overflow:hidden;background:#0d0d0f}
+.bar-track i{display:block;height:100%;background:linear-gradient(90deg,#8d6b3c,#c8a96a)}
+.panel pre{white-space:pre-wrap;overflow:auto;background:#0d0d0f;border:1px solid #30291e;padding:12px;border-radius:8px;color:#cdbd9e}
+@media(max-width:700px){.metric-bar{grid-template-columns:1fr}.metric-bar>strong,html[dir="rtl"] .metric-bar>strong{text-align:left}}

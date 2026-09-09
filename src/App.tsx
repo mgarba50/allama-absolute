@@ -22,8 +22,9 @@ import { HouseMap } from "./components/HouseMap";
 import { ReverseTrace } from "./components/ReverseTrace";
 import { TapCaster } from "./components/TapCaster";
 import { CaseVault } from "./components/CaseVault";
+import { ResearchLab } from "./components/ResearchLab";
 
-type View = "dashboard" | "absolute" | "cast" | "houses" | "reverse" | "abjad" | "question" | "celestial" | "cases";
+type View = "dashboard" | "absolute" | "cast" | "houses" | "reverse" | "abjad" | "question" | "celestial" | "cases" | "research";
 
 function NavigationButton(props: { id: View; current: View; label: string; onSelect: (id: View) => void }) {
   return (
@@ -124,7 +125,8 @@ export default function App() {
     view === "abjad" ? translate(locale,"abjad") :
     view === "question" ? translate(locale,"question") :
     view === "celestial" ? translate(locale,"celestial") :
-    translate(locale,"cases");
+    view === "cases" ? translate(locale,"cases") :
+    translate(locale,"research");
 
   return (
     <div className="shell">
@@ -143,6 +145,7 @@ export default function App() {
         <NavigationButton id="question" current={view} label={translate(locale,"question")} onSelect={setView} />
         <NavigationButton id="celestial" current={view} label={translate(locale,"celestial")} onSelect={setView} />
         <NavigationButton id="cases" current={view} label={translate(locale,"cases")} onSelect={setView} />
+        <NavigationButton id="research" current={view} label={translate(locale,"research")} onSelect={setView} />
 
         <div className="locale-switch">
           <button className={locale === "en" ? "active" : ""} onClick={() => setLocale("en")}>English</button>
@@ -291,6 +294,8 @@ export default function App() {
             <div className="toolbar"><button onClick={() => setView("absolute")}>Run Ω on this question</button></div>
           </section>
         )}
+
+        {view === "research" && <ResearchLab locale={locale} motherIds={motherIds} />}
 
         {view === "cases" && <CaseVault locale={locale} currentQuestion={question} motherIds={motherIds} onContinueCase={(caseQuestion,ids) => { setQuestion(caseQuestion); if(ids?.length === 4) setMotherIds([...ids]); setView("absolute"); }} />}
 

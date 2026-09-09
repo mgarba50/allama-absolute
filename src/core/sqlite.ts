@@ -121,6 +121,17 @@ export interface CaseExportBundle {
   overrides: readonly StoredOverride[];
 }
 
+export interface ExperimentTrialRecord {
+  id:string;
+  experimentId:string;
+  caseId?:string;
+  predictionLockHash?:string;
+  prediction?:unknown;
+  reveal?:unknown;
+  score?:unknown;
+  createdAt:string;
+}
+
 export interface DatabaseHealth {
   integrity: string;
   userVersion: number;
@@ -445,6 +456,36 @@ export class SqliteCaseRepository implements CaseRepository {
     };
   }
 
+
+
+  listExperimentTrials(experimentId?: string): ExperimentTrialRecord[] {
+    const sql=experimentId
+      ? "SELECT * FROM experiment_trials WHERE experiment_id=? ORDER BY created_at DESC"
+      : "SELECT * FROM experiment_trials ORDER BY created_at DESC";
+    return queryRows(this.database,sql,experimentId?[experimentId]:[]).map((row)=>({
+      id:String(row.id),experimentId:String(row.experiment_id),
+      caseId:row.case_id?String(row.case_id):undefined,
+      predictionLockHash:row.prediction_lock_hash?String(row.prediction_lock_hash):undefined,
+      prediction:safeJson<unknown>(row.prediction_json,undefined),
+      reveal:safeJson<unknown>(row.reveal_json,undefined),
+      score:safeJson<unknown>(row.score_json,undefined),
+      createdAt:String(row.created_at)
+    }));
+  }
+
+  async saveExperimentTrial(record: ExperimentTrialRecord): Promise<void> {
+    this.database.run(
+      "INSERT OR REPLACE INTO experiment_trials(id,experiment_id,case_id,prediction_lock_hash,prediction_json,reveal_json,score_json,created_at) VALUES(?,?,?,?,?,?,?,?)",
+      [
+        record.id,record.experimentId,record.caseId??null,record.predictionLockHash??null,
+        record.prediction===undefined?null:JSON.stringify(record.prediction),
+        record.reveal===undefined?null:JSON.stringify(record.reveal),
+        record.score===undefined?null:JSON.stringify(record.score),
+        record.createdAt
+      ]
+    );
+    await this.flush();
+  }
 
   getMethodologyProfile(id: string): MethodologyProfile | null {
     const row=queryRows(this.database,"SELECT profile_json FROM methodology_profiles WHERE id=?",[id])[0];

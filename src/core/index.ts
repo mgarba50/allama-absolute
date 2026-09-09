@@ -64,3 +64,5 @@ export * from "./correspondences";
 export * from "./bookmarks";
 export * from "./timingExplorer";
 export * from "./graph";
+
+export * from "./researchMetrics";
