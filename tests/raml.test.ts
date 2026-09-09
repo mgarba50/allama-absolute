@@ -19,6 +19,6 @@ describe("Raml deterministic engine", () => {
   it("produces expected daughters by transposition", () => {
     const mothers = ["puer","caput-draconis","tristitia","albus"].map(figureFromId);
     const shield = generateShield(mothers);
-    expect(shield.daughters.map((f) => f.pattern.join(""))).toEqual(["1222","1212","2121","1112"]);
+    expect(shield.daughters.map((f) => f.pattern.join(""))).toEqual(["1222","1122","2121","1112"]);
   });
 });

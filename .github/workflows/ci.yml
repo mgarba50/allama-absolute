@@ -17,3 +17,9 @@ jobs:
       - run: npm install --no-audit --no-fund
       - run: npm test
       - run: npm run build
+      - run: npm run audit
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: completion-audit
+          path: completion-audit.generated.json
