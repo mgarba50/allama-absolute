@@ -21,8 +21,9 @@ import { FigureGlyph } from "./components/FigureGlyph";
 import { HouseMap } from "./components/HouseMap";
 import { ReverseTrace } from "./components/ReverseTrace";
 import { TapCaster } from "./components/TapCaster";
+import { CaseVault } from "./components/CaseVault";
 
-type View = "dashboard" | "absolute" | "cast" | "houses" | "reverse" | "abjad" | "question" | "celestial";
+type View = "dashboard" | "absolute" | "cast" | "houses" | "reverse" | "abjad" | "question" | "celestial" | "cases";
 
 function NavigationButton(props: { id: View; current: View; label: string; onSelect: (id: View) => void }) {
   return (
@@ -122,7 +123,8 @@ export default function App() {
     view === "reverse" ? translate(locale,"reverse") :
     view === "abjad" ? translate(locale,"abjad") :
     view === "question" ? translate(locale,"question") :
-    translate(locale,"celestial");
+    view === "celestial" ? translate(locale,"celestial") :
+    translate(locale,"cases");
 
   return (
     <div className="shell">
@@ -140,6 +142,7 @@ export default function App() {
         <NavigationButton id="abjad" current={view} label={translate(locale,"abjad")} onSelect={setView} />
         <NavigationButton id="question" current={view} label={translate(locale,"question")} onSelect={setView} />
         <NavigationButton id="celestial" current={view} label={translate(locale,"celestial")} onSelect={setView} />
+        <NavigationButton id="cases" current={view} label={translate(locale,"cases")} onSelect={setView} />
 
         <div className="locale-switch">
           <button className={locale === "en" ? "active" : ""} onClick={() => setLocale("en")}>English</button>
@@ -288,6 +291,8 @@ export default function App() {
             <div className="toolbar"><button onClick={() => setView("absolute")}>Run Ω on this question</button></div>
           </section>
         )}
+
+        {view === "cases" && <CaseVault locale={locale} currentQuestion={question} motherIds={motherIds} onContinueCase={(caseQuestion,ids) => { setQuestion(caseQuestion); if(ids?.length === 4) setMotherIds([...ids]); setView("absolute"); }} />}
 
         {view === "celestial" && (
           <section className="panel">
