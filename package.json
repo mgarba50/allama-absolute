@@ -5,10 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "build:app": "vite build",
+    "build": "npm run typecheck && npm run build:app",
     "test": "vitest run",
     "test:watch": "vitest",
-    "audit": "node scripts/audit.mjs"
+    "test:db": "vitest run tests/sqlite.test.ts",
+    "audit": "node scripts/audit.mjs",
+    "verify": "npm run typecheck && npm test && npm run build:app && npm run audit"
   },
   "dependencies": {
     "astronomy-engine": "^2.1.19",

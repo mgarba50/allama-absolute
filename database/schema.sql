@@ -1,5 +1,10 @@
 PRAGMA foreign_keys = ON;
 
+CREATE TABLE IF NOT EXISTS schema_migrations (
+  version INTEGER PRIMARY KEY,
+  applied_at TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS users (
   id TEXT PRIMARY KEY,
   display_name TEXT NOT NULL,
@@ -32,12 +37,48 @@ CREATE TABLE IF NOT EXISTS casts (
   recast_reason TEXT
 );
 
+CREATE TABLE IF NOT EXISTS figures (
+  id TEXT PRIMARY KEY,
+  latin_name TEXT NOT NULL,
+  arabic_name TEXT NOT NULL,
+  pattern TEXT NOT NULL,
+  element TEXT,
+  planet TEXT,
+  quality TEXT,
+  payload_json TEXT NOT NULL DEFAULT '{}'
+);
+
+CREATE TABLE IF NOT EXISTS houses (
+  id INTEGER PRIMARY KEY CHECK(id BETWEEN 1 AND 12),
+  name_en TEXT NOT NULL,
+  name_ar TEXT,
+  payload_json TEXT NOT NULL DEFAULT '{}'
+);
+
+CREATE TABLE IF NOT EXISTS correspondence_tables (
+  id TEXT PRIMARY KEY,
+  family TEXT NOT NULL,
+  key_text TEXT NOT NULL,
+  value_json TEXT NOT NULL,
+  provenance_source_id TEXT REFERENCES sources(id),
+  version INTEGER NOT NULL DEFAULT 1
+);
+
+CREATE TABLE IF NOT EXISTS abjad_methods (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  version INTEGER NOT NULL DEFAULT 1,
+  mapping_json TEXT NOT NULL,
+  normalization_json TEXT NOT NULL DEFAULT '{}'
+);
+
 CREATE TABLE IF NOT EXISTS predictions (
   id TEXT PRIMARY KEY,
   case_id TEXT NOT NULL REFERENCES cases(id) ON DELETE CASCADE,
   cast_id TEXT REFERENCES casts(id),
   methodology_version TEXT NOT NULL,
   verdict_json TEXT NOT NULL,
+  evidence_json TEXT NOT NULL DEFAULT '[]',
   lock_hash TEXT,
   created_at TEXT NOT NULL
 );
@@ -68,6 +109,23 @@ CREATE TABLE IF NOT EXISTS schools (
   description TEXT
 );
 
+CREATE TABLE IF NOT EXISTS methodology_profiles (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  version INTEGER NOT NULL,
+  profile_json TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS protocol_bookmarks (
+  id TEXT PRIMARY KEY,
+  name TEXT NOT NULL,
+  protocol_id TEXT NOT NULL,
+  configuration_json TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS sources (
   id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
@@ -77,12 +135,43 @@ CREATE TABLE IF NOT EXISTS sources (
   notes TEXT
 );
 
+CREATE TABLE IF NOT EXISTS documents (
+  id TEXT PRIMARY KEY,
+  source_id TEXT REFERENCES sources(id),
+  title TEXT NOT NULL,
+  mime_type TEXT,
+  checksum TEXT,
+  metadata_json TEXT NOT NULL DEFAULT '{}',
+  created_at TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS annotations (
   id TEXT PRIMARY KEY,
   case_id TEXT REFERENCES cases(id) ON DELETE CASCADE,
   source_id TEXT REFERENCES sources(id),
   body_md TEXT NOT NULL,
   private INTEGER NOT NULL DEFAULT 1,
+  created_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS practitioner_notes (
+  id TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES cases(id) ON DELETE CASCADE,
+  body TEXT NOT NULL,
+  tags_json TEXT NOT NULL DEFAULT '[]',
+  private INTEGER NOT NULL DEFAULT 1,
+  created_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS practitioner_overrides (
+  id TEXT PRIMARY KEY,
+  case_id TEXT NOT NULL REFERENCES cases(id) ON DELETE CASCADE,
+  prediction_id TEXT REFERENCES predictions(id),
+  practitioner TEXT NOT NULL,
+  machine_verdict_json TEXT NOT NULL,
+  override_decision TEXT NOT NULL,
+  reason TEXT NOT NULL,
+  notes TEXT,
   created_at TEXT NOT NULL
 );
 
@@ -121,3 +210,9 @@ CREATE INDEX IF NOT EXISTS idx_cases_updated_at ON cases(updated_at);
 CREATE INDEX IF NOT EXISTS idx_casts_case_id ON casts(case_id);
 CREATE INDEX IF NOT EXISTS idx_predictions_case_id ON predictions(case_id);
 CREATE INDEX IF NOT EXISTS idx_outcomes_case_id ON outcomes(case_id);
+CREATE INDEX IF NOT EXISTS idx_notes_case_id ON practitioner_notes(case_id);
+CREATE INDEX IF NOT EXISTS idx_overrides_case_id ON practitioner_overrides(case_id);
+CREATE INDEX IF NOT EXISTS idx_calibration_scope ON calibration(scope,metric);
+
+INSERT OR IGNORE INTO schema_migrations(version,applied_at) VALUES(3,datetime('now'));
+PRAGMA user_version = 3;
