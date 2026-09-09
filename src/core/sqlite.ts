@@ -209,8 +209,8 @@ export class SqliteCaseRepository implements CaseRepository {
 
   private migrate(): void {
     this.database.run("PRAGMA foreign_keys = ON");
-    this.database.run("PRAGMA user_version = 3");
-    this.database.run("INSERT OR IGNORE INTO schema_migrations(version,applied_at) VALUES(3,datetime('now'))");
+    this.database.run("PRAGMA user_version = 4");
+    this.database.run("INSERT OR IGNORE INTO schema_migrations(version,applied_at) VALUES(4,datetime('now'))");
   }
 
   private seedReferenceData(): void {
@@ -546,6 +546,17 @@ export class SqliteCaseRepository implements CaseRepository {
       "ON CONFLICT(id) DO UPDATE SET name=excluded.name,version=excluded.version,profile_json=excluded.profile_json,updated_at=excluded.updated_at",
       [profile.id,profile.name,profile.version,JSON.stringify(profile),updatedAt]
     );
+    await this.flush();
+  }
+
+  getSetting<T>(key:string,fallback:T):T {
+    const row=queryRows(this.database,"SELECT value_json FROM app_settings WHERE key=?",[key])[0];
+    return row?safeJson<T>(row.value_json,fallback):fallback;
+  }
+
+  async saveSetting(key:string,value:unknown,updatedAt=new Date().toISOString()):Promise<void> {
+    if(!key.trim()) throw new Error("Setting key is required.");
+    this.database.run("INSERT INTO app_settings(key,value_json,updated_at) VALUES(?,?,?) ON CONFLICT(key) DO UPDATE SET value_json=excluded.value_json,updated_at=excluded.updated_at",[key.trim(),JSON.stringify(value),updatedAt]);
     await this.flush();
   }
 

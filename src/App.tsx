@@ -23,8 +23,11 @@ import { ReverseTrace } from "./components/ReverseTrace";
 import { TapCaster } from "./components/TapCaster";
 import { CaseVault } from "./components/CaseVault";
 import { ResearchLab } from "./components/ResearchLab";
+import { GraphLab } from "./components/GraphLab";
+import { TimingLab } from "./components/TimingLab";
+import { SettingsLab } from "./components/SettingsLab";
 
-type View = "dashboard" | "absolute" | "cast" | "houses" | "reverse" | "abjad" | "question" | "celestial" | "cases" | "research";
+type View = "dashboard" | "absolute" | "cast" | "houses" | "reverse" | "abjad" | "question" | "celestial" | "cases" | "research" | "graphs" | "timing" | "settings";
 
 function NavigationButton(props: { id: View; current: View; label: string; onSelect: (id: View) => void }) {
   return (
@@ -106,7 +109,7 @@ export default function App() {
         setView("absolute");
         return;
       case "compare":
-        setView("celestial");
+        setView("timing");
         return;
       case "lock":
         setView("research");
@@ -115,10 +118,13 @@ export default function App() {
         setView("cases");
         return;
       case "graphs":
+        setView("graphs");
+        return;
       case "settings":
-        return "This command target is being wired into the dedicated practitioner surfaces.";
+        setView("settings");
+        return;
       default:
-        return "Unknown command. Supported: /cast, /judge, /reverse, /house N, /abjad TEXT, /hour, /moon, /deep, /compare, /lock, /outcome.";
+        return "Unknown command. Supported: /cast, /judge, /reverse, /house N, /abjad TEXT, /hour, /moon, /deep, /compare, /lock, /outcome, /graphs, /settings.";
     }
   }
 
@@ -132,7 +138,10 @@ export default function App() {
     view === "question" ? translate(locale,"question") :
     view === "celestial" ? translate(locale,"celestial") :
     view === "cases" ? translate(locale,"cases") :
-    translate(locale,"research");
+    view === "research" ? translate(locale,"research") :
+    view === "graphs" ? translate(locale,"graphs") :
+    view === "timing" ? translate(locale,"timing") :
+    translate(locale,"settings");
 
   return (
     <div className="shell">
@@ -152,6 +161,9 @@ export default function App() {
         <NavigationButton id="celestial" current={view} label={translate(locale,"celestial")} onSelect={setView} />
         <NavigationButton id="cases" current={view} label={translate(locale,"cases")} onSelect={setView} />
         <NavigationButton id="research" current={view} label={translate(locale,"research")} onSelect={setView} />
+        <NavigationButton id="graphs" current={view} label={translate(locale,"graphs")} onSelect={setView} />
+        <NavigationButton id="timing" current={view} label={translate(locale,"timing")} onSelect={setView} />
+        <NavigationButton id="settings" current={view} label={translate(locale,"settings")} onSelect={setView} />
 
         <div className="locale-switch">
           <button className={locale === "en" ? "active" : ""} onClick={() => setLocale("en")}>English</button>
@@ -302,6 +314,12 @@ export default function App() {
         )}
 
         {view === "research" && <ResearchLab locale={locale} motherIds={motherIds} />}
+
+        {view === "graphs" && <GraphLab locale={locale} question={question} motherIds={motherIds} latitude={latitude} longitude={longitude} momentText={momentText} />}
+
+        {view === "timing" && <TimingLab locale={locale} defaultLatitude={latitude} defaultLongitude={longitude} defaultMoment={momentText} />}
+
+        {view === "settings" && <SettingsLab locale={locale} />}
 
         {view === "cases" && <CaseVault locale={locale} currentQuestion={question} motherIds={motherIds} onContinueCase={(caseQuestion,ids) => { setQuestion(caseQuestion); if(ids?.length === 4) setMotherIds([...ids]); setView("absolute"); }} />}
 

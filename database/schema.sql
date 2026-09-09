@@ -117,6 +117,12 @@ CREATE TABLE IF NOT EXISTS methodology_profiles (
   updated_at TEXT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS app_settings (
+  key TEXT PRIMARY KEY,
+  value_json TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS protocol_bookmarks (
   id TEXT PRIMARY KEY,
   name TEXT NOT NULL,
@@ -214,5 +220,5 @@ CREATE INDEX IF NOT EXISTS idx_notes_case_id ON practitioner_notes(case_id);
 CREATE INDEX IF NOT EXISTS idx_overrides_case_id ON practitioner_overrides(case_id);
 CREATE INDEX IF NOT EXISTS idx_calibration_scope ON calibration(scope,metric);
 
-INSERT OR IGNORE INTO schema_migrations(version,applied_at) VALUES(3,datetime('now'));
-PRAGMA user_version = 3;
+INSERT OR IGNORE INTO schema_migrations(version,applied_at) VALUES(4,datetime('now'));
+PRAGMA user_version = 4;
