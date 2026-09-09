@@ -1,5 +1,6 @@
 import type { AbsoluteAnalysis } from "./analysis";
 import type { FinalVerdictObject } from "./finalVerdict";
+import type { Locale } from "./i18n";
 
 export type DirectResponseMode = "SOVEREIGN" | "SCHOLAR" | "CLIENT" | "MUSA" | "RESEARCHER";
 
@@ -10,16 +11,19 @@ function percent(value: number): string {
 export function renderDirectResponse(
   mode: DirectResponseMode,
   verdict: FinalVerdictObject,
-  analysis: AbsoluteAnalysis
+  analysis: AbsoluteAnalysis,
+  locale: Locale = "en"
 ): string {
+  const ar=locale==="ar";
+  const t=(en:string,a:string)=>ar?a:en;
   const judge=analysis.shield.judge.latin;
   const houses=verdict.relevantHouses.map((house)=>"H"+house).join(", ");
   if (mode==="MUSA") {
     const objection=verdict.strongestObjection ? " Objection: " + verdict.strongestObjection + "." : "";
-    return `${verdict.verdictText} — ${percent(verdict.confidence)}. ${houses || "No fixed house"}; Judge ${judge}.${objection}`;
+    return `${verdict.verdictText} — ${percent(verdict.confidence)}. ${houses || t("No fixed house","لا بيت ثابت")}; ${t("Judge","الحاكم")} ${judge}.${objection}`;
   }
   if (mode==="CLIENT") {
-    return `${verdict.verdictText}. Traditional confidence: ${percent(verdict.confidence)}. The main symbolic indicators are ${verdict.primaryEvidence.slice(0,2).join(" and ") || "not strong enough to isolate"}. ${verdict.epistemicBoundary ?? ""}`.trim();
+    return ar ? `${verdict.verdictText}. الثقة التقليدية: ${percent(verdict.confidence)}. أبرز المؤشرات الرمزية: ${verdict.primaryEvidence.slice(0,2).join("، ") || "لا توجد إشارة منفردة كافية"}. ${verdict.epistemicBoundary ?? ""}`.trim() : `${verdict.verdictText}. Traditional confidence: ${percent(verdict.confidence)}. The main symbolic indicators are ${verdict.primaryEvidence.slice(0,2).join(" and ") || "not strong enough to isolate"}. ${verdict.epistemicBoundary ?? ""}`.trim();
   }
   if (mode==="SCHOLAR") {
     return [

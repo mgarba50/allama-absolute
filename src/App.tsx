@@ -148,7 +148,7 @@ export default function App() {
       <aside>
         <div className="brand">
           <span className="omega">Ω</span>
-          <div><strong>ALLAMA ABSOLUTE</strong><small>Sovereign Symbolic Intelligence Engine</small></div>
+          <div><strong>ALLAMA ABSOLUTE</strong><small>{locale==="ar"?"محرك سيادي للذكاء الرمزي":"Sovereign Symbolic Intelligence Engine"}</small></div>
         </div>
 
         <NavigationButton id="dashboard" current={view} label={translate(locale,"dashboard")} onSelect={setView} />
@@ -171,7 +171,7 @@ export default function App() {
         </div>
 
         <div className="aside-note">
-          Deterministic calculation, traditional interpretation, AI inference and empirical evidence remain separate by design.
+          {locale==="ar"?"يظل الحساب الحتمي والتفسير التقليدي واستدلال الذكاء الاصطناعي والدليل التجريبي طبقات منفصلة قصداً.":"Deterministic calculation, traditional interpretation, AI inference and empirical evidence remain separate by design."}
         </div>
       </aside>
 
@@ -184,14 +184,14 @@ export default function App() {
           <span className="status">{translate(locale,"localCore")}</span>
         </header>
 
-        <CommandPalette onCommand={executeCommand} />
+        <CommandPalette onCommand={executeCommand} locale={locale} />
 
         {view === "dashboard" && (
           <section className="grid">
             <article className="hero">
-              <p className="eyebrow">CENTRAL COMMAND</p>
+              <p className="eyebrow">{locale==="ar"?"القيادة المركزية":"CENTRAL COMMAND"}</p>
               <h2>Ω ALLAMA ABSOLUTE</h2>
-              <p>The machine calculates first, reasons second, challenges itself third, and writes the verdict last.</p>
+              <p>{locale==="ar"?"يحسب النظام أولاً، ثم يحلل، ثم يعارض قراءته، ولا يكتب الحكم إلا في النهاية.":"The machine calculates first, reasons second, challenges itself third, and writes the verdict last."}</p>
               <div className="hero-actions">
                 <button onClick={() => setView("absolute")}>{translate(locale,"runAnalysis")}</button>
                 <button className="secondary" onClick={() => setView("cast")}>{translate(locale,"castingChamber")}</button>
@@ -199,7 +199,7 @@ export default function App() {
             </article>
 
             <article>
-              <span className="metric-label">Current Judge</span>
+              <span className="metric-label">{locale==="ar"?"الحاكم الحالي":"Current Judge"}</span>
               <div className="figure-row">
                 <FigureGlyph pattern={shield.judge.pattern} />
                 <div><strong>{shield.judge.latin}</strong><small>{shield.judge.arabic}</small></div>
@@ -207,21 +207,21 @@ export default function App() {
             </article>
 
             <article>
-              <span className="metric-label">Planetary Hour</span>
+              <span className="metric-label">{locale==="ar"?"الساعة الكوكبية":"Planetary Hour"}</span>
               <strong className="big">{planetary?.planet ?? "Unavailable"}</strong>
               <small>{planetary ? planetary.start.toLocaleTimeString() + " — " + planetary.end.toLocaleTimeString() : "Check coordinates/date"}</small>
             </article>
 
             <article>
-              <span className="metric-label">Question Domain</span>
+              <span className="metric-label">{locale==="ar"?"مجال السؤال":"Question Domain"}</span>
               <strong className="big">{profile.domain}</strong>
-              <small>Houses {profile.houses.join(", ")}</small>
+              <small>{locale==="ar"?"البيوت":"Houses"} {profile.houses.join(", ")}</small>
             </article>
 
             <article>
-              <span className="metric-label">Moon Illumination</span>
+              <span className="metric-label">{locale==="ar"?"إضاءة القمر":"Moon Illumination"}</span>
               <strong className="big">{Math.round(moon.fraction * 100)}%</strong>
-              <small>Phase index {moon.phase.toFixed(3)}</small>
+              <small>{locale==="ar"?"مؤشر الطور":"Phase index"} {moon.phase.toFixed(3)}</small>
             </article>
           </section>
         )}
@@ -233,26 +233,27 @@ export default function App() {
             latitude={latitude}
             longitude={longitude}
             momentText={momentText}
+            locale={locale}
           />
         )}
 
         {view === "cast" && (
           <section>
-            <TapCaster onUseMothers={useTapMothers} />
+            <TapCaster onUseMothers={useTapMothers} locale={locale} />
 
-            <div className="divider"><span>OR DIRECT / ENTROPY CAST</span></div>
+            <div className="divider"><span>{locale==="ar"?"أو الضرب المباشر / العشوائية التشفيرية":"OR DIRECT / ENTROPY CAST"}</span></div>
             <div className="toolbar">
-              <button onClick={randomize}>Cryptographic Entropy Cast</button>
+              <button onClick={randomize}>{locale==="ar"?"ضرب بعشوائية تشفيرية":"Cryptographic Entropy Cast"}</button>
               <button className="secondary" onClick={() => downloadText("allama-shield.json",toJson(shield),"application/json")}>
-                Export Shield JSON
+                {locale==="ar"?"تصدير الدرع JSON":"Export Shield JSON"}
               </button>
-              <button className="secondary" onClick={() => setView("reverse")}>Trace Judge</button>
+              <button className="secondary" onClick={() => setView("reverse")}>{locale==="ar"?"تتبّع الحاكم":"Trace Judge"}</button>
             </div>
 
             <div className="mothers">
               {motherIds.map((id,index) => (
                 <label key={index}>
-                  Mother {index + 1}
+                  {locale==="ar"?"الأم":"Mother"} {index + 1}
                   <select value={id} onChange={(event) => updateMother(index,event.target.value)}>
                     {FIGURES.map((figure) => (
                       <option key={figure.id} value={figure.id}>{figure.latin} — {figure.pattern.join("")}</option>
@@ -274,26 +275,26 @@ export default function App() {
             </div>
 
             <div className="validation">
-              {validateShield(shield).length ? validateShield(shield).join("; ") : "✓ Structural validation passed, including Judge parity."}
+              {validateShield(shield).length ? validateShield(shield).join("; ") : locale==="ar"?"✓ اجتاز الدرع التحقق البنيوي، بما في ذلك تكافؤ الحاكم.":"✓ Structural validation passed, including Judge parity."}
             </div>
           </section>
         )}
 
-        {view === "houses" && <HouseMap shield={shield} selectedHouse={selectedHouse} onSelect={setSelectedHouse} />}
+        {view === "houses" && <HouseMap shield={shield} selectedHouse={selectedHouse} onSelect={setSelectedHouse} locale={locale} />}
 
-        {view === "reverse" && <ReverseTrace shield={shield} />}
+        {view === "reverse" && <ReverseTrace shield={shield} locale={locale} />}
 
         {view === "abjad" && (
           <section className="panel">
-            <label>Arabic text<input dir="rtl" value={abjadText} onChange={(event) => setAbjadText(event.target.value)} /></label>
+            <label>{locale==="ar"?"النص العربي":"Arabic text"}<input dir="rtl" value={abjadText} onChange={(event) => setAbjadText(event.target.value)} /></label>
             <div className="abjad-result">
-              <div><span>Original</span><strong dir="rtl">{abjad.original}</strong></div>
-              <div><span>Normalized</span><strong dir="rtl">{abjad.normalized}</strong></div>
-              <div><span>Kabir Total</span><strong>{abjad.total}</strong></div>
-              <div><span>Reductions</span><strong>{abjad.reductions.join(" → ")}</strong></div>
+              <div><span>{locale==="ar"?"الأصل":"Original"}</span><strong dir="rtl">{abjad.original}</strong></div>
+              <div><span>{locale==="ar"?"بعد التطبيع":"Normalized"}</span><strong dir="rtl">{abjad.normalized}</strong></div>
+              <div><span>{locale==="ar"?"مجموع الكبير":"Kabir Total"}</span><strong>{abjad.total}</strong></div>
+              <div><span>{locale==="ar"?"الاختزالات":"Reductions"}</span><strong>{abjad.reductions.join(" → ")}</strong></div>
             </div>
             <table>
-              <thead><tr><th>Letter</th><th>Value</th></tr></thead>
+              <thead><tr><th>{locale==="ar"?"الحرف":"Letter"}</th><th>{locale==="ar"?"القيمة":"Value"}</th></tr></thead>
               <tbody>{abjad.steps.map((step,index) => <tr key={index}><td dir="rtl">{step.letter}</td><td>{step.value}</td></tr>)}</tbody>
             </table>
           </section>
@@ -301,15 +302,15 @@ export default function App() {
 
         {view === "question" && (
           <section className="panel">
-            <label>Client question<textarea value={question} onChange={(event) => setQuestion(event.target.value)} /></label>
+            <label>{locale==="ar"?"سؤال العميل":"Client question"}<textarea value={question} onChange={(event) => setQuestion(event.target.value)} /></label>
             <div className="profile">
-              <div><span>Domain</span><strong>{profile.domain}</strong></div>
-              <div><span>Decision Type</span><strong>{profile.decisionType}</strong></div>
-              <div><span>Relevant Houses</span><strong>{profile.houses.join(", ")}</strong></div>
-              <div><span>Modules</span><strong>{profile.modules.join(" · ")}</strong></div>
+              <div><span>{locale==="ar"?"المجال":"Domain"}</span><strong>{profile.domain}</strong></div>
+              <div><span>{locale==="ar"?"نوع القرار":"Decision Type"}</span><strong>{profile.decisionType}</strong></div>
+              <div><span>{locale==="ar"?"البيوت ذات الصلة":"Relevant Houses"}</span><strong>{profile.houses.join(", ")}</strong></div>
+              <div><span>{locale==="ar"?"الوحدات":"Modules"}</span><strong>{profile.modules.join(" · ")}</strong></div>
             </div>
             {profile.notes.map((note) => <p className="notice" key={note}>{note}</p>)}
-            <div className="toolbar"><button onClick={() => setView("absolute")}>Run Ω on this question</button></div>
+            <div className="toolbar"><button onClick={() => setView("absolute")}>{locale==="ar"?"تشغيل Ω على هذا السؤال":"Run Ω on this question"}</button></div>
           </section>
         )}
 
@@ -326,18 +327,18 @@ export default function App() {
         {view === "celestial" && (
           <section className="panel">
             <div className="coordinates">
-              <label>Latitude<input type="number" value={latitude} onChange={(event) => setLatitude(Number(event.target.value))} /></label>
-              <label>Longitude<input type="number" value={longitude} onChange={(event) => setLongitude(Number(event.target.value))} /></label>
-              <label>Moment<input type="datetime-local" value={momentText} onChange={(event) => setMomentText(event.target.value)} /></label>
+              <label>{locale==="ar"?"خط العرض":"Latitude"}<input type="number" value={latitude} onChange={(event) => setLatitude(Number(event.target.value))} /></label>
+              <label>{locale==="ar"?"خط الطول":"Longitude"}<input type="number" value={longitude} onChange={(event) => setLongitude(Number(event.target.value))} /></label>
+              <label>{locale==="ar"?"الوقت":"Moment"}<input type="datetime-local" value={momentText} onChange={(event) => setMomentText(event.target.value)} /></label>
             </div>
             {planetary ? (
               <div className="profile">
-                <div><span>Planetary Hour</span><strong>{planetary.planet}</strong></div>
-                <div><span>Ordinal</span><strong>{planetary.ordinal}</strong></div>
-                <div><span>Period</span><strong>{planetary.daylight ? "Day" : "Night"}</strong></div>
-                <div><span>Moon Illumination</span><strong>{Math.round(moon.fraction * 100)}%</strong></div>
+                <div><span>{locale==="ar"?"الساعة الكوكبية":"Planetary Hour"}</span><strong>{planetary.planet}</strong></div>
+                <div><span>{locale==="ar"?"الترتيب":"Ordinal"}</span><strong>{planetary.ordinal}</strong></div>
+                <div><span>{locale==="ar"?"الفترة":"Period"}</span><strong>{planetary.daylight ? (locale==="ar"?"نهار":"Day") : (locale==="ar"?"ليل":"Night")}</strong></div>
+                <div><span>{locale==="ar"?"إضاءة القمر":"Moon Illumination"}</span><strong>{Math.round(moon.fraction * 100)}%</strong></div>
               </div>
-            ) : <p className="notice">Planetary hours cannot be resolved at this date/location.</p>}
+            ) : <p className="notice">{locale==="ar"?"تعذر حساب الساعات الكوكبية لهذا التاريخ/الموقع.":"Planetary hours cannot be resolved at this date/location."}</p>}
           </section>
         )}
       </main>
