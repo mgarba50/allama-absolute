@@ -51,3 +51,10 @@ export * from "./council";
 export * from "./sessions";
 export * from "./performance";
 export * from "./i18n";
+
+export * from "./blindSession";
+export * from "./clientChaos";
+export * from "./finalVerdict";
+export * from "./directResponse";
+export * from "./methodology";
+export * from "./testCorpus";
