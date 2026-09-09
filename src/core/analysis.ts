@@ -60,6 +60,8 @@ export function runAbsoluteAnalysis(input: AbsoluteAnalysisInput): AbsoluteAnaly
   const question = classifyQuestion(input.question);
   const moment = input.timestamp ? new Date(input.timestamp) : new Date();
 
+  if (!Number.isFinite(moment.getTime())) throw new Error("Invalid analysis timestamp.");
+
   const evidence: Evidence[] = [
     evidenceForFigure("judge", "Judge", shield.judge.quality, 1.4),
     evidenceForFigure("right-witness", "Right Witness", shield.rightWitness.quality, 0.9),
@@ -71,8 +73,14 @@ export function runAbsoluteAnalysis(input: AbsoluteAnalysisInput): AbsoluteAnaly
   const contradiction = analyzeContradictions(evidence);
   const abjad = (input.abjadTexts ?? []).filter(Boolean).map((text) => calculateAbjad(text));
 
+  const hasCoordinates =
+    typeof input.latitude === "number" &&
+    Number.isFinite(input.latitude) &&
+    typeof input.longitude === "number" &&
+    Number.isFinite(input.longitude);
+
   let celestial: AbsoluteAnalysis["celestial"] = null;
-  if (Number.isFinite(input.latitude) && Number.isFinite(input.longitude)) {
+  if (hasCoordinates) {
     try {
       celestial = {
         planetaryHour:currentPlanetaryHour(moment,input.latitude as number,input.longitude as number),
@@ -83,7 +91,7 @@ export function runAbsoluteAnalysis(input: AbsoluteAnalysisInput): AbsoluteAnaly
     }
   }
 
-  const missingCelestialPenalty = input.latitude == null || input.longitude == null ? 10 : celestial ? 0 : 15;
+  const missingCelestialPenalty = hasCoordinates ? (celestial ? 0 : 15) : 10;
   const validationPenalty = validationErrors.length * 20;
   const dataQuality = Math.max(0, Math.min(100, 100 - missingCelestialPenalty - validationPenalty));
 
@@ -100,7 +108,9 @@ export function runAbsoluteAnalysis(input: AbsoluteAnalysisInput): AbsoluteAnaly
     evidence,
     contradiction,
     traditionalVerdict,
-    decisionBoundary:question.highStakes ? "Traditional symbolic output only; do not use as a professional or safety-critical decision." : null,
+    decisionBoundary:question.highStakes
+      ? "Traditional symbolic output only; do not use as a professional or safety-critical decision."
+      : null,
     dataQuality
   };
 }

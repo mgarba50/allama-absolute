@@ -1,9 +1,13 @@
 import type { AbsoluteAnalysis } from "./analysis";
 
 function escapeHtml(value: string): string {
-  return value.replace(/[&<>"']/g,(character) => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-  })[character] as string);
+  return value.replace(/[&<>"']/g,(character) => {
+    if (character === "&") return "&amp;";
+    if (character === "<") return "&lt;";
+    if (character === ">") return "&gt;";
+    if (character === '"') return "&quot;";
+    return "&#039;";
+  });
 }
 
 export function renderScholarMarkdown(analysis: AbsoluteAnalysis): string {
@@ -46,7 +50,10 @@ export function renderScholarMarkdown(analysis: AbsoluteAnalysis): string {
 }
 
 export function renderClientHtml(analysis: AbsoluteAnalysis): string {
-  const boundary = analysis.decisionBoundary ? "<p class=\"boundary\">" + escapeHtml(analysis.decisionBoundary) + "</p>" : "";
+  const boundary = analysis.decisionBoundary
+    ? "<p class=\"boundary\">" + escapeHtml(analysis.decisionBoundary) + "</p>"
+    : "";
+
   return "<!doctype html><html><head><meta charset=\"utf-8\"><title>ALLAMA ABSOLUTE Report</title>" +
     "<style>body{font-family:Georgia,serif;max-width:760px;margin:40px auto;padding:0 20px;color:#1b1813}h1{letter-spacing:.08em}.card{border:1px solid #aa9368;padding:18px;margin:16px 0}.boundary{border-left:4px solid #9a6b25;padding:10px;background:#f7f0e3}</style></head><body>" +
     "<h1>ALLAMA ABSOLUTE</h1><p>" + escapeHtml(analysis.question.normalized) + "</p>" +

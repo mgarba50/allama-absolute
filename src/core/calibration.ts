@@ -14,6 +14,13 @@ export interface AccuracySummary {
   wilsonHigh: number;
 }
 
+export interface HumanAbsoluteRecord {
+  musa: boolean;
+  absolute: boolean;
+  joint?: boolean;
+  actual: boolean;
+}
+
 export function accuracySummary(records: readonly ResolvedPrediction[]): AccuracySummary {
   const sampleSize = records.length;
   const correct = records.filter((record) => record.predicted === record.actual).length;
@@ -34,11 +41,14 @@ export function accuracySummary(records: readonly ResolvedPrediction[]): Accurac
   };
 }
 
-export function compareHumanAbsolute(
-  records: readonly { musa: boolean; absolute: boolean; joint?: boolean; actual: boolean }[]
-) {
-  const map = (selector: (record: typeof records[number]) => boolean) =>
-    accuracySummary(records.map((record,index) => ({ id:String(index), predicted:selector(record), actual:record.actual })));
+export function compareHumanAbsolute(records: readonly HumanAbsoluteRecord[]) {
+  const map = (selector: (record: HumanAbsoluteRecord) => boolean) =>
+    accuracySummary(records.map((record,index) => ({
+      id:String(index),
+      predicted:selector(record),
+      actual:record.actual
+    })));
+
   return {
     musa:map((record) => record.musa),
     absolute:map((record) => record.absolute),
