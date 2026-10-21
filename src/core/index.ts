@@ -56,6 +56,7 @@ export * from "./blindSession";
 export * from "./clientChaos";
 export * from "./finalVerdict";
 export * from "./directResponse";
+export * from "./practitioner";
 export * from "./methodology";
 export * from "./testCorpus";
 
@@ -66,7 +67,5 @@ export * from "./timingExplorer";
 export * from "./graph";
 
 export * from "./researchMetrics";
-
 export * from "./astronomyValidation";
-
 export * from "./personality";
