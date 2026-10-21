@@ -1,0 +1,37 @@
+{
+  "name": "allama-absolute",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "typecheck": "tsc --noEmit",
+    "build:app": "vite build",
+    "build": "npm run typecheck && npm run build:app",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:db": "vitest run tests/sqlite.test.ts",
+    "test:performance": "vitest run tests/performance-budget.test.ts",
+    "performance:budget": "npm run test:performance && npm run build:app && node scripts/check-performance-budget.mjs",
+    "audit": "node scripts/audit.mjs",
+    "audit:strict": "node scripts/audit.mjs --strict",
+    "verify": "npm run typecheck && npm test && npm run build:app && node scripts/check-performance-budget.mjs && npm run audit"
+  },
+  "dependencies": {
+    "astronomy-engine": "^2.1.19",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "sql.js": "^1.14.2",
+    "suncalc": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "@types/sql.js": "^1.4.11",
+    "@types/suncalc": "^1.9.2",
+    "@vitejs/plugin-react": "^5.0.2",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.5",
+    "vitest": "^3.2.4"
+  }
+}
