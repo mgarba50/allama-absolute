@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   CORE_ANALYTICAL_LENSES,
+  newCase,
   resolveTestimonyCollisions,
   runAbsoluteAnalysis,
   runAnalyticalCouncil,
@@ -34,6 +35,19 @@ describe("testimony collision and deep-search orchestration", () => {
     expect(deep.findings.some((item)=>item.category==="repetition")).toBe(true);
     expect(deep.findings.every((item)=>item.provenance.length>0)).toBe(true);
     expect(deep.summary.independentSignalCount).toBeGreaterThan(0);
+  });
+
+  it("compares an unsaved active question with saved historical cases", () => {
+    const question="Will this debtor repay me?";
+    const analysis=runAbsoluteAnalysis({
+      question,
+      motherIds:["via","via","fortuna-major","conjunctio"],
+      timestamp:"2026-09-10T12:00:00.000Z"
+    });
+    const saved=newCase("Will the debtor repay me?","2026-09-01T12:00:00.000Z");
+    const deep=runDeepSearch({analysis,cases:[saved],currentQuestion:question});
+    expect(deep.searchedDimensions).toContain("historical-case");
+    expect(deep.findings.some((finding)=>finding.category==="historical-case" && finding.provenance.includes(`case:${saved.id}`))).toBe(true);
   });
 
   it("implements the ten named analytical lenses without invented authorities", () => {

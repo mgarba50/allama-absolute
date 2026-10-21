@@ -11,8 +11,11 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:db": "vitest run tests/sqlite.test.ts",
+    "test:performance": "vitest run tests/performance-budget.test.ts",
+    "performance:budget": "npm run test:performance && npm run build:app && node scripts/check-performance-budget.mjs",
     "audit": "node scripts/audit.mjs",
-    "verify": "npm run typecheck && npm test && npm run build:app && npm run audit"
+    "audit:strict": "node scripts/audit.mjs --strict",
+    "verify": "npm run typecheck && npm test && npm run build:app && node scripts/check-performance-budget.mjs && npm run audit"
   },
   "dependencies": {
     "astronomy-engine": "^2.1.19",

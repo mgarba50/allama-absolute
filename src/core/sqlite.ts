@@ -10,9 +10,20 @@ import type { PractitionerOverride } from "./override";
 import type { Evidence, Verdict } from "./types";
 import type { MethodologyProfile } from "./methodology";
 import type { ProtocolBookmark } from "./bookmarks";
+import type { VersionedRule, RuleCondition, RuleOperator } from "./rules";
+import type { TraditionSchool } from "./traditions";
 import { HOUSES } from "./houses";
 import { ABJAD_KABIR, DEFAULT_NORMALIZATION } from "./abjad";
 import { ARABIC_LUNAR_MANSIONS } from "./ephemeris";
+
+export function sqliteWasmLocation(url = wasmUrl): string {
+  const runtime = globalThis as typeof globalThis & {
+    process?: { cwd?: () => string };
+  };
+  const cwd = runtime.process?.cwd?.();
+  if (cwd && url.startsWith("/")) return cwd.replace(/\\/g,"/") + url;
+  return url;
+}
 
 export interface SqliteByteStore {
   load(): Promise<Uint8Array | null>;
@@ -112,6 +123,48 @@ export interface CalibrationRecord {
   computedAt: string;
 }
 
+/** The provenance fields represented by the schema's `sources` table. */
+export interface StoredProvenanceSource {
+  id: string;
+  title: string;
+  author?: string;
+  dateText?: string;
+  locator?: string;
+  notes?: string;
+}
+
+/** Searchable manuscript/document metadata. Binary contents remain outside SQLite. */
+export interface StoredDocument {
+  id: string;
+  sourceId?: string;
+  title: string;
+  mimeType?: string;
+  checksum?: string;
+  metadata: Readonly<Record<string,unknown>>;
+  createdAt: string;
+}
+
+export interface StoredAnnotation {
+  id: string;
+  caseId?: string;
+  sourceId?: string;
+  bodyMd: string;
+  private: boolean;
+  createdAt: string;
+}
+
+export interface AnnotationFilter {
+  caseId?: string;
+  sourceId?: string;
+}
+
+export interface ForeignKeyViolation {
+  table: string;
+  rowId: number | null;
+  parent: string;
+  foreignKeyIndex: number;
+}
+
 export interface CaseExportBundle {
   format: "allama-absolute-case";
   version: 1;
@@ -140,6 +193,7 @@ export interface DatabaseHealth {
   userVersion: number;
   tables: readonly string[];
   counts: Readonly<Record<string,number>>;
+  foreignKeyViolations: readonly ForeignKeyViolation[];
 }
 
 function queryRows(database: Database,sql: string,params: readonly SqlValue[] = []): SqlRow[] {
@@ -163,6 +217,59 @@ function safeJson<T>(value: unknown,fallback: T): T {
   }
 }
 
+function safeJsonObject(value: unknown): Readonly<Record<string,unknown>> {
+  const parsed = safeJson<unknown>(value,{});
+  return parsed !== null && typeof parsed === "object" && !Array.isArray(parsed)
+    ? parsed as Readonly<Record<string,unknown>>
+    : {};
+}
+
+const RULE_OPERATORS = new Set<RuleOperator>(["eq","neq","gt","gte","lt","lte","includes"]);
+
+type ParsedRuleExpression = Pick<VersionedRule,"conditions" | "result"> & { valid:boolean };
+
+function invalidRuleExpression(): ParsedRuleExpression {
+  return {valid:false,conditions:[],result:{direction:0,label:""}};
+}
+
+function safeRuleExpression(value: unknown): ParsedRuleExpression {
+  const parsed = safeJson<unknown>(value,null);
+  if (parsed === null || typeof parsed !== "object" || Array.isArray(parsed)) return invalidRuleExpression();
+  const expression = parsed as Record<string,unknown>;
+  if (!Array.isArray(expression.conditions)) return invalidRuleExpression();
+  const conditions: RuleCondition[] = [];
+  for (const candidate of expression.conditions) {
+    if (candidate === null || typeof candidate !== "object" || Array.isArray(candidate)) {
+      return invalidRuleExpression();
+    }
+    const condition = candidate as Record<string,unknown>;
+    if (
+      typeof condition.path !== "string" || !condition.path.trim() ||
+      !RULE_OPERATORS.has(condition.operator as RuleOperator) ||
+      !Object.prototype.hasOwnProperty.call(condition,"value")
+    ) return invalidRuleExpression();
+    conditions.push({path:condition.path,operator:condition.operator as RuleOperator,value:condition.value});
+  }
+  const rawResult = expression.result;
+  if (rawResult === null || typeof rawResult !== "object" || Array.isArray(rawResult)) return invalidRuleExpression();
+  const result = rawResult as Record<string,unknown>;
+  if (
+    result.direction !== -1 && result.direction !== 0 && result.direction !== 1 ||
+    typeof result.label !== "string"
+  ) return invalidRuleExpression();
+  return {
+    valid:true,
+    conditions,
+    result:{direction:result.direction,label:result.label}
+  };
+}
+
+function requireText(value: string,label: string): string {
+  const normalized = value.trim();
+  if (!normalized) throw new Error(label + " is required.");
+  return normalized;
+}
+
 function tableExists(database: Database,name: string): boolean {
   return queryRows(database,"SELECT name FROM sqlite_master WHERE type='table' AND name=?",[name]).length > 0;
 }
@@ -173,6 +280,8 @@ function columnsFor(database: Database,table: string): Set<string> {
 }
 
 export class SqliteCaseRepository implements CaseRepository {
+  private pendingFlush: Promise<void> = Promise.resolve();
+
   private constructor(
     private database: Database,
     private store: SqliteByteStore,
@@ -180,16 +289,35 @@ export class SqliteCaseRepository implements CaseRepository {
   ) {}
 
   static async open(store: SqliteByteStore = new IndexedDbSqliteStore()): Promise<SqliteCaseRepository> {
-    const SQL = await initSqlJs({ locateFile: () => wasmUrl });
+    const SQL = await initSqlJs({ locateFile: () => sqliteWasmLocation() });
     const persisted = await store.load();
     const database = persisted ? new SQL.Database(persisted) : new SQL.Database();
     const repository = new SqliteCaseRepository(database,store,SQL);
-    repository.prepareLegacySchema();
-    database.run(schema);
-    repository.migrate();
-    repository.seedReferenceData();
-    await repository.flush();
-    return repository;
+    try {
+      repository.prepareLegacySchema();
+      database.run(schema);
+      repository.migrate();
+      repository.seedReferenceData();
+      repository.assertHealthyDatabase();
+      await repository.flush();
+      return repository;
+    } catch (error) {
+      database.close();
+      throw error;
+    }
+  }
+
+  /** Read historical cases without opening a writer or replacing the persisted SQLite snapshot. */
+  static async readCasesSnapshot(store: SqliteByteStore = new IndexedDbSqliteStore()): Promise<CaseState[]> {
+    const persisted = await store.load();
+    if (!persisted) return [];
+    const SQL = await initSqlJs({ locateFile: () => sqliteWasmLocation() });
+    const database = new SQL.Database(persisted);
+    try {
+      return new SqliteCaseRepository(database,store,SQL).listCases();
+    } finally {
+      database.close();
+    }
   }
 
   private prepareLegacySchema(): void {
@@ -257,8 +385,258 @@ export class SqliteCaseRepository implements CaseRepository {
     }));
   }
 
+  private exportSnapshot(): Uint8Array {
+    const bytes = this.database.export();
+    // sql.js export may close and reopen the connection, resetting connection PRAGMAs.
+    this.database.run("PRAGMA foreign_keys = ON");
+    return bytes;
+  }
+
   private async flush(): Promise<void> {
-    await this.store.save(this.database.export());
+    const bytes = this.exportSnapshot();
+    const save = this.pendingFlush.then(() => this.store.save(bytes));
+    this.pendingFlush = save.catch(() => undefined);
+    await save;
+  }
+
+  private hasRecord(table: "cases" | "schools" | "sources",id: string): boolean {
+    return queryRows(this.database,`SELECT 1 AS found FROM ${table} WHERE id=? LIMIT 1`,[id]).length > 0;
+  }
+
+  private requireReference(table: "cases" | "schools" | "sources",id: string,label: string): void {
+    if (!this.hasRecord(table,id)) throw new Error(label + " does not exist: " + id);
+  }
+
+  listSchools(): TraditionSchool[] {
+    return queryRows(
+      this.database,
+      "SELECT id,name,description FROM schools ORDER BY name COLLATE NOCASE,id"
+    ).map((row) => ({
+      id:String(row.id),
+      name:String(row.name),
+      description:row.description === null ? undefined : String(row.description)
+    }));
+  }
+
+  getSchool(id: string): TraditionSchool | null {
+    return this.listSchools().find((school) => school.id === id) ?? null;
+  }
+
+  async saveSchool(school: TraditionSchool): Promise<void> {
+    const id = requireText(school.id,"School id");
+    const name = requireText(school.name,"School name");
+    this.database.run(
+      "INSERT INTO schools(id,name,description) VALUES(?,?,?) " +
+      "ON CONFLICT(id) DO UPDATE SET name=excluded.name,description=excluded.description",
+      [id,name,school.description?.trim() || null]
+    );
+    await this.flush();
+  }
+
+  async deleteSchool(id: string): Promise<void> {
+    const dependents = queryRows(this.database,"SELECT COUNT(*) AS count FROM rules WHERE school_id=?",[id])[0];
+    if (Number(dependents?.count ?? 0) > 0) {
+      throw new Error("Cannot delete a school while rules reference it: " + id);
+    }
+    this.database.run("DELETE FROM schools WHERE id=?",[id]);
+    await this.flush();
+  }
+
+  listRules(schoolId?: string): VersionedRule[] {
+    const sql = schoolId === undefined
+      ? "SELECT id,school_id,version,name,expression_json,weight,enabled,provenance_source_id " +
+        "FROM rules ORDER BY school_id COLLATE NOCASE,name COLLATE NOCASE,version,id"
+      : "SELECT id,school_id,version,name,expression_json,weight,enabled,provenance_source_id " +
+        "FROM rules WHERE school_id=? ORDER BY name COLLATE NOCASE,version,id";
+    return queryRows(this.database,sql,schoolId === undefined ? [] : [schoolId]).map((row) => {
+      const expression = safeRuleExpression(row.expression_json);
+      return {
+        id:String(row.id),
+        name:String(row.name),
+        version:Number(row.version),
+        enabled:Number(row.enabled) !== 0 && expression.valid,
+        weight:Number(row.weight),
+        school:row.school_id === null ? "" : String(row.school_id),
+        provenance:row.provenance_source_id === null ? undefined : String(row.provenance_source_id),
+        conditions:expression.conditions,
+        result:expression.result
+      };
+    });
+  }
+
+  getRule(id: string): VersionedRule | null {
+    return this.listRules().find((rule) => rule.id === id) ?? null;
+  }
+
+  async saveRule(rule: VersionedRule): Promise<void> {
+    const id = requireText(rule.id,"Rule id");
+    const name = requireText(rule.name,"Rule name");
+    const school = requireText(rule.school,"Rule school id");
+    if (!Number.isInteger(rule.version) || rule.version < 1) {
+      throw new Error("Rule version must be a positive integer.");
+    }
+    if (!Number.isFinite(rule.weight)) throw new Error("Rule weight must be finite.");
+    this.requireReference("schools",school,"Rule school");
+    const provenance = rule.provenance?.trim() || undefined;
+    if (provenance) this.requireReference("sources",provenance,"Rule provenance source");
+    this.database.run(
+      "INSERT INTO rules(id,school_id,version,name,expression_json,weight,enabled,provenance_source_id,created_at) " +
+      "VALUES(?,?,?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET school_id=excluded.school_id,version=excluded.version," +
+      "name=excluded.name,expression_json=excluded.expression_json,weight=excluded.weight,enabled=excluded.enabled," +
+      "provenance_source_id=excluded.provenance_source_id",
+      [
+        id,school,rule.version,name,JSON.stringify({conditions:rule.conditions,result:rule.result}),
+        rule.weight,rule.enabled ? 1 : 0,provenance ?? null,new Date().toISOString()
+      ]
+    );
+    await this.flush();
+  }
+
+  async deleteRule(id: string): Promise<void> {
+    this.database.run("DELETE FROM rules WHERE id=?",[id]);
+    await this.flush();
+  }
+
+  listSources(): StoredProvenanceSource[] {
+    return queryRows(
+      this.database,
+      "SELECT id,title,author,date_text,locator,notes FROM sources ORDER BY title COLLATE NOCASE,id"
+    ).map((row) => ({
+      id:String(row.id),
+      title:String(row.title),
+      author:row.author === null ? undefined : String(row.author),
+      dateText:row.date_text === null ? undefined : String(row.date_text),
+      locator:row.locator === null ? undefined : String(row.locator),
+      notes:row.notes === null ? undefined : String(row.notes)
+    }));
+  }
+
+  getSource(id: string): StoredProvenanceSource | null {
+    return this.listSources().find((source) => source.id === id) ?? null;
+  }
+
+  async saveSource(source: StoredProvenanceSource): Promise<void> {
+    const id = requireText(source.id,"Source id");
+    const title = requireText(source.title,"Source title");
+    this.database.run(
+      "INSERT INTO sources(id,title,author,date_text,locator,notes) VALUES(?,?,?,?,?,?) " +
+      "ON CONFLICT(id) DO UPDATE SET title=excluded.title,author=excluded.author,date_text=excluded.date_text," +
+      "locator=excluded.locator,notes=excluded.notes",
+      [
+        id,title,source.author?.trim() || null,source.dateText?.trim() || null,
+        source.locator?.trim() || null,source.notes?.trim() || null
+      ]
+    );
+    await this.flush();
+  }
+
+  async deleteSource(id: string): Promise<void> {
+    const ruleReferences = queryRows(
+      this.database,"SELECT COUNT(*) AS count FROM rules WHERE provenance_source_id=?",[id]
+    )[0];
+    if (Number(ruleReferences?.count ?? 0) > 0) {
+      throw new Error("Cannot delete a provenance source while rules reference it: " + id);
+    }
+    this.database.run("DELETE FROM sources WHERE id=?",[id]);
+    await this.flush();
+  }
+
+  listDocuments(sourceId?: string): StoredDocument[] {
+    const sql = sourceId === undefined
+      ? "SELECT id,source_id,title,mime_type,checksum,metadata_json,created_at " +
+        "FROM documents ORDER BY created_at DESC,id"
+      : "SELECT id,source_id,title,mime_type,checksum,metadata_json,created_at " +
+        "FROM documents WHERE source_id=? ORDER BY created_at DESC,id";
+    return queryRows(this.database,sql,sourceId === undefined ? [] : [sourceId]).map((row) => ({
+      id:String(row.id),
+      sourceId:row.source_id === null ? undefined : String(row.source_id),
+      title:String(row.title),
+      mimeType:row.mime_type === null ? undefined : String(row.mime_type),
+      checksum:row.checksum === null ? undefined : String(row.checksum),
+      metadata:safeJsonObject(row.metadata_json),
+      createdAt:String(row.created_at)
+    }));
+  }
+
+  getDocument(id: string): StoredDocument | null {
+    return this.listDocuments().find((document) => document.id === id) ?? null;
+  }
+
+  async saveDocument(document: StoredDocument): Promise<void> {
+    const id = requireText(document.id,"Document id");
+    const title = requireText(document.title,"Document title");
+    const createdAt = requireText(document.createdAt,"Document creation timestamp");
+    const sourceId = document.sourceId?.trim() || undefined;
+    if (sourceId) this.requireReference("sources",sourceId,"Document source");
+    this.database.run(
+      "INSERT INTO documents(id,source_id,title,mime_type,checksum,metadata_json,created_at) VALUES(?,?,?,?,?,?,?) " +
+      "ON CONFLICT(id) DO UPDATE SET source_id=excluded.source_id,title=excluded.title,mime_type=excluded.mime_type," +
+      "checksum=excluded.checksum,metadata_json=excluded.metadata_json,created_at=excluded.created_at",
+      [
+        id,sourceId ?? null,title,document.mimeType?.trim() || null,document.checksum?.trim() || null,
+        JSON.stringify(document.metadata ?? {}),createdAt
+      ]
+    );
+    await this.flush();
+  }
+
+  async deleteDocument(id: string): Promise<void> {
+    this.database.run("DELETE FROM documents WHERE id=?",[id]);
+    await this.flush();
+  }
+
+  listAnnotations(filter?: string | AnnotationFilter): StoredAnnotation[] {
+    const normalized = typeof filter === "string" ? {caseId:filter} : filter;
+    const clauses: string[] = [];
+    const params: SqlValue[] = [];
+    if (normalized?.caseId !== undefined) {
+      clauses.push("case_id=?");
+      params.push(normalized.caseId);
+    }
+    if (normalized?.sourceId !== undefined) {
+      clauses.push("source_id=?");
+      params.push(normalized.sourceId);
+    }
+    const where = clauses.length ? " WHERE " + clauses.join(" AND ") : "";
+    return queryRows(
+      this.database,
+      "SELECT id,case_id,source_id,body_md,private,created_at FROM annotations" + where +
+      " ORDER BY created_at DESC,id",
+      params
+    ).map((row) => ({
+      id:String(row.id),
+      caseId:row.case_id === null ? undefined : String(row.case_id),
+      sourceId:row.source_id === null ? undefined : String(row.source_id),
+      bodyMd:String(row.body_md),
+      private:Number(row.private) !== 0,
+      createdAt:String(row.created_at)
+    }));
+  }
+
+  getAnnotation(id: string): StoredAnnotation | null {
+    return this.listAnnotations().find((annotation) => annotation.id === id) ?? null;
+  }
+
+  async saveAnnotation(annotation: StoredAnnotation): Promise<void> {
+    const id = requireText(annotation.id,"Annotation id");
+    const bodyMd = requireText(annotation.bodyMd,"Annotation body");
+    const createdAt = requireText(annotation.createdAt,"Annotation creation timestamp");
+    const caseId = annotation.caseId?.trim() || undefined;
+    const sourceId = annotation.sourceId?.trim() || undefined;
+    if (caseId) this.requireReference("cases",caseId,"Annotation case");
+    if (sourceId) this.requireReference("sources",sourceId,"Annotation source");
+    this.database.run(
+      "INSERT INTO annotations(id,case_id,source_id,body_md,private,created_at) VALUES(?,?,?,?,?,?) " +
+      "ON CONFLICT(id) DO UPDATE SET case_id=excluded.case_id,source_id=excluded.source_id," +
+      "body_md=excluded.body_md,private=excluded.private,created_at=excluded.created_at",
+      [id,caseId ?? null,sourceId ?? null,bodyMd,annotation.private ? 1 : 0,createdAt]
+    );
+    await this.flush();
+  }
+
+  async deleteAnnotation(id: string): Promise<void> {
+    this.database.run("DELETE FROM annotations WHERE id=?",[id]);
+    await this.flush();
   }
 
   listCases(): CaseState[] {
@@ -583,7 +961,7 @@ export class SqliteCaseRepository implements CaseRepository {
   }
 
   exportDatabase(): Uint8Array {
-    return this.database.export();
+    return this.exportSnapshot();
   }
 
   integrityCheck(): string {
@@ -593,6 +971,50 @@ export class SqliteCaseRepository implements CaseRepository {
     return String(Object.values(first)[0]);
   }
 
+  foreignKeyCheck(): ForeignKeyViolation[] {
+    return queryRows(this.database,"PRAGMA foreign_key_check").map((row) => ({
+      table:String(row.table),
+      rowId:row.rowid === null ? null : Number(row.rowid),
+      parent:String(row.parent),
+      foreignKeyIndex:Number(row.fkid)
+    })).sort((left,right) =>
+      left.table.localeCompare(right.table) ||
+      (left.rowId ?? -1) - (right.rowId ?? -1) ||
+      left.foreignKeyIndex - right.foreignKeyIndex
+    );
+  }
+
+  private knowledgeReferenceViolations(): string[] {
+    const missingSchools = queryRows(
+      this.database,
+      "SELECT r.id FROM rules r LEFT JOIN schools s ON s.id=r.school_id " +
+      "WHERE r.school_id IS NOT NULL AND s.id IS NULL ORDER BY r.id"
+    ).map((row) => "rule " + String(row.id) + " references a missing school");
+    const missingSources = queryRows(
+      this.database,
+      "SELECT r.id FROM rules r LEFT JOIN sources s ON s.id=r.provenance_source_id " +
+      "WHERE r.provenance_source_id IS NOT NULL AND s.id IS NULL ORDER BY r.id"
+    ).map((row) => "rule " + String(row.id) + " references a missing provenance source");
+    return [...missingSchools,...missingSources];
+  }
+
+  private assertHealthyDatabase(): void {
+    const integrity = this.integrityCheck();
+    if (integrity !== "ok") throw new Error("SQLite integrity check failed: " + integrity);
+    const foreignKeys = this.foreignKeyCheck();
+    if (foreignKeys.length) {
+      const first = foreignKeys[0];
+      throw new Error(
+        "SQLite foreign key check failed: " + first.table + " row " + String(first.rowId) +
+        " references " + first.parent
+      );
+    }
+    const knowledgeReferences = this.knowledgeReferenceViolations();
+    if (knowledgeReferences.length) {
+      throw new Error("Practitioner knowledge integrity check failed: " + knowledgeReferences[0]);
+    }
+  }
+
   databaseHealth(): DatabaseHealth {
     const version = queryRows(this.database,"PRAGMA user_version")[0];
     const userVersion = Number(version ? Object.values(version)[0] : 0);
@@ -600,12 +1022,21 @@ export class SqliteCaseRepository implements CaseRepository {
       this.database,
       "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name"
     ).map((row) => String(row.name));
-    const countTables = ["cases","casts","predictions","outcomes","practitioner_notes","practitioner_overrides","calibration"];
+    const countTables = [
+      "cases","casts","predictions","outcomes","practitioner_notes","practitioner_overrides","calibration",
+      "schools","rules","sources","documents","annotations"
+    ];
     const counts = Object.fromEntries(countTables.map((name) => {
       const row = queryRows(this.database,`SELECT COUNT(*) AS count FROM ${name}`)[0];
       return [name,Number(row?.count ?? 0)];
     }));
-    return { integrity:this.integrityCheck(),userVersion,tables,counts };
+    return {
+      integrity:this.integrityCheck(),
+      userVersion,
+      tables,
+      counts,
+      foreignKeyViolations:this.foreignKeyCheck()
+    };
   }
 
   async replaceDatabase(bytes: Uint8Array): Promise<void> {
@@ -624,7 +1055,7 @@ export class SqliteCaseRepository implements CaseRepository {
       this.database.run(schema);
       this.migrate();
       this.seedReferenceData();
-      if (this.integrityCheck() !== "ok") throw new Error("Imported database failed post-migration integrity check.");
+      this.assertHealthyDatabase();
       await this.flush();
       previous.close();
     } catch (error) {

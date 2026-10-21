@@ -123,13 +123,12 @@ export function deliberateCouncil(perspectives: readonly CouncilPerspective[]): 
   return { perspectives:normalized,weightedScore,disagreement,majority,dissent };
 }
 
-export function runAnalyticalCouncil(
+function evaluateAnalyticalCouncil(
   analysis: AbsoluteAnalysis,
   deep: DeepSearchResult,
-  additionalLenses: readonly AnalyticalLens[] = []
+  lenses: readonly AnalyticalLens[]
 ): AnalyticalCouncilResult {
   void analysis;
-  const lenses = [...CORE_ANALYTICAL_LENSES,...additionalLenses];
   const perspectives = lenses.map((lens) => perspectiveForLens(lens,deep));
   const base = deliberateCouncil(perspectives);
   const verdict = base.majority === "support" ? "SUPPORT" : base.majority === "oppose" ? "OPPOSE" : "SPLIT";
@@ -148,6 +147,14 @@ export function runAnalyticalCouncil(
     ...base,verdict,evidence,contradiction:deep.collision.contradictionStrength,confidence,
     minorityOpinion,consensus,strongestObjection
   };
+}
+
+export function runAnalyticalCouncil(
+  analysis: AbsoluteAnalysis,
+  deep: DeepSearchResult,
+  additionalLenses: readonly AnalyticalLens[] = []
+): AnalyticalCouncilResult {
+  return evaluateAnalyticalCouncil(analysis,deep,[...CORE_ANALYTICAL_LENSES,...additionalLenses]);
 }
 
 const COUNCIL_VARIANTS = [
@@ -196,6 +203,5 @@ export function runHundredPerspectiveCouncil(
   deep:DeepSearchResult,
   additionalLenses:readonly AnalyticalLens[]=[]
 ):AnalyticalCouncilResult {
-  const hundred=hundredAnalyticalLenses();
-  return runAnalyticalCouncil(analysis,deep,[...hundred.slice(CORE_ANALYTICAL_LENSES.length),...additionalLenses]);
+  return evaluateAnalyticalCouncil(analysis,deep,[...hundredAnalyticalLenses(),...additionalLenses]);
 }

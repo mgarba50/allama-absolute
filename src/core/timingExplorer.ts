@@ -1,10 +1,6 @@
 import { classicalPlanetPositions, lunarMansionIndex } from "./ephemeris";
 import { currentPlanetaryHour, moonPhase, planetaryHoursForDate, type Planet } from "./celestial";
-
-export interface TimingPreference {
-  preferredPlanets: readonly Planet[];
-  avoidedPlanets?: readonly Planet[];
-}
+import type { TimingPreference } from "./timeIntelligence";
 
 export interface TimingCandidate {
   label:string;

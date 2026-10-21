@@ -19,6 +19,12 @@ function base64ToBytes(value: string): Uint8Array {
   return Uint8Array.from(binary,(character) => character.charCodeAt(0));
 }
 
+function toArrayBuffer(bytes: Uint8Array): ArrayBuffer {
+  const buffer = new ArrayBuffer(bytes.byteLength);
+  new Uint8Array(buffer).set(bytes);
+  return buffer;
+}
+
 async function deriveKey(password: string, salt: Uint8Array, iterations: number): Promise<CryptoKey> {
   const material = await crypto.subtle.importKey(
     "raw",
@@ -28,7 +34,7 @@ async function deriveKey(password: string, salt: Uint8Array, iterations: number)
     ["deriveKey"]
   );
   return crypto.subtle.deriveKey(
-    { name:"PBKDF2", salt, iterations, hash:"SHA-256" },
+    { name:"PBKDF2", salt:toArrayBuffer(salt), iterations, hash:"SHA-256" },
     material,
     { name:"AES-GCM", length:256 },
     false,
@@ -43,7 +49,11 @@ export async function encryptBackup(payload: unknown, password: string): Promise
   const iv = crypto.getRandomValues(new Uint8Array(12));
   const key = await deriveKey(password,salt,iterations);
   const plaintext = new TextEncoder().encode(JSON.stringify(payload));
-  const encrypted = await crypto.subtle.encrypt({ name:"AES-GCM", iv },key,plaintext);
+  const encrypted = await crypto.subtle.encrypt(
+    { name:"AES-GCM", iv:toArrayBuffer(iv) },
+    key,
+    toArrayBuffer(plaintext)
+  );
   return {
     version:1,
     algorithm:"AES-GCM",
@@ -60,9 +70,9 @@ export async function decryptBackup<T = unknown>(backup: EncryptedBackup, passwo
   const iv = base64ToBytes(backup.iv);
   const key = await deriveKey(password,salt,backup.iterations);
   const decrypted = await crypto.subtle.decrypt(
-    { name:"AES-GCM", iv },
+    { name:"AES-GCM", iv:toArrayBuffer(iv) },
     key,
-    base64ToBytes(backup.ciphertext)
+    toArrayBuffer(base64ToBytes(backup.ciphertext))
   );
   return JSON.parse(new TextDecoder().decode(decrypted)) as T;
 }

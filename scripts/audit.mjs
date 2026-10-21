@@ -9,10 +9,24 @@ for (const line of spec.split(/\r?\n/)) {
   if (match) sections.push({ id:match[1], title:match[2].trim() });
 }
 
+const validStatuses = new Set(["core","partial","pending","data-blocked"]);
+const terminalStatuses = new Set(["core","data-blocked"]);
+const strict = process.argv.includes("--strict");
+
 const requirements = sections.map((section) => {
   const mapped = map[section.id] ?? { status:"pending", evidence:[] };
-  const missingEvidence = mapped.evidence.filter((path) => !fs.existsSync(path));
-  return { ...section,status:mapped.status,evidence:mapped.evidence,missingEvidence };
+  const status = String(mapped.status ?? "pending").toLowerCase();
+  const evidence = Array.isArray(mapped.evidence) ? mapped.evidence : [];
+  const tests = Array.isArray(mapped.tests)
+    ? mapped.tests
+    : evidence.filter((path) => path === "tests" || path.startsWith("tests/"));
+  const docs = Array.isArray(mapped.docs)
+    ? mapped.docs
+    : evidence.filter((path) => path === "README.md" || path.startsWith("docs/"));
+  const blockers = Array.isArray(mapped.blockers) ? mapped.blockers : [];
+  const references = [...new Set([...evidence,...tests,...docs])];
+  const missingEvidence = references.filter((path) => !fs.existsSync(path));
+  return { ...section,status,evidence,tests,docs,blockers,missingEvidence };
 });
 
 const forbidden = ["TODO","FIXME","coming soon","not implemented","placeholder"];
@@ -32,7 +46,10 @@ collect("src");
 
 const violations = [];
 for (const file of sourceFiles) {
-  const source = fs.readFileSync(file,"utf8").toLowerCase();
+  const source = fs.readFileSync(file,"utf8")
+    // An input hint property is not an implementation placeholder.
+    .replace(/\bplaceholder\s*[:=]|\.placeholder\b/gi,"")
+    .toLowerCase();
   for (const token of forbidden) {
     if (source.includes(token.toLowerCase())) violations.push({ file,token });
   }
@@ -43,11 +60,22 @@ const counts = requirements.reduce((acc,item) => {
   return acc;
 },{});
 
+const invalidStatuses = requirements
+  .filter((item) => !validStatuses.has(item.status))
+  .map((item) => ({ section:item.id,status:item.status }));
+const invalidDataBlocked = requirements
+  .filter((item) => item.status === "data-blocked" && item.blockers.length === 0)
+  .map((item) => ({ section:item.id,reason:"DATA-BLOCKED requires an explicit blocker." }));
+
 const report = {
   generatedAt:new Date().toISOString(),
   specificationSections:requirements.length,
   counts,
   allCore:requirements.every((item) => item.status === "core"),
+  allTerminal:requirements.every((item) => terminalStatuses.has(item.status)),
+  strict,
+  invalidStatuses,
+  invalidDataBlocked,
   missingEvidenceReferences:requirements.flatMap((item) => item.missingEvidence.map((path) => ({ section:item.id,path }))),
   forbiddenMarkerViolations:violations,
   requirements
@@ -60,7 +88,17 @@ console.log(JSON.stringify({
   counts:report.counts,
   missingEvidenceReferences:report.missingEvidenceReferences.length,
   forbiddenMarkerViolations:violations.length,
-  allCore:report.allCore
+  invalidStatuses:invalidStatuses.length,
+  invalidDataBlocked:invalidDataBlocked.length,
+  allCore:report.allCore,
+  allTerminal:report.allTerminal,
+  strict
 },null,2));
 
-if (report.missingEvidenceReferences.length || violations.length) process.exitCode = 1;
+if (
+  report.missingEvidenceReferences.length ||
+  violations.length ||
+  invalidStatuses.length ||
+  invalidDataBlocked.length ||
+  (strict && !report.allTerminal)
+) process.exitCode = 1;

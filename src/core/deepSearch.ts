@@ -40,6 +40,8 @@ export interface DeepSearchInput {
   schools?: readonly TraditionSchool[];
   cases?: readonly CaseState[];
   currentCaseId?: string;
+  /** Raw active question used to compare unsaved work against persisted cases. */
+  currentQuestion?: string;
   manuscriptParallels?: readonly ManuscriptParallel[];
   testimonyCalibration?: Readonly<Record<string,number>>;
 }
@@ -301,15 +303,27 @@ export function runDeepSearch(input: DeepSearchInput): DeepSearchResult {
     }
   }
 
-  if (input.cases?.length && input.currentCaseId) {
-    const current = input.cases.find((item) => item.id === input.currentCaseId);
+  if (input.cases?.length) {
+    const persistedCurrent = input.currentCaseId
+      ? input.cases.find((item) => item.id === input.currentCaseId)
+      : undefined;
+    const currentQuestion = input.currentQuestion?.trim();
+    const current = persistedCurrent ?? (currentQuestion ? {
+      id:"ACTIVE-QUESTION",
+      question:currentQuestion,
+      createdAt:"",
+      updatedAt:"",
+      status:"open" as const,
+      castIds:[],
+      timeline:[]
+    } : undefined);
     if (current) {
       searched.add("historical-case");
       for (const hit of similarCases(input.cases,current,8)) {
         raw.push(finding(
           "case-" + hit.case.id,"historical-case","Similar historical case",
-          `${hit.case.id}: ${hit.case.question}`,0,hit.score,`case-${hit.case.id}`,
-          [`case:${hit.case.id}`]
+          `${hit.case.id}: ${hit.case.question}${hit.sharedTokens.length ? `; shared terms: ${hit.sharedTokens.join(", ")}` : ""}`,
+          0,hit.score,`case-${hit.case.id}`,[`case:${hit.case.id}`]
         ));
       }
     }

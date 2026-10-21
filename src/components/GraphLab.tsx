@@ -8,6 +8,7 @@ import {
   runAbsoluteAnalysis,
   runDeepSearch,
   testimonyDependencyGraph,
+  type CaseState,
   type GraphModel,
   type Locale
 } from "../core";
@@ -19,6 +20,8 @@ interface Props {
   latitude:number;
   longitude:number;
   momentText:string;
+  historicalCases:readonly CaseState[];
+  archiveState:"loading" | "ready" | "unavailable";
 }
 
 function GraphCanvas({model}:{model:GraphModel}) {
@@ -50,13 +53,13 @@ function GraphCanvas({model}:{model:GraphModel}) {
   </div>;
 }
 
-export function GraphLab({locale,question,motherIds,latitude,longitude,momentText}:Props){
+export function GraphLab({locale,question,motherIds,latitude,longitude,momentText,historicalCases,archiveState}:Props){
   const ar=locale==="ar";
   const [kind,setKind]=useState("ancestry");
   const analysis=useMemo(()=>runAbsoluteAnalysis({
     question,motherIds,timestamp:new Date(momentText),latitude,longitude
   }),[question,motherIds.join("|"),latitude,longitude,momentText]);
-  const deep=useMemo(()=>runDeepSearch({analysis}),[analysis]);
+  const deep=useMemo(()=>runDeepSearch({analysis,cases:historicalCases,currentQuestion:question}),[analysis,historicalCases,question]);
   const models=useMemo(()=>({
     ancestry:judgeAncestryGraph(analysis),
     houses:houseNetworkGraph(analysis),
@@ -89,6 +92,13 @@ export function GraphLab({locale,question,motherIds,latitude,longitude,momentTex
     </article>
     <article className="panel">
       <h3>{ar?"أقوى نتائج البحث العميق":"Top Deep-Search Findings"}</h3>
+      <p className="notice">{archiveState==="loading"
+        ? (ar?"جارٍ فحص أرشيف القضايا المحلي…":"Checking the local case archive…")
+        : archiveState==="unavailable"
+          ? (ar?"مقارنة القضايا السابقة غير متاحة.":"Historical case comparison is unavailable.")
+          : historicalCases.length
+            ? (ar?`تمت المقارنة مع ${historicalCases.length} قضية محفوظة.`:`Compared with ${historicalCases.length} saved case(s).`)
+            : (ar?"لا توجد قضايا محفوظة للمقارنة بعد.":"No saved cases to compare yet.")}</p>
       {deep.findings.slice(0,12).map((item)=><div className="record-row" key={item.id}>
         <strong>{item.label}</strong>
         <small>{item.category} · {(item.strength*100).toFixed(0)}% · {item.direction>0?"+":item.direction<0?"−":"·"}</small>

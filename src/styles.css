@@ -189,3 +189,41 @@ html[dir="rtl"] .metric-bar>strong{text-align:left}
 .graph-nodes text{fill:#eadfc8;font-size:9px;pointer-events:none}
 .graph-nodes .graph-group{fill:#99886b;font-size:7px}
 @media(max-width:700px){.graph-frame{min-height:340px}.graph-frame svg{min-width:480px}}
+
+.question-intelligence{max-width:1100px;min-width:0}
+.question-intelligence .panel{max-width:none}
+.question-workbench>p{margin:0 0 18px;color:#b9ae9c;line-height:1.65}
+.question-workbench label,.extracted-question label{display:block}
+.question-workbench .client-message{min-height:190px;line-height:1.55}
+.question-length{align-self:center;color:#8f826e;font-size:11px}
+.chaos-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 16px}
+.chaos-summary article{border:1px solid #403522;background:linear-gradient(145deg,rgba(34,29,22,.94),rgba(17,17,19,.96));border-radius:10px;padding:16px}
+.chaos-summary span,.chaos-summary strong{display:block}
+.chaos-summary span{color:#9c8c72;font-size:11px}
+.chaos-summary strong{margin-top:7px;color:#e6ce9e;font-size:23px}
+.extracted-question textarea{min-height:90px;line-height:1.5}
+.hidden-questions{display:grid;gap:8px;margin-top:20px;padding-top:16px;border-top:1px solid #3a3021}
+.hidden-questions>strong{color:#c8a96a;font-size:12px}
+.hidden-questions button{width:100%;text-align:start;white-space:normal;overflow-wrap:anywhere;line-height:1.45}
+.chaos-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:16px}
+.chaos-bucket{min-width:0;border:1px solid #403522;background:linear-gradient(145deg,rgba(34,29,22,.94),rgba(17,17,19,.96));border-radius:12px;padding:18px}
+.chaos-bucket h3{margin:0 0 12px;color:#c8a96a;font-size:14px}
+.chaos-bucket ul{margin:0;padding-inline-start:20px;color:#d8ccb5;font-size:13px;line-height:1.6;overflow-wrap:anywhere}
+.chaos-bucket li+li{margin-top:8px}
+.chaos-bucket small{color:#8f826e}
+.fragment-audit summary{cursor:pointer;color:#c8a96a;font-weight:700}
+.fragment-audit[open] summary{margin-bottom:12px}
+.fragment-row{display:grid;grid-template-columns:minmax(120px,180px) minmax(0,1fr);gap:12px;padding:11px 0;border-top:1px solid #30291e}
+.fragment-row span{color:#aa9e8a;font-size:11px}
+.fragment-row p{margin:0;line-height:1.55;overflow-wrap:anywhere}
+.active-question{color:#e6ddca;line-height:1.6;overflow-wrap:anywhere}
+.question-intelligence .profile strong{font-size:14px;line-height:1.4;overflow-wrap:anywhere}
+
+@media(max-width:700px){
+  .chaos-summary{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .chaos-summary article{padding:12px}
+  .chaos-summary strong{font-size:19px}
+  .chaos-grid{grid-template-columns:1fr}
+  .fragment-row{grid-template-columns:1fr;gap:4px}
+  .question-intelligence .toolbar button{flex:1 1 180px}
+}

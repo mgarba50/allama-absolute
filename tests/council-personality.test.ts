@@ -19,7 +19,9 @@ describe("100-perspective council and personality contract",()=>{
     const analysis=runAbsoluteAnalysis({question:"Will this contract proceed?",motherIds:["via","populus","fortuna-major","conjunctio"],timestamp:"2026-09-10T10:00:00Z"});
     const deep=runDeepSearch({analysis});
     const result=runHundredPerspectiveCouncil(analysis,deep);
+    const expected=hundredAnalyticalLenses();
     expect(result.perspectives).toHaveLength(100);
+    expect(result.perspectives.map(({id})=>id)).toEqual(expected.map(({id})=>id));
     expect(result.consensus).toContain("/100");
   });
   it("requires confirmation-bias resistance and blocks explicit theatrical certainty phrases",()=>{

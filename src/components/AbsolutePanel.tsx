@@ -9,6 +9,7 @@ import {
   runAbsoluteAnalysis,
   runHundredPerspectiveCouncil,
   runDeepSearch,
+  type CaseState,
   type DirectResponseMode,
   type Locale
 } from "../core";
@@ -16,16 +17,17 @@ import { FigureGlyph } from "./FigureGlyph";
 
 interface Props {
   question:string; motherIds:readonly string[]; latitude:number; longitude:number; momentText:string; locale?:Locale;
+  historicalCases:readonly CaseState[]; archiveState:"loading" | "ready" | "unavailable";
 }
 const MODES:readonly DirectResponseMode[]=["SOVEREIGN","SCHOLAR","CLIENT","MUSA","RESEARCHER"];
 
-export function AbsolutePanel({ question,motherIds,latitude,longitude,momentText,locale="en" }: Props) {
+export function AbsolutePanel({ question,motherIds,latitude,longitude,momentText,locale="en",historicalCases,archiveState }: Props) {
   const [showCalculation,setShowCalculation] = useState(false);
   const [mode,setMode]=useState<DirectResponseMode>("SOVEREIGN");
   const ar=locale==="ar";
   const t=(en:string,arabic:string)=>ar?arabic:en;
   const analysis = useMemo(() => runAbsoluteAnalysis({question,motherIds,timestamp:new Date(momentText),latitude,longitude}),[question,motherIds.join("|"),latitude,longitude,momentText]);
-  const deep=useMemo(()=>runDeepSearch({analysis}),[analysis]);
+  const deep=useMemo(()=>runDeepSearch({analysis,cases:historicalCases,currentQuestion:question}),[analysis,historicalCases,question]);
   const council=useMemo(()=>runHundredPerspectiveCouncil(analysis,deep),[analysis,deep]);
   const finalVerdict=useMemo(()=>buildFinalVerdict(analysis,{deepSearch:deep,council}),[analysis,deep,council]);
   const significators=identifySignificators(analysis.question);
@@ -68,6 +70,13 @@ export function AbsolutePanel({ question,motherIds,latitude,longitude,momentText
     </article>
     <article className="panel">
       <h3>{t("Deep Search ×100 — ranked findings","البحث العميق ×100 — النتائج المرتبة")}</h3>
+      <p className="notice">{archiveState==="loading"
+        ? t("Checking the local case archive…","جارٍ فحص أرشيف القضايا المحلي…")
+        : archiveState==="unavailable"
+          ? t("Historical case comparison is unavailable; other findings remain available.","مقارنة القضايا السابقة غير متاحة؛ وتبقى النتائج الأخرى متاحة.")
+          : historicalCases.length
+            ? t(`Compared with ${historicalCases.length} saved case(s).`,`تمت المقارنة مع ${historicalCases.length} قضية محفوظة.`)
+            : t("No saved cases to compare yet.","لا توجد قضايا محفوظة للمقارنة بعد.")}</p>
       {deep.findings.slice(0,16).map((item)=><div className="record-row" key={item.id}><strong>{item.label}</strong><small>{item.category} · {(item.strength*100).toFixed(0)}%</small><span>{item.detail}</span><code>{item.provenance.join(" · ")}</code></div>)}
     </article>
     <div className="toolbar">

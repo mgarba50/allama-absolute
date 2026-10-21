@@ -17,15 +17,15 @@ export interface ClientChaosAnalysis {
   hiddenQuestions: readonly string[];
 }
 
-const EMOTION=/\b(useless|liar|hate|love|angry|furious|afraid|scared|worried|desperate|betrayed|stupid|terrible|amazing|surely|obviously|never trust)\b/i;
-const ALLEGED=/\b(he says|she says|they say|claimed|claims|alleged|promised|told me|according to|supposedly|apparently)\b/i;
-const QUESTION=/\?|\b(will|is|are|does|did|can|could|should|when|where|why|whether|which|who)\b/i;
-const FACT=/\b(contract|money|debt|paid|payment|date|meeting|travel|marriage|job|work|business|document|signed|sent|received|arrived|left|called|message|property|court|exam|shipment)\b/i;
+const EMOTION=/\b(useless|liar|hate|love|angry|furious|afraid|scared|worried|desperate|betrayed|stupid|terrible|amazing|surely|obviously|never trust)\b|(?:^|[^\p{L}\p{N}])(?:غاضب|غاضبة|غضبان|أكره|اكره|أحب|احب|خائف|خائفة|قلق|قلقة|يائس|يائسة|خانني|خانتني|كاذب|كاذبة|فظيع|فظيعة|رائع|رائعة|بالتأكيد|طبعاً|طبعا|من الواضح|لا أثق)(?=$|[^\p{L}\p{N}])/iu;
+const ALLEGED=/\b(he says|she says|they say|claimed|claims|alleged|promised|told me|according to|supposedly|apparently)\b|(?:^|[^\p{L}\p{N}])(?:يقول|تقول|قال|قالت|يدعي|تدعي|زعم|زعمت|وعد|وعدت|أخبرني|اخبرني|حسب قوله|حسب قولها|وفقاً له|وفقا له|وفقاً لها|وفقا لها|يُزعم|يزعم|على ما يبدو)(?=$|[^\p{L}\p{N}])/iu;
+const QUESTION=/[?؟]|\b(will|is|are|does|did|can|could|should|when|where|why|whether|which|who)\b|(?:^|[^\p{L}\p{N}])(?:هل|ماذا|متى|أين|اين|لماذا|كيف|مَن|من|أي|أيمكن|ايمكن|هل يمكن)(?=$|[^\p{L}\p{N}])/iu;
+const FACT=/\b(contract|money|debt|paid|payment|date|meeting|travel|marriage|job|work|business|document|signed|sent|received|arrived|left|called|message|property|court|exam|shipment)\b|(?:^|[^\p{L}\p{N}])(?:عقد|العقد|مال|المال|أموال|اموال|دين|الدين|سداد|دفع|دفعت|دفعة|موعد|الموعد|اجتماع|سفر|زواج|وظيفة|عمل|تجارة|مشروع|وثيقة|مستند|وقّع|وقع|أرسل|ارسل|استلم|وصل|غادر|اتصل|رسالة|عقار|محكمة|امتحان|شحنة)(?=$|[^\p{L}\p{N}])/iu;
 
 function splitFragments(message: string): string[] {
   return message
     .replace(/\r/g,"")
-    .split(/(?<=[.!?])\s+|\n+/)
+    .split(/(?<=[.!?؟])\s+|\n+/)
     .map((item)=>item.trim())
     .filter(Boolean);
 }

@@ -6,6 +6,7 @@ import {
   appendCaseTimeline,
   createPractitionerNote,
   newCase,
+  sqliteWasmLocation,
   type SqliteByteStore
 } from "../src/core";
 
@@ -134,7 +135,7 @@ describe("SQLite practitioner repository", () => {
   });
 
   it("migrates the pre-SQLite-UI cases schema before creating updated indexes", async () => {
-    const SQL = await initSqlJs({ locateFile: () => wasmUrl });
+    const SQL = await initSqlJs({ locateFile: () => sqliteWasmLocation(wasmUrl) });
     const legacy = new SQL.Database();
     legacy.run(`
       CREATE TABLE cases (

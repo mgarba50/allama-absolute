@@ -26,11 +26,19 @@ function similarity(left: Set<string>,right: Set<string>): { score:number; share
 export function searchCases(cases: readonly CaseState[],query: string,limit = 20): CaseSearchHit[] {
   const needle = tokens(query);
   if (!needle.size) return [];
-  return cases.map((record) => {
+  return cases.map((record,index) => {
     const haystack = tokens(record.question + " " + record.timeline.map((item) => item.detail).join(" "));
     const match = similarity(needle,haystack);
-    return { case:record,score:match.score,sharedTokens:match.shared };
-  }).filter((hit) => hit.score > 0).sort((a,b) => b.score - a.score).slice(0,limit);
+    return {
+      case:record,
+      score:match.shared.length / needle.size,
+      sharedTokens:match.shared,
+      index
+    };
+  }).filter((hit) => hit.score > 0)
+    .sort((a,b) => b.score - a.score || a.index - b.index)
+    .slice(0,limit)
+    .map(({index:_,...hit}) => hit);
 }
 
 export function similarCases(cases: readonly CaseState[],target: CaseState,limit = 10): CaseSearchHit[] {

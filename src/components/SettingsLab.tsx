@@ -26,7 +26,7 @@ export function SettingsLab({locale}:{locale:Locale}){
   const [protocolId,setProtocolId]=useState(PROTOCOLS[0].id);
   const [bookmarkName,setBookmarkName]=useState(PROTOCOLS[0].name);
   const [bookmarks,setBookmarks]=useState<ReturnType<SqliteCaseRepository["listProtocolBookmarks"]>>([]);
-  const [endpoint,setEndpoint]=useState(LOCAL_AI_PRESETS.ollama.endpoint);
+  const [endpoint,setEndpoint]=useState<string>(LOCAL_AI_PRESETS.ollama.endpoint);
   const [model,setModel]=useState("");
   const [aiResult,setAiResult]=useState("");
   const [password,setPassword]=useState("");

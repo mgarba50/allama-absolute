@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import initSqlJs from "sql.js";
 import wasmUrl from "sql.js/dist/sql-wasm.wasm?url";
-import { SqliteCaseRepository, type SqliteByteStore } from "../src/core";
+import { SqliteCaseRepository, sqliteWasmLocation, type SqliteByteStore } from "../src/core";
 
 class Store implements SqliteByteStore {
   constructor(public bytes:Uint8Array|null=null){}
@@ -11,7 +11,7 @@ class Store implements SqliteByteStore {
 
 describe("schema v4 migration",()=>{
   it("adds v4 settings and seeds practitioner reference tables on an existing v3-style database",async()=>{
-    const SQL=await initSqlJs({locateFile:()=>wasmUrl});
+    const SQL=await initSqlJs({locateFile:()=>sqliteWasmLocation(wasmUrl)});
     const db=new SQL.Database();
     db.run(`
       PRAGMA user_version=3;

@@ -10,9 +10,11 @@ import {
   localeDirection,
   moonPhase,
   parseCommand,
+  SqliteCaseRepository,
   toJson,
   translate,
   validateShield,
+  type CaseState,
   type Locale
 } from "./core";
 import { AbsolutePanel } from "./components/AbsolutePanel";
@@ -26,6 +28,7 @@ import { ResearchLab } from "./components/ResearchLab";
 import { GraphLab } from "./components/GraphLab";
 import { TimingLab } from "./components/TimingLab";
 import { SettingsLab } from "./components/SettingsLab";
+import { QuestionIntelligence } from "./components/QuestionIntelligence";
 
 type View = "dashboard" | "absolute" | "cast" | "houses" | "reverse" | "abjad" | "question" | "celestial" | "cases" | "research" | "graphs" | "timing" | "settings";
 
@@ -39,6 +42,8 @@ function NavigationButton(props: { id: View; current: View; label: string; onSel
 
 export default function App() {
   const [view,setView] = useState<View>("dashboard");
+  const [historicalCases,setHistoricalCases] = useState<CaseState[]>([]);
+  const [archiveState,setArchiveState] = useState<"loading" | "ready" | "unavailable">("loading");
   const [locale,setLocale] = useState<Locale>("en");
   const [selectedHouse,setSelectedHouse] = useState(1);
   const [motherIds,setMotherIds] = useState(["via","populus","fortuna-major","conjunctio"]);
@@ -65,6 +70,26 @@ export default function App() {
     document.documentElement.lang = locale;
     document.documentElement.dir = localeDirection(locale);
   },[locale]);
+
+  useEffect(() => {
+    if (view !== "absolute" && view !== "graphs") return;
+    let active = true;
+    setArchiveState("loading");
+    // Read the current SQLite snapshot without opening a second writer. Other
+    // workspaces own their repository only while their view is mounted.
+    void SqliteCaseRepository.readCasesSnapshot()
+      .then((cases) => {
+        if (!active) return;
+        setHistoricalCases(cases);
+        setArchiveState("ready");
+      })
+      .catch(() => {
+        if (!active) return;
+        setHistoricalCases([]);
+        setArchiveState("unavailable");
+      });
+    return () => { active = false; };
+  },[view]);
 
   const labels = ["M1","M2","M3","M4","D1","D2","D3","D4","N1","N2","N3","N4","RW","LW","JUDGE","RECONCILER"];
   const shieldFigures = [...shield.mothers,...shield.daughters,...shield.nieces,shield.rightWitness,shield.leftWitness,shield.judge,shield.reconciler];
@@ -234,6 +259,8 @@ export default function App() {
             longitude={longitude}
             momentText={momentText}
             locale={locale}
+            historicalCases={historicalCases}
+            archiveState={archiveState}
           />
         )}
 
@@ -301,22 +328,18 @@ export default function App() {
         )}
 
         {view === "question" && (
-          <section className="panel">
-            <label>{locale==="ar"?"سؤال العميل":"Client question"}<textarea value={question} onChange={(event) => setQuestion(event.target.value)} /></label>
-            <div className="profile">
-              <div><span>{locale==="ar"?"المجال":"Domain"}</span><strong>{profile.domain}</strong></div>
-              <div><span>{locale==="ar"?"نوع القرار":"Decision Type"}</span><strong>{profile.decisionType}</strong></div>
-              <div><span>{locale==="ar"?"البيوت ذات الصلة":"Relevant Houses"}</span><strong>{profile.houses.join(", ")}</strong></div>
-              <div><span>{locale==="ar"?"الوحدات":"Modules"}</span><strong>{profile.modules.join(" · ")}</strong></div>
-            </div>
-            {profile.notes.map((note) => <p className="notice" key={note}>{note}</p>)}
-            <div className="toolbar"><button onClick={() => setView("absolute")}>{locale==="ar"?"تشغيل Ω على هذا السؤال":"Run Ω on this question"}</button></div>
-          </section>
+          <QuestionIntelligence
+            locale={locale}
+            activeQuestion={question}
+            profile={profile}
+            onUseQuestion={setQuestion}
+            onRunQuestion={(nextQuestion)=>{setQuestion(nextQuestion);setView("absolute");}}
+          />
         )}
 
         {view === "research" && <ResearchLab locale={locale} motherIds={motherIds} />}
 
-        {view === "graphs" && <GraphLab locale={locale} question={question} motherIds={motherIds} latitude={latitude} longitude={longitude} momentText={momentText} />}
+        {view === "graphs" && <GraphLab locale={locale} question={question} motherIds={motherIds} latitude={latitude} longitude={longitude} momentText={momentText} historicalCases={historicalCases} archiveState={archiveState} />}
 
         {view === "timing" && <TimingLab locale={locale} defaultLatitude={latitude} defaultLongitude={longitude} defaultMoment={momentText} />}
 
