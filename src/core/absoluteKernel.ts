@@ -63,7 +63,6 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
   const toukhi=executeToukhiCandidate({
     birthYear:input.birthYear,
     targetYear:input.targetYear,
-    taksirText:input.subjectName,
     verifiedPages:input.toukhiVerifiedPages ?? []
   });
 
