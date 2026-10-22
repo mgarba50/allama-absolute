@@ -9,6 +9,8 @@ export interface AbsoluteKernelInput {
   subjectName?:string;
   motherName?:string;
   otherParty?:string;
+  birthYear?:number;
+  targetYear?:number;
   timing?:{
     moment:Date;
     latitude:number;
@@ -59,8 +61,8 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
   }) : undefined;
 
   const toukhi=executeToukhiCandidate({
-    personName:input.subjectName,
-    motherName:input.motherName,
+    birthYear:input.birthYear,
+    targetYear:input.targetYear,
     taksirText:input.subjectName,
     verifiedPages:input.toukhiVerifiedPages ?? []
   });
@@ -73,7 +75,7 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
   }
   if (input.motherName?.trim()) {
     unresolvedMethodNeeds.push(
-      "Mother-name arithmetic is calculated. It cannot alter the verdict until the relevant Toukhi/source interpretation rule is visually verified and activated."
+      "No mother-name Toukhi rule is active merely because a mother name was entered. The earlier legacy name+mother÷9 attribution failed page verification and is quarantined."
     );
   }
   if (falaki) {
@@ -83,7 +85,7 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
   }
   if (!toukhi.activation.active) {
     unresolvedMethodNeeds.push(
-      `Ṭūkhī corpus is source-gated: ${toukhi.activation.verifiedPages}/${toukhi.activation.logicalPages} logical pages verified; recovered candidate formulas may run for arithmetic checks only.`
+      `Ṭūkhī corpus is source-gated: ${toukhi.activation.verifiedPages}/${toukhi.activation.logicalPages} logical pages completely verified; ${toukhi.activation.screenedPages} pages screened; ${toukhi.activation.quarantinedItems} legacy item(s) quarantined.`
     );
   }
 
@@ -91,8 +93,9 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
     "The Raml decision is house-first and records every matched rule in precedence order.",
     "Abjad calculations are mechanically reproducible and table-scoped.",
     "Falaki calculations use real local solar boundaries and verified unequal planetary hours when timing coordinates are supplied.",
-    "Recovered Toukhi formulas are isolated behind a complete-corpus activation gate.",
-    "No Abjad, Falaki, or Toukhi correspondence is converted into a favorable/unfavorable judgment without a sourced interpretation rule."
+    "Recovered Toukhi material is isolated behind a complete-corpus activation gate.",
+    "False legacy page attributions are quarantined rather than executed.",
+    "No Abjad, Falaki, or Toukhi correspondence is converted into a favorable/unfavorable practitioner judgment without a verified source rule."
   ];
 
   const abjadTraces=[
