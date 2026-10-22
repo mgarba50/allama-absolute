@@ -61,6 +61,9 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
   }) : undefined;
 
   const toukhi=executeToukhiCandidate({
+    personName:input.subjectName,
+    motherName:input.motherName,
+    otherParty:input.otherParty,
     birthYear:input.birthYear,
     targetYear:input.targetYear,
     verifiedPages:input.toukhiVerifiedPages ?? []
