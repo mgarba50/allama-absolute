@@ -35,7 +35,7 @@ export * from "./falakiMethodPack";
 export * from "./absoluteSynthesis";
 export * from "./practitionerEngine";
 export * from "./toukhiMethodPack";
-export * from "./toukhiRecoveredIndex";
+export * from "./toukhiRecoveredIndex";\nexport * from "./toukhiScanMap";
 export * from "./toukhiCorpus";
 export * from "./deepSearch";
 export * from "./reports";
