@@ -37,7 +37,7 @@ export interface RecoveredToukhiItem {
   sourceText?:string;
   normalized?:string;
   sourceStatus:
-    | "RECOVERED_NOT_VISUALLY_VERIFIED"
+    | "LEGACY_DISCOVERY_HINT"
     | "VERIFIED"
     | "QUARANTINED_BAD_ATTRIBUTION";
   executable:boolean;
