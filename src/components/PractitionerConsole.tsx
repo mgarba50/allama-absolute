@@ -31,14 +31,13 @@ export function PractitionerConsole({locale,latitude,longitude,onOpenAudit,onOpe
   const [error,setError]=useState<string|null>(null);
   const [working,setWorking]=useState(false);
   const [showOptional,setShowOptional]=useState(false);
-  const [showCrossReference,setShowCrossReference]=useState(false);
 
   function analyze():void {
     const cleanQuestion=question.trim();
     if (!cleanQuestion) {
       setError(t(
-        "Write one precise question exactly as you want Allama to judge it.",
-        "اكتب سؤالاً واحداً واضحاً كما تريد من علّامة أن يحكم فيه."
+        "Write one precise question exactly as you want Allama to consider it.",
+        "اكتب سؤالاً واحداً واضحاً كما تريد من علّامة أن ينظر فيه."
       ));
       return;
     }
@@ -80,53 +79,69 @@ export function PractitionerConsole({locale,latitude,longitude,onOpenAudit,onOpe
     setSession(null);
     setQuestion("");
     setError(null);
-    setShowCrossReference(false);
   }
 
   if (session) {
+    const reading=session.conversation;
+
     return <section className="practitioner-console">
-      <div className="conversation-result">
+      <div className="consultation-result">
         <p className="eyebrow">{t("ALLAMA'S READING","قراءة علّامة")}</p>
-        <h1>{session.conversation.headline}</h1>
+        <h1>{reading.headline}</h1>
         <p className="asked-question">{session.response.question}</p>
 
-        <article className="conversation-answer">
-          <p className="conversation-opening">{session.conversation.opening}</p>
-          {session.conversation.reading.map((paragraph,index)=><p key={index}>{paragraph}</p>)}
+        <article className="consultation-letter">
+          <p className="consultation-verdict">{reading.verdict}</p>
+          {reading.overview.map((paragraph,index)=><p key={index}>{paragraph}</p>)}
+
+          <section className="reading-section">
+            <h2>{t("What stands out","أبرز ما يظهر")}</h2>
+            <ul>{reading.centralThemes.map((item,index)=><li key={index}>{item}</li>)}</ul>
+          </section>
+
+          <div className="reading-columns">
+            <section className="reading-section">
+              <h2>{t("Opportunities","وجوه الفرصة")}</h2>
+              <ul>{reading.opportunities.map((item,index)=><li key={index}>{item}</li>)}</ul>
+            </section>
+
+            <section className="reading-section">
+              <h2>{t("Cautions","مواضع الحذر")}</h2>
+              <ul>{reading.cautions.map((item,index)=><li key={index}>{item}</li>)}</ul>
+            </section>
+          </div>
+
+          <section className="reading-section timing-section">
+            <h2>{t("Timing impression","انطباع التوقيت")}</h2>
+            <p>{reading.timingImpression}</p>
+          </section>
+
+          <section className="reading-section guidance-section">
+            <h2>{t("My practical advice","نصيحتي العملية")}</h2>
+            <p>{reading.practicalGuidance}</p>
+          </section>
+
+          <p className="consultation-closing">{reading.closing}</p>
         </article>
-
-        <article className="practical-direction">
-          <span>{t("WHAT I WOULD DO","ما الذي أراه عملياً")}</span>
-          <p>{session.conversation.practicalDirection}</p>
-        </article>
-
-        <p className="conversation-closing">{session.conversation.closing}</p>
-
-        <button className="cross-reference-toggle" onClick={()=>setShowCrossReference((value)=>!value)}>
-          {showCrossReference?t("Hide cross-reference","إخفاء المراجعة"):t("Show how the methods cross-checked","عرض كيفية المراجعة بين المناهج")}
-        </button>
-
-        {showCrossReference&&<article className="cross-reference-card">
-          <span>{t("CROSS-REFERENCE SUMMARY","خلاصة المراجعة المتقاطعة")}</span>
-          <ul>{session.conversation.crossReference.map((item,index)=><li key={index}>{item}</li>)}</ul>
-        </article>}
       </div>
 
-      <div className="result-actions">
+      <div className="result-actions consultation-actions">
         <button onClick={reset}>{t("Ask Another Question","اسأل سؤالاً آخر")}</button>
         <button className="secondary" onClick={onOpenCases}>{t("Case Vault","خزانة القضايا")}</button>
-        <button className="ghost" onClick={()=>onOpenAudit(session.response.question)}>{t("Inspect Expert Audit","فتح التدقيق الخبير")}</button>
+        <button className="ghost expert-audit-button" onClick={()=>onOpenAudit(session.response.question)}>
+          {t("Expert Audit","التدقيق الخبير")}
+        </button>
       </div>
     </section>;
   }
 
   return <section className="practitioner-console">
     <div className="practitioner-heading">
-      <p className="eyebrow">{t("PRIVATE PRACTITIONER ENGINE","محرك الممارس الخاص")}</p>
+      <p className="eyebrow">{t("PRIVATE CONSULTATION","استشارة خاصة")}</p>
       <h1>Ω ALLAMA ABSOLUTE</h1>
       <p>{t(
-        "Give the names and ask the question. Allama will do the calculations and cross-checks internally, then answer you directly.",
-        "أدخل الأسماء واسأل السؤال. يتولى علّامة الحسابات والمراجعات في الداخل ثم يجيبك مباشرة."
+        "Give the names and ask the question naturally. Allama will return the considered reading, not the workings behind it.",
+        "أدخل الأسماء واسأل سؤالك بصورة طبيعية. سيعطيك علّامة خلاصة القراءة لا تفاصيل العمل خلفها."
       )}</p>
     </div>
 
@@ -166,16 +181,15 @@ export function PractitionerConsole({locale,latitude,longitude,onOpenAudit,onOpe
       {error&&<p className="practitioner-error">{error}</p>}
 
       <button className="analyze-button" onClick={analyze} disabled={working}>
-        {working?t("ANALYZING…","جارٍ التحليل…"):t("ANALYZE","حلّل")}
+        {working?t("READING…","جارٍ النظر…"):t("BEGIN READING","ابدأ القراءة")}
       </button>
 
-      <div className="silent-engine-note">
-        <span>{t("Silent engine","المحرك الصامت")}</span>
-        <small>{t(
-          "Raml · Ṭūkhī · Abjad · planetary timing · question routing · cross-reference · final conversational judgment",
-          "الرمل · الطوخي · الأبجد · التوقيت الكوكبي · توجيه السؤال · المراجعة المتقاطعة · الحكم الحواري النهائي"
-        )}</small>
-      </div>
+      <p className="consultation-privacy-note">
+        {t(
+          "Private consultation mode. Only the final reading is shown here; the underlying workings remain in Expert Audit.",
+          "وضع الاستشارة الخاصة. تظهر هنا خلاصة القراءة فقط، أما التفاصيل الداخلية فتظل في التدقيق الخبير."
+        )}
+      </p>
     </article>
   </section>;
 }
