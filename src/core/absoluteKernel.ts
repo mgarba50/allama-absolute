@@ -77,7 +77,7 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
   }
   if (input.motherName?.trim()) {
     unresolvedMethodNeeds.push(
-      "No mother-name Toukhi rule is active merely because a mother name was entered. The earlier legacy name+mother÷9 attribution failed page verification and is quarantined."
+      "The verified Toukhi full-name balance can use the mother's name as a declared school variant, but that structural result remains decision-gated until the complete corpus is verified. The old name+mother÷9 shortcut remains quarantined."
     );
   }
   if (falaki) {
