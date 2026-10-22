@@ -1,9 +1,11 @@
 import { runAbsoluteKernel, type AbsoluteKernelInput, type AbsoluteKernelExecution } from "./absoluteKernel";
 import { synthesizeAbsolute, type AbsoluteSynthesis } from "./absoluteSynthesis";
+import { buildConversationalAnswer, type ConversationalAnswer } from "./conversationalSynthesis";
 
 export interface PractitionerEngineResult {
   kernel:AbsoluteKernelExecution;
   synthesis:AbsoluteSynthesis;
+  conversation:ConversationalAnswer;
   response:{
     question:string;
     verdict:AbsoluteSynthesis["decision"];
@@ -22,11 +24,13 @@ export interface PractitionerEngineResult {
 export function runPractitionerEngine(input:AbsoluteKernelInput):PractitionerEngineResult {
   const kernel=runAbsoluteKernel(input);
   const synthesis=synthesizeAbsolute(kernel);
+  const conversation=buildConversationalAnswer(kernel,synthesis);
   const verifiedAvailable=kernel.toukhi.verifiedRules.some((rule)=>rule.status==="VERIFIED_ACTIVE");
   const verifiedFired=Boolean(kernel.toukhi.decisionRuleId);
   return {
     kernel,
     synthesis,
+    conversation,
     response:{
       question:input.question,
       verdict:synthesis.decision,
