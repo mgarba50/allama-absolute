@@ -319,3 +319,61 @@ export function analyzeToukhiReducedNameNumber(name:string):ToukhiReducedNameNum
     decisionEligible:false
   };
 }
+
+
+export type ToukhiLineagePolicy = "MOTHER"|"FATHER";
+
+export interface ToukhiFullNameProfile {
+  subjectName:string;
+  lineageName:string;
+  lineagePolicy:ToukhiLineagePolicy;
+  compositeInput:string;
+  elemental:ToukhiNameProfile;
+  reducedNumber:ToukhiReducedNameNumber;
+  methodologicalRule:{
+    schoolVariant:true;
+    consistentPolicyRequired:true;
+    note:string;
+  };
+  source:{
+    pages:readonly [30,31];
+    status:"VISUALLY_VERIFIED";
+    note:string;
+  };
+  decisionEligible:false;
+}
+
+/**
+ * Pages 30-31 discuss موازنة الاسم الكامل and explicitly preserve a school
+ * disagreement over appending the mother's name versus the father's name.
+ * The source warns that comparisons must not mix those policies.
+ */
+export function analyzeToukhiFullName(
+  subjectName:string,
+  lineageName:string,
+  lineagePolicy:ToukhiLineagePolicy
+):ToukhiFullNameProfile {
+  if (!subjectName.trim() || !lineageName.trim()) {
+    throw new Error("Subject name and lineage name are both required for full-name analysis.");
+  }
+  const compositeInput=`${subjectName} ${lineageName}`;
+  return {
+    subjectName,
+    lineageName,
+    lineagePolicy,
+    compositeInput,
+    elemental:analyzeToukhiName(compositeInput),
+    reducedNumber:analyzeToukhiReducedNameNumber(compositeInput),
+    methodologicalRule:{
+      schoolVariant:true,
+      consistentPolicyRequired:true,
+      note:"The source reports disagreement over mother-name versus father-name composition. The selected policy must be declared and kept identical across any comparison."
+    },
+    source:{
+      pages:[30,31],
+      status:"VISUALLY_VERIFIED",
+      note:"Full-name balancing and the parent-name school variant were visually verified in the scan. No claim is made that one lineage policy is universally authoritative."
+    },
+    decisionEligible:false
+  };
+}
