@@ -61,6 +61,7 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
   }) : undefined;
 
   const toukhi=executeToukhiCandidate({
+    question:input.question,
     personName:input.subjectName,
     motherName:input.motherName,
     otherParty:input.otherParty,
@@ -72,22 +73,22 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
   const unresolvedMethodNeeds:string[]=[];
   if (subjectToOtherParty) {
     unresolvedMethodNeeds.push(
-      "A sourced rule pack is still required to interpret name-to-name Abjad relations. The kernel records the arithmetic but does not assign compatibility from equality/difference alone."
+      "Generic Abjad name-to-name equality/difference remains context-only. Ṭūkhī pages 20-22 provide a richer elemental-balance comparison that is being kept separate rather than collapsed into a generic compatibility shortcut."
     );
   }
   if (input.motherName?.trim()) {
     unresolvedMethodNeeds.push(
-      "The verified Toukhi full-name balance can use the mother's name as a declared school variant, but that structural result remains decision-gated until the complete corpus is verified. The old name+mother÷9 shortcut remains quarantined."
+      "Ṭūkhī pages 30-31 verify a full-name lineage variant using the mother's or father's name, but the source treats lineage choice as a school variant; the selected policy must remain consistent across comparisons. The old name+mother÷9 shortcut remains quarantined."
     );
   }
   if (falaki) {
     unresolvedMethodNeeds.push(
-      "A separate sourced Falaki interpretation pack is required before planetary hours, zodiac positions, or lunar mansions can change a verdict. Falaki Core currently computes facts only."
+      "Falaki Core computes solar boundaries and planetary hours, but no favorable/unfavorable Falaki direction is assigned without a separately verified interpretive rule."
     );
   }
   if (!toukhi.activation.active) {
     unresolvedMethodNeeds.push(
-      `Ṭūkhī corpus is source-gated: ${toukhi.activation.verifiedPages}/${toukhi.activation.logicalPages} logical pages completely verified; ${toukhi.activation.screenedPages} pages screened; ${toukhi.activation.quarantinedItems} legacy item(s) quarantined.`
+      `Ṭūkhī full-corpus transcription remains incomplete (${toukhi.activation.verifiedPages}/${toukhi.activation.logicalPages} pages fully verified), but individually verified rules may execute by page provenance; ${toukhi.activation.quarantinedItems} legacy item(s) remain quarantined.`
     );
   }
 
@@ -95,9 +96,9 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
     "The Raml decision is house-first and records every matched rule in precedence order.",
     "Abjad calculations are mechanically reproducible and table-scoped.",
     "Falaki calculations use real local solar boundaries and verified unequal planetary hours when timing coordinates are supplied.",
-    "Recovered Toukhi material is isolated behind a complete-corpus activation gate.",
+    "Ṭūkhī rules activate individually after direct page verification; whole-book coverage is a quality metric, not an all-or-nothing lock.",
     "False legacy page attributions are quarantined rather than executed.",
-    "No Abjad, Falaki, or Toukhi correspondence is converted into a favorable/unfavorable practitioner judgment without a verified source rule."
+    "No Abjad, Falaki, or Ṭūkhī correspondence is converted into a practitioner direction without a verified rule that actually supplies direction."
   ];
 
   const abjadTraces=[
