@@ -14,7 +14,7 @@ export interface PractitionerEngineResult {
       raml:"ACTIVE";
       abjad:"CALCULATED_SOURCE_GATED";
       falaki:"CALCULATED_SOURCE_GATED"|"NOT_REQUESTED";
-      tukhi:"ACTIVE"|"CORPUS_GATE_LOCKED";
+      tukhi:"VERIFIED_RULES_ACTIVE"|"NO_VERIFIED_RULE_FIRED";
     };
   };
 }
@@ -22,6 +22,7 @@ export interface PractitionerEngineResult {
 export function runPractitionerEngine(input:AbsoluteKernelInput):PractitionerEngineResult {
   const kernel=runAbsoluteKernel(input);
   const synthesis=synthesizeAbsolute(kernel);
+  const verifiedActive=kernel.toukhi.verifiedRules.some((rule)=>rule.status==="VERIFIED_ACTIVE");
   return {
     kernel,
     synthesis,
@@ -35,7 +36,7 @@ export function runPractitionerEngine(input:AbsoluteKernelInput):PractitionerEng
         raml:"ACTIVE",
         abjad:"CALCULATED_SOURCE_GATED",
         falaki:kernel.falaki ? "CALCULATED_SOURCE_GATED" : "NOT_REQUESTED",
-        tukhi:kernel.toukhi.activation.active ? "ACTIVE" : "CORPUS_GATE_LOCKED"
+        tukhi:verifiedActive ? "VERIFIED_RULES_ACTIVE" : "NO_VERIFIED_RULE_FIRED"
       }
     }
   };
