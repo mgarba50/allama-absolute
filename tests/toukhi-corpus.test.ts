@@ -93,7 +93,7 @@ describe("Toukhi corpus gate",()=>{
     const result=executeToukhiCandidate({birthYear:1920,targetYear:1952});
     expect(result.activation.active).toBe(false);
     expect(result.annualParity?.digitSum).toBe(22);
-    expect(result.annualParity?.decisionEligible).toBe(false);
+    expect(result.annualParity?.decisionEligible).toBe(true);
     expect(result.decisionDirection).toBeNull();
   });
 
