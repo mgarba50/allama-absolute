@@ -1,6 +1,8 @@
 import { describe,expect,it } from "vitest";
 import {
+  analyzeToukhiFullName,
   analyzeToukhiName,
+  analyzeToukhiReducedNameNumber,
   compareToukhiNames,
   toukhiElementRelation
 } from "../src/core/toukhiNameEngine";
@@ -18,7 +20,7 @@ describe("verified Toukhi name engine",()=>{
     const air=analyzeToukhiName("جزكسقثظ");
     expect(air.presentElements).toEqual(["AIR"]);
 
-    const water=analyzeToukhiName("دحلع رخغ".replace(" ",""));
+    const water=analyzeToukhiName("دحلعرخغ");
     expect(water.presentElements).toEqual(["WATER"]);
   });
 
@@ -35,7 +37,7 @@ describe("verified Toukhi name engine",()=>{
     expect(profile.internalState).toBe("CONFLICTING_BLEND");
   });
 
-  it("reproduces Salim as a four-nature name with air strongest by the ordinal/7 balance",()=>{
+  it("reproduces Salim as a four-nature name with air strongest by ordinal/7 balance",()=>{
     const profile=analyzeToukhiName("سليم");
     expect(profile.presentElements).toEqual(["FIRE","EARTH","AIR","WATER"]);
     expect(profile.elementWeights.AIR.weightNumerator).toBe(15);
@@ -66,9 +68,39 @@ describe("verified Toukhi name engine",()=>{
     expect(comparison.decisionEligible).toBe(false);
   });
 
-  it("uses an explicit 28-letter normalization policy for ta marbuta",()=>{
+  it("uses an explicit closed 28-letter policy for ta marbuta",()=>{
     const profile=analyzeToukhiName("نبوية");
     expect(profile.normalized.endsWith("ه")).toBe(true);
     expect(profile.letters.every((item)=>item.ordinal>=1 && item.ordinal<=28)).toBe(true);
+  });
+
+  it("reproduces the page-24 Mustafa reduced-number example",()=>{
+    const result=analyzeToukhiReducedNameNumber("مصطفى");
+    expect(result.normalized).toBe("مصطفي");
+    expect(result.letters.map((item)=>item.reducedValue)).toEqual([4,9,9,8,1]);
+    expect(result.total).toBe(31);
+    expect(result.quotient).toBe(3);
+    expect(result.rawRemainder).toBe(4);
+    expect(result.interpretationKey).toBe(4);
+    expect(result.zeroRemainderStatus).toBe("NOT_APPLICABLE");
+  });
+
+  it("does not guess that zero remainder means state 9",()=>{
+    const result=analyzeToukhiReducedNameNumber("ط");
+    expect(result.total).toBe(9);
+    expect(result.rawRemainder).toBe(0);
+    expect(result.interpretationKey).toBeNull();
+    expect(result.zeroRemainderStatus).toBe("SOURCE_RULE_NOT_YET_VERIFIED");
+  });
+
+  it("keeps the mother-name full-name policy explicit and reproducible",()=>{
+    const full=analyzeToukhiFullName("موسى","فاطمة","MOTHER");
+    expect(full.lineagePolicy).toBe("MOTHER");
+    expect(full.compositeInput).toBe("موسى فاطمة");
+    expect(full.methodologicalRule.schoolVariant).toBe(true);
+    expect(full.methodologicalRule.consistentPolicyRequired).toBe(true);
+    expect(full.elemental.letters.length).toBeGreaterThan(0);
+    expect(full.reducedNumber.total).toBeGreaterThan(0);
+    expect(full.decisionEligible).toBe(false);
   });
 });
