@@ -72,7 +72,8 @@ describe("Toukhi corpus gate",()=>{
     expect(napoleon.combined).toBe(1839);
     expect(napoleon.digitSum).toBe(21);
     expect(napoleon.parity).toBe("ODD");
-    expect(napoleon.traditionalLabel).toBe("سعادة/صعود");\n    expect(napoleon.decisionEligible).toBe(true);
+    expect(napoleon.traditionalLabel).toBe("سعادة/صعود");
+    expect(napoleon.decisionEligible).toBe(true);
 
     const farouk=executeVerifiedAnnualYearParity(1920,1952);
     expect(farouk.ageByYearSubtraction).toBe(32);
