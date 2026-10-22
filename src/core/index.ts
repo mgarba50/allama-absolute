@@ -35,7 +35,8 @@ export * from "./falakiMethodPack";
 export * from "./absoluteSynthesis";
 export * from "./practitionerEngine";
 export * from "./toukhiMethodPack";
-export * from "./toukhiRecoveredIndex";\nexport * from "./toukhiScanMap";
+export * from "./toukhiRecoveredIndex";
+export * from "./toukhiScanMap";
 export * from "./toukhiNameEngine";
 export * from "./toukhiVerifiedRules";
 export * from "./toukhiCorpus";
@@ -78,7 +79,5 @@ export * from "./timingExplorer";
 export * from "./graph";
 
 export * from "./researchMetrics";
-
 export * from "./astronomyValidation";
-
 export * from "./personality";
