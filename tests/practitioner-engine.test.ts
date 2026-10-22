@@ -13,6 +13,11 @@ describe("practitioner engine",()=>{
     expect(["YES","NO","CONDITIONAL","UNRESOLVED"]).toContain(result.response.verdict);
     expect(["STRONG","MODERATE","MIXED","WEAK","UNRESOLVED"]).toContain(result.response.strength);
     expect(result.response.directAnswer.length).toBeGreaterThan(20);
+    expect(result.conversation.headline.length).toBeGreaterThan(5);
+    expect(result.conversation.opening).toContain("overall reading");
+    expect(result.conversation.reading.length).toBeGreaterThan(0);
+    expect(result.conversation.practicalDirection.length).toBeGreaterThan(30);
+    expect(result.conversation.crossReference.some((item)=>item.startsWith("Raml:"))).toBe(true);
     expect(result.response.methodStatus.raml).toBe("ACTIVE");
     expect(result.response.methodStatus.tukhi).toBe("VERIFIED_RULES_AVAILABLE_NO_MATCH");
     expect(result.kernel.toukhi.activation.active).toBe(false);
@@ -37,5 +42,6 @@ describe("practitioner engine",()=>{
     expect(result.synthesis.evidence[0].layer).toBe("TOUKHI");
     expect(result.response.methodStatus.tukhi).toBe("VERIFIED_RULE_FIRED");
     expect(["NO","CONDITIONAL"]).toContain(result.response.verdict);
+    expect(result.conversation.reading.some((item)=>item.includes("Ṭūkhī"))).toBe(true);
   });
 });
