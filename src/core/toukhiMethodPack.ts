@@ -1,27 +1,20 @@
-import { calculateAbjad, normalizeArabic } from "./abjad";
+import { normalizeArabic } from "./abjad";
 import { toukhiActivationReport, type ToukhiActivationReport } from "./toukhiCorpus";
 
-export interface ToukhiNameMotherNineResult {
-  person:{
-    raw:string;
-    normalized:string;
-    total:number;
-  };
-  mother:{
-    raw:string;
-    normalized:string;
-    total:number;
-  };
-  combinedTotal:number;
-  divisor:9;
-  quotient:number;
-  rawRemainder:number;
+export interface ToukhiAnnualParityResult {
+  birthYear:number;
+  targetYear:number;
+  ageByYearSubtraction:number;
+  combined:number;
+  digitSum:number;
+  parity:"ODD"|"EVEN";
+  traditionalLabel:"سعادة/صعود"|"نحس/نزول";
   source:{
-    itemId:"FRM-001";
-    page:4;
-    status:"RECOVERED_NOT_VISUALLY_VERIFIED";
+    pages:readonly [6,7];
+    status:"VISUALLY_VERIFIED";
+    note:string;
   };
-  interpretation:null;
+  decisionEligible:false;
 }
 
 export interface ToukhiWafqKeyResult {
@@ -32,8 +25,9 @@ export interface ToukhiWafqKeyResult {
   quotient:number;
   remainder:number;
   exact:boolean;
-  sourceItemId:"FRM-012"|"WQF-051";
-  sourcePage:39|150;
+  sourceItemId:"WQF-051";
+  sourcePage:150;
+  sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED";
 }
 
 export interface ToukhiTaksirResult {
@@ -50,8 +44,7 @@ export interface ToukhiTaksirResult {
 
 export interface ToukhiCandidateExecution {
   activation:ToukhiActivationReport;
-  nameMotherNine?:ToukhiNameMotherNineResult;
-  wafq4?:ToukhiWafqKeyResult;
+  annualParity?:ToukhiAnnualParityResult;
   wafq5?:ToukhiWafqKeyResult;
   taksir?:ToukhiTaksirResult;
   decisionDirection:null;
@@ -62,35 +55,64 @@ function positiveRemainder(value:number,divisor:number):number {
   return ((value%divisor)+divisor)%divisor;
 }
 
-export function executeRecoveredNameMotherNine(personName:string,motherName:string):ToukhiNameMotherNineResult {
-  const person=calculateAbjad(personName);
-  const mother=calculateAbjad(motherName);
-  const combinedTotal=person.total+mother.total;
-  const rawRemainder=positiveRemainder(combinedTotal,9);
+function decimalDigitSum(value:number):number {
+  return [...String(Math.abs(Math.trunc(value)))]
+    .filter((char)=>/\d/.test(char))
+    .reduce((sum,char)=>sum+Number(char),0);
+}
+
+/**
+ * Pages 6-7 of the scanned source visibly describe this year/age procedure:
+ * age in the target year is added to the target year; the decimal digits of
+ * that combined number are summed once; odd/even is then given a traditional
+ * rise/happiness vs decline/unlucky classification. This function preserves
+ * that source logic without claiming scientific predictive validity.
+ */
+export function executeVerifiedAnnualYearParity(
+  birthYear:number,
+  targetYear:number
+):ToukhiAnnualParityResult {
+  if (!Number.isInteger(birthYear) || !Number.isInteger(targetYear)) {
+    throw new Error("Birth year and target year must be whole-number years.");
+  }
+  if (targetYear<birthYear) {
+    throw new Error("Target year must not precede birth year.");
+  }
+  const ageByYearSubtraction=targetYear-birthYear;
+  const combined=targetYear+ageByYearSubtraction;
+  const digitSum=decimalDigitSum(combined);
+  const parity=digitSum%2===0 ? "EVEN" : "ODD";
   return {
-    person:{raw:personName,normalized:person.normalized,total:person.total},
-    mother:{raw:motherName,normalized:mother.normalized,total:mother.total},
-    combinedTotal,
-    divisor:9,
-    quotient:Math.floor(combinedTotal/9),
-    rawRemainder,
-    source:{itemId:"FRM-001",page:4,status:"RECOVERED_NOT_VISUALLY_VERIFIED"},
-    interpretation:null
+    birthYear,
+    targetYear,
+    ageByYearSubtraction,
+    combined,
+    digitSum,
+    parity,
+    traditionalLabel:parity==="ODD" ? "سعادة/صعود" : "نحس/نزول",
+    source:{
+      pages:[6,7],
+      status:"VISUALLY_VERIFIED",
+      note:"Traditional rule visibly present across PDF pages 6-7; interpretation is recorded as source tradition, not scientific fact."
+    },
+    decisionEligible:false
   };
 }
 
-export function executeRecoveredWafq4Key(total:number):ToukhiWafqKeyResult {
-  if (!Number.isFinite(total)) throw new Error("Wafq total must be finite.");
-  const adjusted=total-30;
-  const remainder=positiveRemainder(adjusted,4);
-  return {
-    total,subtraction:30,divisor:4,adjusted,
-    quotient:Math.floor(adjusted/4),
-    remainder,
-    exact:remainder===0,
-    sourceItemId:"FRM-012",
-    sourcePage:39
-  };
+/**
+ * Legacy archive compatibility guard. The old database attributed this formula
+ * to page 4, but page 4 was visually checked and does not contain it.
+ */
+export function executeRecoveredNameMotherNine(_personName:string,_motherName:string):never {
+  throw new Error("FRM-001 is quarantined: its legacy page-4 attribution failed visual source checking.");
+}
+
+/**
+ * Legacy archive compatibility guard. The old database attributed this rule
+ * to page 39, but page 39 was visually checked and does not contain it.
+ */
+export function executeRecoveredWafq4Key(_total:number):never {
+  throw new Error("FRM-012 is quarantined: its legacy page-39 attribution failed visual source checking.");
 }
 
 export function executeRecoveredWafq5Key(total:number):ToukhiWafqKeyResult {
@@ -103,7 +125,8 @@ export function executeRecoveredWafq5Key(total:number):ToukhiWafqKeyResult {
     remainder,
     exact:remainder===0,
     sourceItemId:"WQF-051",
-    sourcePage:150
+    sourcePage:150,
+    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED"
   };
 }
 
@@ -139,31 +162,30 @@ export function executeRecoveredTaksirTailHead(text:string):ToukhiTaksirResult {
 }
 
 export function executeToukhiCandidate(input:{
-  personName?:string;
-  motherName?:string;
+  birthYear?:number;
+  targetYear?:number;
   wafqTarget?:number;
   taksirText?:string;
   verifiedPages?:readonly number[];
 }):ToukhiCandidateExecution {
   const activation=toukhiActivationReport(input.verifiedPages ?? []);
   const notes:string[]=[
-    "Recovered calculations are executable for arithmetic verification only.",
-    "No recovered Toukhi calculation may influence a practitioner verdict until the 1-252 corpus activation gate passes.",
-    "Even after corpus activation, a numerical remainder does not receive a favorable/unfavorable meaning without its explicit source interpretation table."
+    "The legacy page-4 name+mother÷9 claim and page-39 4x4-key claim are quarantined and are not executed.",
+    "Pages 6-7 contain a visually verified annual year/age parity calculation; it remains decision-ineligible until the complete 1-252 corpus gate passes.",
+    "Recovered-but-unverified calculations may run only for arithmetic testing and never influence a practitioner verdict.",
+    "A numerical remainder or correspondence never receives a favorable/unfavorable meaning without its explicit verified interpretation rule."
   ];
 
-  const nameMotherNine=input.personName?.trim() && input.motherName?.trim()
-    ? executeRecoveredNameMotherNine(input.personName,input.motherName)
+  const annualParity=Number.isInteger(input.birthYear) && Number.isInteger(input.targetYear)
+    ? executeVerifiedAnnualYearParity(input.birthYear!,input.targetYear!)
     : undefined;
 
-  const wafq4=typeof input.wafqTarget==="number" ? executeRecoveredWafq4Key(input.wafqTarget) : undefined;
   const wafq5=typeof input.wafqTarget==="number" ? executeRecoveredWafq5Key(input.wafqTarget) : undefined;
   const taksir=input.taksirText?.trim() ? executeRecoveredTaksirTailHead(input.taksirText) : undefined;
 
   return {
     activation,
-    nameMotherNine,
-    wafq4,
+    annualParity,
     wafq5,
     taksir,
     decisionDirection:null,
