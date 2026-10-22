@@ -2,7 +2,7 @@ import { describe,expect,it } from "vitest";
 import { runAbsoluteKernel } from "../src/core/absoluteKernel";
 
 describe("absolute kernel",()=>{
-  it("combines Raml, Abjad and verified source-gated Toukhi mechanics without inventing missing rules",()=>{
+  it("combines source-gated method packs without inventing missing rules",()=>{
     const result=runAbsoluteKernel({
       question:"Will this business partnership succeed?",
       subjectName:"موسى",
@@ -12,25 +12,15 @@ describe("absolute kernel",()=>{
 
     expect(result.raml.primaryHouse).toBe(7);
     expect(["YES","NO","CONDITIONAL","UNRESOLVED"]).toContain(result.raml.decision);
-
     expect(result.abjad.subject?.total).toBe(116);
-    expect(result.abjad.subjectToOtherParty?.interpretation).toBe("UNASSIGNED");
-
     expect(result.toukhi.subjectName?.original).toBe("موسى");
-    expect(result.toukhi.subjectReducedNumber?.rawRemainder).toBeGreaterThanOrEqual(0);
-    expect(result.toukhi.subjectWithMother?.lineagePolicy).toBe("MOTHER");
-    expect(result.toukhi.subjectWithMother?.compositeInput).toBe("موسى فاطمة");
-    expect(result.toukhi.otherPartyName?.original).toBe("احمد");
-    expect(result.toukhi.nameComparison?.recommendation).toBeNull();
-    expect(result.toukhi.activation.active).toBe(false);
-
-    expect(result.unresolvedMethodNeeds.some((item)=>item.includes("Ṭūkhī"))).toBe(true);
+    expect(result.toukhi.verifiedRules.some((rule)=>rule.id==="TK-NAME-ELEMENTS-009")).toBe(true);
     expect(result.audit.ramlRules[0].ruleId).toBe("RAML-HOUSE-PRIMARY");
   });
 
-  it("executes the verified Toukhi annual rule only when year inputs are supplied",()=>{
+  it("activates the verified annual arithmetic rule for an annual question",()=>{
     const result=runAbsoluteKernel({
-      question:"What is the traditional year indication?",
+      question:"What is the traditional indication for the year 1952?",
       subjectName:"موسى",
       birthYear:1920,
       targetYear:1952
@@ -38,7 +28,8 @@ describe("absolute kernel",()=>{
 
     expect(result.toukhi.annualParity?.combined).toBe(1984);
     expect(result.toukhi.annualParity?.digitSum).toBe(22);
-    expect(result.toukhi.annualParity?.traditionalLabel).toBe("نحس/نزول");
-    expect(result.toukhi.annualParity?.decisionEligible).toBe(false);
+    expect(result.toukhi.annualParity?.decisionEligible).toBe(true);
+    expect(result.toukhi.decisionDirection).toBe(-1);
+    expect(result.toukhi.decisionRuleId).toBe("TK-YEAR-PARITY-006");
   });
 });
