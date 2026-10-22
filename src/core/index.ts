@@ -27,6 +27,7 @@ export * from "./ruleSurvival";
 export * from "./traditions";
 export * from "./provenance";
 export * from "./analysis";
+export * from "./formulaKernel";
 export * from "./deepSearch";
 export * from "./reports";
 export * from "./security";
