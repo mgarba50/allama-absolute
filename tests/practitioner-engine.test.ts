@@ -1,8 +1,42 @@
 import { describe,expect,it } from "vitest";
 import { runPractitionerEngine } from "../src/core/practitionerEngine";
 
+const forbiddenDefaultTerms = [
+  "raml",
+  "abjad",
+  "ṭūkhī",
+  "toukhi",
+  "house ",
+  "figure",
+  "planetary",
+  "witness",
+  "testimony",
+  "remainder",
+  "matrix",
+  "weighting",
+  "source-gated",
+  "method status",
+  "confidence score",
+  "calculation chain"
+];
+
+function visibleReadingText(result:ReturnType<typeof runPractitionerEngine>):string {
+  const c=result.conversation;
+  return [
+    c.headline,
+    c.verdict,
+    ...c.overview,
+    ...c.centralThemes,
+    ...c.opportunities,
+    ...c.cautions,
+    c.timingImpression,
+    c.practicalGuidance,
+    c.closing
+  ].join("\n").toLowerCase();
+}
+
 describe("practitioner engine",()=>{
-  it("returns a direct source-gated answer without numeric confidence camouflage",()=>{
+  it("returns a human consultation while keeping the analytical machinery internal",()=>{
     const result=runPractitionerEngine({
       question:"Will this business partnership succeed?",
       subjectName:"موسى",
@@ -11,24 +45,27 @@ describe("practitioner engine",()=>{
     });
 
     expect(["YES","NO","CONDITIONAL","UNRESOLVED"]).toContain(result.response.verdict);
-    expect(["STRONG","MODERATE","MIXED","WEAK","UNRESOLVED"]).toContain(result.response.strength);
-    expect(result.response.directAnswer.length).toBeGreaterThan(20);
-    expect(result.conversation.headline.length).toBeGreaterThan(5);
-    expect(result.conversation.opening).toContain("overall reading");
-    expect(result.conversation.reading.length).toBeGreaterThan(0);
-    expect(result.conversation.practicalDirection.length).toBeGreaterThan(30);
-    expect(result.conversation.crossReference.some((item)=>item.startsWith("Raml:"))).toBe(true);
+    expect(result.conversation.headline.length).toBeGreaterThan(8);
+    expect(result.conversation.verdict.length).toBeGreaterThan(20);
+    expect(result.conversation.overview.length).toBeGreaterThanOrEqual(2);
+    expect(result.conversation.centralThemes.length).toBeGreaterThan(0);
+    expect(result.conversation.opportunities.length).toBeGreaterThan(0);
+    expect(result.conversation.cautions.length).toBeGreaterThan(0);
+    expect(result.conversation.timingImpression.length).toBeGreaterThan(20);
+    expect(result.conversation.practicalGuidance.length).toBeGreaterThan(30);
+
+    const visible=visibleReadingText(result);
+    for (const term of forbiddenDefaultTerms) {
+      expect(visible, "default reading leaked internal term: " + term).not.toContain(term);
+    }
+
+    // The full technical machinery still exists for Expert Audit.
     expect(result.response.methodStatus.raml).toBe("ACTIVE");
-    expect(result.response.methodStatus.tukhi).toBe("VERIFIED_RULES_AVAILABLE_NO_MATCH");
-    expect(result.kernel.toukhi.activation.active).toBe(false);
-    expect(result.kernel.toukhi.activation.logicalPages).toBe(252);
-    expect(result.kernel.toukhi.verifiedRules.some((rule)=>rule.status==="VERIFIED_ACTIVE")).toBe(true);
-    expect(result.synthesis.audit.noInventedWeights).toBe(true);
-    expect(result.synthesis.audit.methodRelevanceRouting).toBe(true);
+    expect(result.kernel.toukhi.verifiedRules.length).toBeGreaterThan(0);
     expect(result.synthesis.evidence.some((item)=>item.role==="DECISIVE")).toBe(true);
   });
 
-  it("lets a directly relevant verified Toukhi year rule become primary",()=>{
+  it("uses a verified annual rule internally without naming it in the normal reading",()=>{
     const result=runPractitionerEngine({
       question:"Is the year 1952 traditionally fortunate or unfortunate for this person?",
       subjectName:"موسى",
@@ -36,12 +73,15 @@ describe("practitioner engine",()=>{
       targetYear:1952
     });
 
-    expect(result.kernel.toukhi.annualParity?.digitSum).toBe(22);
-    expect(result.kernel.toukhi.decisionDirection).toBe(-1);
     expect(result.kernel.toukhi.decisionRuleId).toBe("TK-YEAR-PARITY-006");
-    expect(result.synthesis.evidence[0].layer).toBe("TOUKHI");
     expect(result.response.methodStatus.tukhi).toBe("VERIFIED_RULE_FIRED");
     expect(["NO","CONDITIONAL"]).toContain(result.response.verdict);
-    expect(result.conversation.reading.some((item)=>item.includes("Ṭūkhī"))).toBe(true);
+
+    const visible=visibleReadingText(result);
+    expect(visible).not.toContain("ṭūkhī");
+    expect(visible).not.toContain("toukhi");
+    expect(visible).not.toContain("digit sum");
+    expect(visible).not.toContain("parity");
+    expect(visible).toContain("period");
   });
 });
