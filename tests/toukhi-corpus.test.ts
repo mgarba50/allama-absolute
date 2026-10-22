@@ -97,6 +97,13 @@ describe("Toukhi corpus gate",()=>{
     expect(result.decisionDirection).toBeNull();
   });
 
+  it("screening map covers every logical page without pretending it is verified",()=>{
+    expect(toukhiScreeningPagesCovered()).toBe(252);
+    expect(TOUKHI_SCREENING_MAP[0].start).toBe(1);
+    expect(TOUKHI_SCREENING_MAP[TOUKHI_SCREENING_MAP.length-1].end).toBe(252);
+    expect(toukhiCriticalScreenRanges().length).toBeGreaterThan(5);
+  });
+
   it("makes the old archive coverage gaps explicit instead of calling it complete",()=>{
     expect(TOUKHI_RECOVERED_MODULE_INDEX).toHaveLength(16);
     expect(toukhiRecoveredPageCount()).toBe(71);
