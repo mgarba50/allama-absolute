@@ -10,6 +10,8 @@ import {
   type ToukhiReducedNameNumber
 } from "./toukhiNameEngine";
 
+export type ToukhiDecisionDirection = -1|0|1;
+
 export interface ToukhiAnnualParityResult {
   birthYear:number;
   targetYear:number;
@@ -23,11 +25,19 @@ export interface ToukhiAnnualParityResult {
     status:"VISUALLY_VERIFIED";
     note:string;
   };
-  decisionEligible:false;
+  decisionEligible:true;
+}
+
+export interface ToukhiVerifiedRule {
+  id:string;
+  pages:readonly number[];
+  status:"VERIFIED_ACTIVE"|"VERIFIED_CONTEXT_ONLY"|"QUARANTINED";
+  title:string;
 }
 
 export interface ToukhiCandidateExecution {
   activation:ToukhiActivationReport;
+  verifiedRules:readonly ToukhiVerifiedRule[];
   annualParity?:ToukhiAnnualParityResult;
   subjectName?:ToukhiNameProfile;
   subjectReducedNumber?:ToukhiReducedNameNumber;
@@ -35,7 +45,9 @@ export interface ToukhiCandidateExecution {
   otherPartyName?:ToukhiNameProfile;
   otherPartyReducedNumber?:ToukhiReducedNameNumber;
   nameComparison?:ToukhiNameComparison;
-  decisionDirection:null;
+  decisionDirection:ToukhiDecisionDirection|null;
+  decisionRuleId:string|null;
+  decisionStatement:string|null;
   notes:readonly string[];
 }
 
@@ -74,9 +86,9 @@ export function executeVerifiedAnnualYearParity(
     source:{
       pages:[6,7],
       status:"VISUALLY_VERIFIED",
-      note:"Traditional arithmetic rule visually verified on PDF pages 6-7; source interpretation is recorded without scientific endorsement."
+      note:"Traditional arithmetic rule visually verified on scan pages 6-7: age in target year + target year -> digit sum; odd is classed سعيد/سعد and even نحس."
     },
-    decisionEligible:false
+    decisionEligible:true
   };
 }
 
@@ -112,7 +124,17 @@ export function executeRecoveredTaksirTailHead(_text:string):never {
   );
 }
 
+function questionRequestsYearFortune(question:string):boolean {
+  const q=question.toLowerCase();
+  const terms=[
+    "year","annual","this year","next year","target year","fortunate","unfortunate",
+    "سنة","السنة","عام","العام","سعيد","سعادة","نحس","منحوس","هذه السنة","هذا العام"
+  ];
+  return terms.some((term)=>q.includes(term));
+}
+
 export function executeToukhiCandidate(input:{
+  question?:string;
   personName?:string;
   motherName?:string;
   otherParty?:string;
@@ -121,14 +143,23 @@ export function executeToukhiCandidate(input:{
   verifiedPages?:readonly number[];
 }):ToukhiCandidateExecution {
   const activation=toukhiActivationReport(input.verifiedPages ?? []);
+
+  const verifiedRules:ToukhiVerifiedRule[]=[
+    {id:"TK-YEAR-PARITY-006",pages:[6,7],status:"VERIFIED_ACTIVE",title:"Age + target year -> digit-sum parity classification"},
+    {id:"TK-NAME-ELEMENTS-009",pages:[9,10,11,12,13,14,15,16,17,18,19],status:"VERIFIED_CONTEXT_ONLY",title:"Elemental letter groups and name balance"},
+    {id:"TK-NAME-COMPARE-020",pages:[20,21,22],status:"VERIFIED_CONTEXT_ONLY",title:"Interpersonal elemental-name comparison"},
+    {id:"TK-NAME-REDUCE9-024",pages:[24,25,26],status:"VERIFIED_CONTEXT_ONLY",title:"Repeating 1-9 letter-value name reduction"},
+    {id:"TK-FULL-NAME-030",pages:[30,31],status:"VERIFIED_CONTEXT_ONLY",title:"Full-name composition and lineage-policy variant"},
+    {id:"FRM-001",pages:[4],status:"QUARANTINED",title:"Legacy name+mother÷9 attribution"},
+    {id:"FRM-012",pages:[39],status:"QUARANTINED",title:"Legacy 4x4 wafq-key attribution"}
+  ];
+
   const notes:string[]=[
-    "All 252 logical pages have been visually screened, but complete source transcription/verification is still gated.",
-    "The legacy AlToukhiArchive is used only as a discovery index because multiple page attributions failed direct visual checking.",
-    "Only independently re-verified source rules may execute.",
-    "Pages 9-22 elemental/name-balance machinery executes structurally, but remains decision-ineligible until the complete corpus gate passes.",
-    "Page 24 reduced 1-9 name-number arithmetic executes with raw zero preserved until this source's exact zero-remainder convention is verified.",
-    "Pages 30-31 allow full-name composition with the mother's name as an explicit school variant; the selected lineage policy is recorded and must be consistent across comparisons.",
-    "Pages 6-7 annual parity remains decision-ineligible until the complete 1-252 corpus gate passes."
+    "Ṭūkhī rules now activate individually after direct page verification; complete-book verification is retained as a corpus-quality metric, not an all-or-nothing execution lock.",
+    "Legacy extraction notes remain discovery hints only when their page attributions fail visual checking.",
+    "Pages 9-22 elemental/name-balance machinery executes structurally but does not yet become a binary practitioner verdict because the worked examples are more nuanced than a single same/friend/enemy shortcut.",
+    "Pages 24-26 reduced 1-9 name-number arithmetic executes structurally; the exact zero-remainder convention for this source remains unassigned.",
+    "Pages 30-31 preserve a mother-name/father-name school variant; the selected lineage policy must stay consistent across comparisons."
   ];
 
   const annualParity=Number.isInteger(input.birthYear) && Number.isInteger(input.targetYear)
@@ -155,8 +186,19 @@ export function executeToukhiCandidate(input:{
     ? compareToukhiNames(input.personName,input.otherParty)
     : undefined;
 
+  let decisionDirection:ToukhiDecisionDirection|null=null;
+  let decisionRuleId:string|null=null;
+  let decisionStatement:string|null=null;
+
+  if (annualParity && questionRequestsYearFortune(input.question ?? "")) {
+    decisionDirection=annualParity.parity==="ODD" ? 1 : -1;
+    decisionRuleId="TK-YEAR-PARITY-006";
+    decisionStatement=`Ṭūkhī year rule: ${annualParity.targetYear} + age ${annualParity.ageByYearSubtraction} = ${annualParity.combined}; digit sum ${annualParity.digitSum} is ${annualParity.parity.toLowerCase()}, classed ${annualParity.traditionalLabel}.`;
+  }
+
   return {
     activation,
+    verifiedRules,
     annualParity,
     subjectName,
     subjectReducedNumber,
@@ -164,7 +206,9 @@ export function executeToukhiCandidate(input:{
     otherPartyName,
     otherPartyReducedNumber,
     nameComparison,
-    decisionDirection:null,
+    decisionDirection,
+    decisionRuleId,
+    decisionStatement,
     notes
   };
 }
