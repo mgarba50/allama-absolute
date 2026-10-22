@@ -23,7 +23,10 @@ export const TOUKHI_LOGICAL_PAGE_COUNT = 252;
  * reconstruction. Screening is NOT the same as complete page transcription,
  * so screened pages do not satisfy the activation gate.
  */
-export const TOUKHI_SCREENED_PAGES = [4,6,7,35,39] as const;
+export const TOUKHI_SCREENED_PAGES:readonly number[] = Array.from(
+  {length:TOUKHI_LOGICAL_PAGE_COUNT},
+  (_,index)=>index+1
+);
 
 export interface RecoveredToukhiItem {
   id:string;
@@ -71,78 +74,78 @@ export const RECOVERED_TOUKHI_ITEMS:readonly RecoveredToukhiItem[] = [
   {
     id:"TAL-012",type:"table",moduleId:"MOD-012",page:40,
     title:"Recovered 4x4 natural square",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
   },
   {
     id:"ERR-021-A",type:"constraint",moduleId:"MOD-021",page:75,
     title:"Recovered Saturn/Mars timing prohibition for benevolent work",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY",
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY",
     notes:["Traditional ritual constraint; preserved as source metadata, not treated as objective fact."]
   },
   {
     id:"VTAL-022",type:"archive",moduleId:"MOD-022",page:79,
     title:"Recovered circular/triangular seal description",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
   },
   {
     id:"ERR-031-FATAL",type:"constraint",moduleId:"MOD-031",page:102,
     title:"Recovered retreat-condition failure rule",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
   },
   {
     id:"VTAL-032",type:"archive",moduleId:"MOD-032",page:106,
     title:"Recovered nested protection-seal geometry",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
   },
   {
     id:"ERR-041-A",type:"constraint",moduleId:"MOD-041",page:130,
     title:"Recovered first lunar-mansion ritual constraint",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
   },
   {
     id:"TAK-042",type:"algorithm",moduleId:"MOD-042",page:135,
     title:"Tail-to-head letter taksir",
     sourceText:"تبسط حروف الجملة، ثم تأخذ الحرف الأخير ثم الأول",
     normalized:"alternate tail/head extraction over normalized letters",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:true,decisionEligible:false,safetyClass:"ANALYTICAL"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ANALYTICAL"
   },
   {
     id:"WQF-051",type:"formula",moduleId:"MOD-051",page:150,
     title:"5x5 wafq key",
     sourceText:"تطرح من الجملة ستين، وتقسم الباقي على خمسة",
     normalized:"key=(total_value-60)/5",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:true,decisionEligible:false,safetyClass:"ANALYTICAL"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ANALYTICAL"
   },
   {
     id:"ERR-052-A",type:"constraint",moduleId:"MOD-052",page:154,
     title:"Recovered dismissal/closure condition",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
   },
   {
     id:"ERR-061-A",type:"constraint",moduleId:"MOD-061",page:180,
     title:"Recovered 21-day retreat-condition rule",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
   },
   {
     id:"REP-062",type:"table",moduleId:"MOD-062",page:185,
     title:"Recovered repetition count 313",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
   },
   {
     id:"ERR-071-A",type:"constraint",moduleId:"MOD-071",page:210,
     title:"Recovered Aries ritual-intent constraint",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
   },
   {
     id:"MND-072",type:"workflow",moduleId:"MOD-072",page:215,
     title:"Recovered mandal workflow",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY",
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY",
     notes:["Archived for bibliographic completeness only; not operationalized."]
   },
   {
     id:"TXT-081-01",type:"archive",moduleId:"MOD-081",page:240,
     title:"Recovered Barhatiyya section marker",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
+    sourceStatus:"LEGACY_DISCOVERY_HINT",executable:false,decisionEligible:false,safetyClass:"ARCHIVE_ONLY"
   }
 ] as const;
 
@@ -185,7 +188,7 @@ export interface ToukhiActivationReport {
   logicalPages:number;
   verifiedPages:number;
   screenedPages:number;
-  recoveredButUnverifiedPages:number;
+  legacyHintPages:number;
   quarantinedPages:number;
   quarantinedItems:number;
   unreviewedPages:number;
@@ -204,8 +207,8 @@ export function toukhiActivationReport(verifiedPages:readonly number[]=[]):Toukh
 
   const blockers:string[]=[];
   if (verified!==TOUKHI_LOGICAL_PAGE_COUNT) blockers.push(`Only ${verified}/${TOUKHI_LOGICAL_PAGE_COUNT} logical pages are completely verified.`);
-  blockers.push(`${TOUKHI_SCREENED_PAGES.length} page(s) have been visually screened so far; screening does not count as complete verification.`);
-  if (recovered>0) blockers.push(`${recovered} page(s) contain recovered material that still require visual source verification.`);
+  blockers.push(`All ${TOUKHI_SCREENED_PAGES.length} logical pages have been visually screened; screening does not count as complete transcription/verification.`);
+  if (recovered>0) blockers.push(`${recovered} page(s) contain legacy discovery hints that must be independently relocated and verified in the scan.`);
   if (quarantinedItems>0) blockers.push(`${quarantinedItems} recovered item(s) are quarantined because their legacy page attribution failed visual checking.`);
   if (unreviewed>0) blockers.push(`${unreviewed} page(s) remain unreviewed by the completeness gate.`);
   if (!overlapPages.includes(101)) blockers.push("Expected split overlap at logical page 101 was not detected.");
@@ -215,7 +218,7 @@ export function toukhiActivationReport(verifiedPages:readonly number[]=[]):Toukh
     logicalPages:TOUKHI_LOGICAL_PAGE_COUNT,
     verifiedPages:verified,
     screenedPages:TOUKHI_SCREENED_PAGES.length,
-    recoveredButUnverifiedPages:recovered,
+    legacyHintPages:recovered,
     quarantinedPages,
     quarantinedItems,
     unreviewedPages:unreviewed,
