@@ -72,7 +72,7 @@ describe("Toukhi corpus gate",()=>{
     expect(napoleon.combined).toBe(1839);
     expect(napoleon.digitSum).toBe(21);
     expect(napoleon.parity).toBe("ODD");
-    expect(napoleon.traditionalLabel).toBe("سعادة/صعود");
+    expect(napoleon.traditionalLabel).toBe("سعادة/صعود");\n    expect(napoleon.decisionEligible).toBe(true);
 
     const farouk=executeVerifiedAnnualYearParity(1920,1952);
     expect(farouk.ageByYearSubtraction).toBe(32);
@@ -89,7 +89,7 @@ describe("Toukhi corpus gate",()=>{
     expect(()=>executeRecoveredTaksirTailHead("موسى")).toThrow(/not executable/i);
   });
 
-  it("keeps the Toukhi candidate decision-neutral while the corpus gate is locked",()=>{
+  it("keeps verified rule execution separate from the whole-book completeness gate",()=>{
     const result=executeToukhiCandidate({birthYear:1920,targetYear:1952});
     expect(result.activation.active).toBe(false);
     expect(result.annualParity?.digitSum).toBe(22);
