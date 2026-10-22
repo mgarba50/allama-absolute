@@ -211,7 +211,7 @@ export function toukhiActivationReport(verifiedPages:readonly number[]=[]):Toukh
   if (!overlapPages.includes(101)) blockers.push("Expected split overlap at logical page 101 was not detected.");
 
   return {
-    active:verified===TOUKHI_LOGICAL_PAGE_COUNT && quarantinedItems===0,
+    active:verified===TOUKHI_LOGICAL_PAGE_COUNT,
     logicalPages:TOUKHI_LOGICAL_PAGE_COUNT,
     verifiedPages:verified,
     screenedPages:TOUKHI_SCREENED_PAGES.length,
