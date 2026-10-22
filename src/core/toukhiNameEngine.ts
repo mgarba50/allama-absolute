@@ -241,3 +241,81 @@ export function compareToukhiNames(leftName:string,rightName:string):ToukhiNameC
     decisionEligible:false
   };
 }
+
+
+export interface ToukhiReducedLetterValue {
+  letter:string;
+  ordinal:number;
+  reducedValue:number;
+}
+
+export interface ToukhiReducedNameNumber {
+  original:string;
+  normalized:string;
+  letters:readonly ToukhiReducedLetterValue[];
+  total:number;
+  divisor:9;
+  quotient:number;
+  rawRemainder:number;
+  interpretationKey:1|2|3|4|5|6|7|8|9|null;
+  zeroRemainderStatus:"NOT_APPLICABLE"|"SOURCE_RULE_NOT_YET_VERIFIED";
+  source:{
+    pages:readonly [24,25,26];
+    status:"VISUALLY_VERIFIED";
+    note:string;
+  };
+  decisionEligible:false;
+}
+
+export function toukhiReducedLetterValue(letter:string):number {
+  const ordinal=TOUKHI_ABJAD_ORDINAL[letter];
+  if (!ordinal) throw new Error(`Letter ${letter} is not in the verified 28-letter Toukhi table.`);
+  return ((ordinal-1)%9)+1;
+}
+
+/**
+ * Page 24 gives a 1-9 repeating value table for the 28 Arabic letters and
+ * demonstrates summing a name, dividing the sum by 9, discarding complete
+ * nine-cycles and retaining the remainder as the name's numerical state.
+ * Pages 25-26 list the traditional properties of states 1-9.
+ *
+ * Zero remainder is intentionally NOT converted to 9 here because the
+ * zero-remainder convention has not yet been independently verified for this
+ * exact source method.
+ */
+export function analyzeToukhiReducedNameNumber(name:string):ToukhiReducedNameNumber {
+  const normalized=normalizeArabic(name,TOUKHI_NAME_NORMALIZATION);
+  const letters:ToukhiReducedLetterValue[]=[...normalized]
+    .filter((letter)=>TOUKHI_ABJAD_ORDINAL[letter]!==undefined)
+    .map((letter)=>{
+      const ordinal=TOUKHI_ABJAD_ORDINAL[letter];
+      return {letter,ordinal,reducedValue:toukhiReducedLetterValue(letter)};
+    });
+
+  if (!letters.length) throw new Error("Name contains no letters from the verified 28-letter Toukhi table.");
+
+  const total=letters.reduce((sum,item)=>sum+item.reducedValue,0);
+  const quotient=Math.floor(total/9);
+  const rawRemainder=((total%9)+9)%9;
+  const interpretationKey=rawRemainder===0
+    ? null
+    : rawRemainder as 1|2|3|4|5|6|7|8|9;
+
+  return {
+    original:name,
+    normalized,
+    letters,
+    total,
+    divisor:9,
+    quotient,
+    rawRemainder,
+    interpretationKey,
+    zeroRemainderStatus:rawRemainder===0 ? "SOURCE_RULE_NOT_YET_VERIFIED" : "NOT_APPLICABLE",
+    source:{
+      pages:[24,25,26],
+      status:"VISUALLY_VERIFIED",
+      note:"Page 24 contains the repeating 1-9 letter table and the مصطفى worked example; pages 25-26 enumerate the traditional properties for numerical states 1-9. Detailed keyword transcription is kept separate until checked line-by-line."
+    },
+    decisionEligible:false
+  };
+}
