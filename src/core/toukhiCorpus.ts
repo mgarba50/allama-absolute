@@ -18,6 +18,13 @@ export const TOUKHI_SOURCE_PARTS:readonly ToukhiSourcePart[] = [
 
 export const TOUKHI_LOGICAL_PAGE_COUNT = 252;
 
+/**
+ * These pages have been visually screened against the scan during the current
+ * reconstruction. Screening is NOT the same as complete page transcription,
+ * so screened pages do not satisfy the activation gate.
+ */
+export const TOUKHI_SCREENED_PAGES = [4,6,7,35,39] as const;
+
 export interface RecoveredToukhiItem {
   id:string;
   type:"formula"|"constraint"|"table"|"algorithm"|"workflow"|"archive";
@@ -26,7 +33,10 @@ export interface RecoveredToukhiItem {
   title:string;
   sourceText?:string;
   normalized?:string;
-  sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED"|"VERIFIED";
+  sourceStatus:
+    | "RECOVERED_NOT_VISUALLY_VERIFIED"
+    | "VERIFIED"
+    | "QUARANTINED_BAD_ATTRIBUTION";
   executable:boolean;
   decisionEligible:boolean;
   safetyClass:"ANALYTICAL"|"ARCHIVE_ONLY"|"HAZARDOUS_ARCHIVE_ONLY";
@@ -36,25 +46,27 @@ export interface RecoveredToukhiItem {
 export const RECOVERED_TOUKHI_ITEMS:readonly RecoveredToukhiItem[] = [
   {
     id:"FRM-001",type:"formula",moduleId:"MOD-001",page:4,
-    title:"Person name + mother name, reduction by 9",
+    title:"Legacy claim: person name + mother name, reduction by 9",
     sourceText:"يحسب اسم الطالب واسم أمه بحساب الجمل الكبير ويقسم على تسعة",
     normalized:"(abjad(person_name) + abjad(mother_name)) mod 9",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:true,decisionEligible:false,safetyClass:"ANALYTICAL",
-    notes:["Recovered from the prior Batch 01 database export; must be page-verified before affecting any practitioner verdict."]
+    sourceStatus:"QUARANTINED_BAD_ATTRIBUTION",executable:false,decisionEligible:false,safetyClass:"ANALYTICAL",
+    notes:["Visual inspection of PDF page 4 shows introductory material on names and letters, not this claimed formula. The legacy claim remains archived only until a correct source page is located."]
   },
   {
     id:"FRM-011",type:"formula",moduleId:"MOD-011",page:35,
-    title:"Planetary hour duration",
+    title:"Legacy claim: planetary hour duration",
     sourceText:"تحسب الدقائق من شروق الشمس إلى غروبها وتقسم على اثني عشر",
     normalized:"day_hour=(sunset-sunrise)/12; night_hour=(next_sunrise-sunset)/12",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:true,decisionEligible:false,safetyClass:"ANALYTICAL"
+    sourceStatus:"QUARANTINED_BAD_ATTRIBUTION",executable:false,decisionEligible:false,safetyClass:"ANALYTICAL",
+    notes:["Visual inspection of PDF page 35 shows lesson seven, أعداد الحروف, with letter-number tables. The legacy planetary-hour page attribution is false."]
   },
   {
     id:"FRM-012",type:"formula",moduleId:"MOD-012",page:39,
-    title:"4x4 wafq key",
+    title:"Legacy claim: 4x4 wafq key",
     sourceText:"تطرح من المجموع ثلاثين وتقسم الباقي على أربعة. فالخارج هو المفتاح",
     normalized:"key=(total_value-30)/4",
-    sourceStatus:"RECOVERED_NOT_VISUALLY_VERIFIED",executable:true,decisionEligible:false,safetyClass:"ANALYTICAL"
+    sourceStatus:"QUARANTINED_BAD_ATTRIBUTION",executable:false,decisionEligible:false,safetyClass:"ANALYTICAL",
+    notes:["Visual inspection of PDF page 39 shows a three-based numerical/letter table and discussion, not the claimed 4x4 key formula."]
   },
   {
     id:"TAL-012",type:"table",moduleId:"MOD-012",page:40,
@@ -139,6 +151,7 @@ export interface ToukhiCoverageEntry {
   parts:readonly string[];
   status:ToukhiPageStatus;
   recoveredItemIds:readonly string[];
+  quarantinedItemIds:readonly string[];
 }
 
 function sourcePartsForPage(page:number):string[] {
@@ -152,14 +165,17 @@ export function buildToukhiCoverage(verifiedPages:readonly number[]=[]):readonly
   return Array.from({length:TOUKHI_LOGICAL_PAGE_COUNT},(_,index)=>{
     const page=index+1;
     const items=RECOVERED_TOUKHI_ITEMS.filter((item)=>item.page===page);
+    const quarantined=items.filter((item)=>item.sourceStatus==="QUARANTINED_BAD_ATTRIBUTION");
     let status:ToukhiPageStatus="UNREVIEWED";
     if (verified.has(page)) status="VERIFIED";
+    else if (quarantined.length) status="QUARANTINED";
     else if (items.length) status="RECOVERED";
     return {
       page,
       parts:sourcePartsForPage(page),
       status,
-      recoveredItemIds:items.map((item)=>item.id)
+      recoveredItemIds:items.map((item)=>item.id),
+      quarantinedItemIds:quarantined.map((item)=>item.id)
     };
   });
 }
@@ -168,7 +184,10 @@ export interface ToukhiActivationReport {
   active:boolean;
   logicalPages:number;
   verifiedPages:number;
+  screenedPages:number;
   recoveredButUnverifiedPages:number;
+  quarantinedPages:number;
+  quarantinedItems:number;
   unreviewedPages:number;
   overlapPages:readonly number[];
   blockers:readonly string[];
@@ -178,20 +197,27 @@ export function toukhiActivationReport(verifiedPages:readonly number[]=[]):Toukh
   const coverage=buildToukhiCoverage(verifiedPages);
   const verified=coverage.filter((item)=>item.status==="VERIFIED").length;
   const recovered=coverage.filter((item)=>item.status==="RECOVERED").length;
+  const quarantinedPages=coverage.filter((item)=>item.status==="QUARANTINED").length;
   const unreviewed=coverage.filter((item)=>item.status==="UNREVIEWED").length;
   const overlapPages=coverage.filter((item)=>item.parts.length>1).map((item)=>item.page);
+  const quarantinedItems=RECOVERED_TOUKHI_ITEMS.filter((item)=>item.sourceStatus==="QUARANTINED_BAD_ATTRIBUTION").length;
 
   const blockers:string[]=[];
-  if (verified!==TOUKHI_LOGICAL_PAGE_COUNT) blockers.push(`Only ${verified}/${TOUKHI_LOGICAL_PAGE_COUNT} logical pages are visually verified.`);
+  if (verified!==TOUKHI_LOGICAL_PAGE_COUNT) blockers.push(`Only ${verified}/${TOUKHI_LOGICAL_PAGE_COUNT} logical pages are completely verified.`);
+  blockers.push(`${TOUKHI_SCREENED_PAGES.length} page(s) have been visually screened so far; screening does not count as complete verification.`);
   if (recovered>0) blockers.push(`${recovered} page(s) contain recovered material that still require visual source verification.`);
-  if (unreviewed>0) blockers.push(`${unreviewed} page(s) remain unreviewed.`);
+  if (quarantinedItems>0) blockers.push(`${quarantinedItems} recovered item(s) are quarantined because their legacy page attribution failed visual checking.`);
+  if (unreviewed>0) blockers.push(`${unreviewed} page(s) remain unreviewed by the completeness gate.`);
   if (!overlapPages.includes(101)) blockers.push("Expected split overlap at logical page 101 was not detected.");
 
   return {
-    active:blockers.length===0,
+    active:verified===TOUKHI_LOGICAL_PAGE_COUNT && quarantinedItems===0,
     logicalPages:TOUKHI_LOGICAL_PAGE_COUNT,
     verifiedPages:verified,
+    screenedPages:TOUKHI_SCREENED_PAGES.length,
     recoveredButUnverifiedPages:recovered,
+    quarantinedPages,
+    quarantinedItems,
     unreviewedPages:unreviewed,
     overlapPages,
     blockers
