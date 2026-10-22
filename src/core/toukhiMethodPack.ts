@@ -1,4 +1,10 @@
 import { toukhiActivationReport, type ToukhiActivationReport } from "./toukhiCorpus";
+import {
+  analyzeToukhiName,
+  compareToukhiNames,
+  type ToukhiNameComparison,
+  type ToukhiNameProfile
+} from "./toukhiNameEngine";
 
 export interface ToukhiAnnualParityResult {
   birthYear:number;
@@ -19,6 +25,9 @@ export interface ToukhiAnnualParityResult {
 export interface ToukhiCandidateExecution {
   activation:ToukhiActivationReport;
   annualParity?:ToukhiAnnualParityResult;
+  subjectName?:ToukhiNameProfile;
+  otherPartyName?:ToukhiNameProfile;
+  nameComparison?:ToukhiNameComparison;
   decisionDirection:null;
   notes:readonly string[];
 }
@@ -97,6 +106,8 @@ export function executeRecoveredTaksirTailHead(_text:string):never {
 }
 
 export function executeToukhiCandidate(input:{
+  personName?:string;
+  otherParty?:string;
   birthYear?:number;
   targetYear?:number;
   verifiedPages?:readonly number[];
@@ -106,16 +117,30 @@ export function executeToukhiCandidate(input:{
     "All 252 logical pages have been visually screened, but complete source transcription/verification is still gated.",
     "The legacy AlToukhiArchive is used only as a discovery index because multiple page attributions failed direct visual checking.",
     "Only independently re-verified source rules may execute.",
-    "The visually verified pages 6-7 annual parity rule remains decision-ineligible until the complete 1-252 corpus gate passes."
+    "The pages 9-22 elemental/name-balance machinery now executes structurally, but remains decision-ineligible until the complete corpus gate passes.",
+    "The pages 6-7 annual parity rule remains decision-ineligible until the complete 1-252 corpus gate passes."
   ];
 
   const annualParity=Number.isInteger(input.birthYear) && Number.isInteger(input.targetYear)
     ? executeVerifiedAnnualYearParity(input.birthYear!,input.targetYear!)
     : undefined;
 
+  const subjectName=input.personName?.trim()
+    ? analyzeToukhiName(input.personName)
+    : undefined;
+  const otherPartyName=input.otherParty?.trim()
+    ? analyzeToukhiName(input.otherParty)
+    : undefined;
+  const nameComparison=input.personName?.trim() && input.otherParty?.trim()
+    ? compareToukhiNames(input.personName,input.otherParty)
+    : undefined;
+
   return {
     activation,
     annualParity,
+    subjectName,
+    otherPartyName,
+    nameComparison,
     decisionDirection:null,
     notes
   };
