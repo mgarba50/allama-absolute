@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { runPractitionerEngine, type Locale } from "../core";
 import "../practitioner.css";
 
@@ -31,15 +31,7 @@ export function PractitionerConsole({locale,latitude,longitude,onOpenAudit,onOpe
   const [error,setError]=useState<string|null>(null);
   const [working,setWorking]=useState(false);
   const [showOptional,setShowOptional]=useState(false);
-
-  const decisiveEvidence=useMemo(
-    ()=>session?.synthesis.evidence.filter((item)=>item.role==="DECISIVE") ?? [],
-    [session]
-  );
-  const supportingEvidence=useMemo(
-    ()=>session?.synthesis.evidence.filter((item)=>item.role==="SUPPORTING") ?? [],
-    [session]
-  );
+  const [showCrossReference,setShowCrossReference]=useState(false);
 
   function analyze():void {
     const cleanQuestion=question.trim();
@@ -68,20 +60,15 @@ export function PractitionerConsole({locale,latitude,longitude,onOpenAudit,onOpe
     setWorking(true);
     setError(null);
     try {
-      const result=runPractitionerEngine({
+      setSession(runPractitionerEngine({
         question:cleanQuestion,
         subjectName:subjectName.trim() || undefined,
         motherName:motherName.trim() || undefined,
         otherParty:otherParty.trim() || undefined,
         birthYear:parsedBirth,
         targetYear,
-        timing:{
-          moment:new Date(),
-          latitude,
-          longitude
-        }
-      });
-      setSession(result);
+        timing:{moment:new Date(),latitude,longitude}
+      }));
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : String(caught));
     } finally {
@@ -93,75 +80,43 @@ export function PractitionerConsole({locale,latitude,longitude,onOpenAudit,onOpe
     setSession(null);
     setQuestion("");
     setError(null);
+    setShowCrossReference(false);
   }
 
   if (session) {
     return <section className="practitioner-console">
-      <div className="result-header">
-        <div>
-          <p className="eyebrow">{t("SOVEREIGN JUDGMENT","الحكم السيادي")}</p>
-          <h1>{session.response.verdict}</h1>
-          <p className="asked-question">{session.response.question}</p>
-        </div>
-        <div className={`verdict-orb verdict-${session.response.verdict.toLowerCase()}`}>
-          <strong>{session.response.verdict}</strong>
-          <span>{session.response.strength}</span>
-        </div>
-      </div>
+      <div className="conversation-result">
+        <p className="eyebrow">{t("ALLAMA'S READING","قراءة علّامة")}</p>
+        <h1>{session.conversation.headline}</h1>
+        <p className="asked-question">{session.response.question}</p>
 
-      <div className="judgment-grid">
-        <article className="judgment-card direct-card">
-          <span>{t("DIRECT ANSWER","الجواب المباشر")}</span>
-          <h2>{session.response.directAnswer}</h2>
+        <article className="conversation-answer">
+          <p className="conversation-opening">{session.conversation.opening}</p>
+          {session.conversation.reading.map((paragraph,index)=><p key={index}>{paragraph}</p>)}
         </article>
 
-        <article className="judgment-card wide-card">
-          <span>{t("DECISIVE BASIS","أساس الحكم")}</span>
-          <p>{session.response.decisiveBasis}</p>
+        <article className="practical-direction">
+          <span>{t("WHAT I WOULD DO","ما الذي أراه عملياً")}</span>
+          <p>{session.conversation.practicalDirection}</p>
         </article>
 
-        {decisiveEvidence.length>0 && <article className="judgment-card wide-card">
-          <span>{t("DECISIVE VERIFIED EVIDENCE","الدليل المتحقق الحاسم")}</span>
-          <ul>{decisiveEvidence.map((item)=><li key={item.id}><strong>{item.layer}</strong> — {item.statement}</li>)}</ul>
-        </article>}
+        <p className="conversation-closing">{session.conversation.closing}</p>
 
-        {supportingEvidence.length>0 && <article className="judgment-card wide-card">
-          <span>{t("SUPPORTING CROSS-CHECKS","المراجعات المساندة")}</span>
-          <ul>{supportingEvidence.slice(0,6).map((item)=><li key={item.id}><strong>{item.layer}</strong> — {item.statement}</li>)}</ul>
-        </article>}
+        <button className="cross-reference-toggle" onClick={()=>setShowCrossReference((value)=>!value)}>
+          {showCrossReference?t("Hide cross-reference","إخفاء المراجعة"):t("Show how the methods cross-checked","عرض كيفية المراجعة بين المناهج")}
+        </button>
 
-        <article className="judgment-card">
-          <span>{t("METHOD STATUS","حالة المناهج")}</span>
-          <p>Raml: {session.response.methodStatus.raml}</p>
-          <p>Ṭūkhī: {session.response.methodStatus.tukhi}</p>
-          <p>Abjad: {session.response.methodStatus.abjad}</p>
-          <p>Falaki: {session.response.methodStatus.falaki}</p>
-        </article>
-
-        <article className="judgment-card">
-          <span>{t("QUESTION ROUTING","توجيه السؤال")}</span>
-          <p>{session.kernel.structural.question.domain}</p>
-          <p>{t("Primary house","البيت الأصلي")}: {session.kernel.raml.primaryHouse}</p>
-        </article>
-
-        {session.synthesis.unresolved.length>0 && <article className="judgment-card caution-card wide-card">
-          <span>{t("SOURCE-GATED / NOT USED IN THE VERDICT","موقوف بالمصدر / لم يدخل في الحكم")}</span>
-          <ul>{session.synthesis.unresolved.map((item,index)=><li key={index}>{item}</li>)}</ul>
+        {showCrossReference&&<article className="cross-reference-card">
+          <span>{t("CROSS-REFERENCE SUMMARY","خلاصة المراجعة المتقاطعة")}</span>
+          <ul>{session.conversation.crossReference.map((item,index)=><li key={index}>{item}</li>)}</ul>
         </article>}
       </div>
 
       <div className="result-actions">
-        <button onClick={reset}>{t("New Analysis","تحليل جديد")}</button>
+        <button onClick={reset}>{t("Ask Another Question","اسأل سؤالاً آخر")}</button>
         <button className="secondary" onClick={onOpenCases}>{t("Case Vault","خزانة القضايا")}</button>
         <button className="ghost" onClick={()=>onOpenAudit(session.response.question)}>{t("Inspect Expert Audit","فتح التدقيق الخبير")}</button>
       </div>
-
-      <p className="archive-note">
-        {t(
-          "No numeric confidence weighting is used. The visible verdict is produced only from methods that actually executed and passed their source gate.",
-          "لا يستخدم النظام أوزان ثقة رقمية. لا يظهر الحكم إلا من المناهج التي نُفذت فعلاً واجتازت بوابة المصدر."
-        )}
-      </p>
     </section>;
   }
 
@@ -170,8 +125,8 @@ export function PractitionerConsole({locale,latitude,longitude,onOpenAudit,onOpe
       <p className="eyebrow">{t("PRIVATE PRACTITIONER ENGINE","محرك الممارس الخاص")}</p>
       <h1>Ω ALLAMA ABSOLUTE</h1>
       <p>{t(
-        "Give the names and ask the question. Allama handles the cast, calculations, source routing and cross-checking silently.",
-        "أدخل الأسماء واسأل السؤال. يتولى علّامة الضرب والحساب وتوجيه المصادر والمراجعة في الخفاء."
+        "Give the names and ask the question. Allama will do the calculations and cross-checks internally, then answer you directly.",
+        "أدخل الأسماء واسأل السؤال. يتولى علّامة الحسابات والمراجعات في الداخل ثم يجيبك مباشرة."
       )}</p>
     </div>
 
@@ -189,17 +144,17 @@ export function PractitionerConsole({locale,latitude,longitude,onOpenAudit,onOpe
 
         <label className="wide question-label">{t("What do you want to know?","ما الذي تريد معرفته؟")}
           <textarea value={question} onChange={(event)=>setQuestion(event.target.value)} placeholder={t(
-            "Ask one precise question in ordinary language…",
-            "اكتب سؤالاً واحداً واضحاً بلغتك العادية…"
+            "Ask naturally. Example: Should I proceed with this partnership, and what should I watch for?",
+            "اسأل بصورة طبيعية. مثال: هل أمضي في هذه الشراكة، وما الذي ينبغي أن أنتبه له؟"
           )} />
         </label>
       </div>
 
       <button className="optional-toggle" onClick={()=>setShowOptional((value)=>!value)}>
-        {showOptional ? t("Hide optional details","إخفاء التفاصيل الاختيارية") : t("Optional year details","تفاصيل السنة الاختيارية")}
+        {showOptional?t("Hide optional details","إخفاء التفاصيل الاختيارية"):t("Optional year details","تفاصيل السنة الاختيارية")}
       </button>
 
-      {showOptional && <div className="intake-grid optional-grid">
+      {showOptional&&<div className="intake-grid optional-grid">
         <label>{t("Birth year","سنة الميلاد")}
           <input inputMode="numeric" value={birthYearText} onChange={(event)=>setBirthYearText(event.target.value)} placeholder="e.g. 1985" />
         </label>
@@ -217,8 +172,8 @@ export function PractitionerConsole({locale,latitude,longitude,onOpenAudit,onOpe
       <div className="silent-engine-note">
         <span>{t("Silent engine","المحرك الصامت")}</span>
         <small>{t(
-          "Question routing · Raml · verified Ṭūkhī rules · Abjad · Falaki facts · source gates · contradiction preservation",
-          "توجيه السؤال · الرمل · قواعد الطوخي المتحققة · الأبجد · الحقائق الفلكية · بوابات المصدر · حفظ التعارض"
+          "Raml · Ṭūkhī · Abjad · planetary timing · question routing · cross-reference · final conversational judgment",
+          "الرمل · الطوخي · الأبجد · التوقيت الكوكبي · توجيه السؤال · المراجعة المتقاطعة · الحكم الحواري النهائي"
         )}</small>
       </div>
     </article>
