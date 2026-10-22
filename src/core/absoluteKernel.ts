@@ -1,12 +1,18 @@
 import { executeAbjadName, compareAbjadNames, type AbjadNameExecution, type AbjadRelation } from "./abjadMethodPack";
 import { runStructuralFormula, type StructuralFormulaResult } from "./formulaKernel";
 import { executeRamlCore, type RamlCoreJudgment } from "./ramlMethodPack";
+import { executeFalakiCore, type FalakiCoreExecution } from "./falakiMethodPack";
 
 export interface AbsoluteKernelInput {
   question:string;
   subjectName?:string;
   motherName?:string;
   otherParty?:string;
+  timing?:{
+    moment:Date;
+    latitude:number;
+    longitude:number;
+  };
 }
 
 export interface AbsoluteKernelExecution {
@@ -19,10 +25,13 @@ export interface AbsoluteKernelExecution {
     otherParty?:AbjadNameExecution;
     subjectToOtherParty?:AbjadRelation;
   };
+  falaki?:FalakiCoreExecution;
   unresolvedMethodNeeds:readonly string[];
   audit:{
     formulaTrace:StructuralFormulaResult["trace"];
     ramlRules:RamlCoreJudgment["execution"]["matchedRules"];
+    abjadTraces:readonly string[];
+    falakiTrace:readonly string[];
     notes:readonly string[];
   };
 }
@@ -38,6 +47,12 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
     ? compareAbjadNames(input.subjectName,input.otherParty)
     : undefined;
 
+  const falaki=input.timing ? executeFalakiCore({
+    moment:input.timing.moment,
+    latitude:input.timing.latitude,
+    longitude:input.timing.longitude
+  }) : undefined;
+
   const unresolvedMethodNeeds:string[]=[];
   if (subjectToOtherParty) {
     unresolvedMethodNeeds.push(
@@ -49,6 +64,11 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
       "A sourced method is still required before mother-name arithmetic can alter a verdict. The kernel calculates it but does not invent a weighting."
     );
   }
+  if (falaki) {
+    unresolvedMethodNeeds.push(
+      "A separate sourced Falaki interpretation pack is required before planetary hours, zodiac positions, or lunar mansions can change a verdict. Falaki Core currently computes facts only."
+    );
+  }
   unresolvedMethodNeeds.push(
     "Ṭūkhī-specific precedence/formulas are not active until they are extracted from an identifiable source text."
   );
@@ -56,7 +76,14 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
   const notes=[
     "The Raml decision is house-first and records every matched rule in precedence order.",
     "Abjad calculations are mechanically reproducible and table-scoped.",
-    "No Abjad correspondence is converted into a favorable/unfavorable judgment without a sourced interpretation rule."
+    "Falaki calculations use real local solar boundaries and verified unequal planetary hours when timing coordinates are supplied.",
+    "No Abjad or Falaki correspondence is converted into a favorable/unfavorable judgment without a sourced interpretation rule."
+  ];
+
+  const abjadTraces=[
+    ...(subject?.trace ?? []),
+    ...(mother?.trace ?? []),
+    ...(otherParty?.trace ?? [])
   ];
 
   return {
@@ -64,10 +91,13 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
     structural,
     raml,
     abjad:{subject,mother,otherParty,subjectToOtherParty},
+    falaki,
     unresolvedMethodNeeds,
     audit:{
       formulaTrace:structural.trace,
       ramlRules:raml.execution.matchedRules,
+      abjadTraces,
+      falakiTrace:falaki?.trace ?? [],
       notes
     }
   };
