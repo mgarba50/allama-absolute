@@ -14,7 +14,7 @@ export interface PractitionerEngineResult {
       raml:"ACTIVE";
       abjad:"CALCULATED_SOURCE_GATED";
       falaki:"CALCULATED_SOURCE_GATED"|"NOT_REQUESTED";
-      tukhi:"NOT_ACTIVE_SOURCE_TEXT_REQUIRED";
+      tukhi:"ACTIVE"|"CORPUS_GATE_LOCKED";
     };
   };
 }
@@ -35,7 +35,7 @@ export function runPractitionerEngine(input:AbsoluteKernelInput):PractitionerEng
         raml:"ACTIVE",
         abjad:"CALCULATED_SOURCE_GATED",
         falaki:kernel.falaki ? "CALCULATED_SOURCE_GATED" : "NOT_REQUESTED",
-        tukhi:"NOT_ACTIVE_SOURCE_TEXT_REQUIRED"
+        tukhi:kernel.toukhi.activation.active ? "ACTIVE" : "CORPUS_GATE_LOCKED"
       }
     }
   };
