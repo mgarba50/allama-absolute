@@ -37,6 +37,7 @@ export * from "./practitionerEngine";
 export * from "./toukhiMethodPack";
 export * from "./toukhiRecoveredIndex";\nexport * from "./toukhiScanMap";
 export * from "./toukhiNameEngine";
+export * from "./toukhiVerifiedRules";
 export * from "./toukhiCorpus";
 export * from "./deepSearch";
 export * from "./reports";
