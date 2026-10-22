@@ -22,7 +22,8 @@ export interface PractitionerEngineResult {
 export function runPractitionerEngine(input:AbsoluteKernelInput):PractitionerEngineResult {
   const kernel=runAbsoluteKernel(input);
   const synthesis=synthesizeAbsolute(kernel);
-  const verifiedAvailable=kernel.toukhi.verifiedRules.some((rule)=>rule.status==="VERIFIED_ACTIVE");\n  const verifiedFired=Boolean(kernel.toukhi.decisionRuleId);
+  const verifiedAvailable=kernel.toukhi.verifiedRules.some((rule)=>rule.status==="VERIFIED_ACTIVE");
+  const verifiedFired=Boolean(kernel.toukhi.decisionRuleId);
   return {
     kernel,
     synthesis,
