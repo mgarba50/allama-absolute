@@ -8,6 +8,7 @@ import {
 } from "../src/core/toukhiCorpus";
 import {
   executeRecoveredNameMotherNine,
+  executeRecoveredTaksirTailHead,
   executeRecoveredWafq4Key,
   executeRecoveredWafq5Key,
   executeToukhiCandidate,
@@ -27,14 +28,22 @@ describe("Toukhi corpus gate",()=>{
     expect(coverage[100].parts).toEqual(["TK-P2","TK-P3"]);
   });
 
-  it("records current visual screening and quarantines false legacy attributions",()=>{
+  it("records full visual screening while keeping transcription verification locked",()=>{
     const report=toukhiActivationReport();
-    expect(TOUKHI_SCREENED_PAGES).toEqual([4,6,7,35,39]);
-    expect(report.screenedPages).toBe(5);
-    expect(report.quarantinedItems).toBe(3);
+    expect(TOUKHI_SCREENED_PAGES).toHaveLength(252);
+    expect(TOUKHI_SCREENED_PAGES[0]).toBe(1);
+    expect(TOUKHI_SCREENED_PAGES[251]).toBe(252);
+    expect(report.screenedPages).toBe(252);
+    expect(report.verifiedPages).toBe(0);
     expect(report.active).toBe(false);
+  });
+
+  it("quarantines disproved legacy attributions and demotes the rest to discovery hints",()=>{
     expect(RECOVERED_TOUKHI_ITEMS.filter((item)=>item.sourceStatus==="QUARANTINED_BAD_ATTRIBUTION").map((item)=>item.id))
       .toEqual(["FRM-001","FRM-011","FRM-012"]);
+    expect(RECOVERED_TOUKHI_ITEMS.filter((item)=>item.sourceStatus==="LEGACY_DISCOVERY_HINT").length)
+      .toBeGreaterThan(10);
+    expect(RECOVERED_TOUKHI_ITEMS.every((item)=>item.executable===false)).toBe(true);
   });
 
   it("stays locked while even one logical page is unverified",()=>{
@@ -44,7 +53,7 @@ describe("Toukhi corpus gate",()=>{
     expect(report.verifiedPages).toBe(251);
   });
 
-  it("only activates at full 252/252 verification",()=>{
+  it("only activates at full 252/252 complete verification",()=>{
     const all=Array.from({length:TOUKHI_LOGICAL_PAGE_COUNT},(_,i)=>i+1);
     const report=toukhiActivationReport(all);
     expect(report.active).toBe(true);
@@ -52,7 +61,7 @@ describe("Toukhi corpus gate",()=>{
     expect(report.unreviewedPages).toBe(0);
   });
 
-  it("executes the visually verified pages 6-7 annual parity rule",()=>{
+  it("executes the visually re-verified pages 6-7 annual parity rule",()=>{
     const napoleon=executeVerifiedAnnualYearParity(1769,1804);
     expect(napoleon.ageByYearSubtraction).toBe(35);
     expect(napoleon.combined).toBe(1839);
@@ -68,24 +77,22 @@ describe("Toukhi corpus gate",()=>{
     expect(farouk.traditionalLabel).toBe("نحس/نزول");
   });
 
-  it("refuses to execute disproved legacy page-4 and page-39 formulas",()=>{
-    expect(()=>executeRecoveredNameMotherNine("موسى","حواء")).toThrow(/quarantined/i);
-    expect(()=>executeRecoveredWafq4Key(134)).toThrow(/quarantined/i);
+  it("refuses to execute every legacy archive formula until independently relocated",()=>{
+    expect(()=>executeRecoveredNameMotherNine("موسى","حواء")).toThrow(/not executable/i);
+    expect(()=>executeRecoveredWafq4Key(134)).toThrow(/not executable/i);
+    expect(()=>executeRecoveredWafq5Key(125)).toThrow(/not executable/i);
+    expect(()=>executeRecoveredTaksirTailHead("موسى")).toThrow(/not executable/i);
   });
 
-  it("keeps unverified recovered arithmetic decision-neutral",()=>{
-    const five=executeRecoveredWafq5Key(125);
-    expect(five.quotient).toBe(13);
-    expect(five.remainder).toBe(0);
-    expect(five.exact).toBe(true);
-    expect(five.sourceStatus).toBe("RECOVERED_NOT_VISUALLY_VERIFIED");
-
-    const result=executeToukhiCandidate({});
+  it("keeps the Toukhi candidate decision-neutral while the corpus gate is locked",()=>{
+    const result=executeToukhiCandidate({birthYear:1920,targetYear:1952});
     expect(result.activation.active).toBe(false);
+    expect(result.annualParity?.digitSum).toBe(22);
+    expect(result.annualParity?.decisionEligible).toBe(false);
     expect(result.decisionDirection).toBeNull();
   });
 
-  it("makes legacy recovered coverage gaps explicit instead of calling the archive complete",()=>{
+  it("makes the old archive coverage gaps explicit instead of calling it complete",()=>{
     expect(TOUKHI_RECOVERED_MODULE_INDEX).toHaveLength(16);
     expect(toukhiRecoveredPageCount()).toBe(71);
     expect(toukhiRecoveredGapRanges()).toEqual([
