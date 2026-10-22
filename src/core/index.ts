@@ -34,6 +34,8 @@ export * from "./absoluteKernel";
 export * from "./falakiMethodPack";
 export * from "./absoluteSynthesis";
 export * from "./practitionerEngine";
+export * from "./toukhiMethodPack";
+export * from "./toukhiCorpus";
 export * from "./deepSearch";
 export * from "./reports";
 export * from "./security";
