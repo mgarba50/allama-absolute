@@ -34,6 +34,7 @@ export * from "./absoluteKernel";
 export * from "./falakiMethodPack";
 export * from "./absoluteSynthesis";
 export * from "./practitionerEngine";
+export * from "./conversationalSynthesis";
 export * from "./toukhiMethodPack";
 export * from "./toukhiRecoveredIndex";
 export * from "./toukhiScanMap";
