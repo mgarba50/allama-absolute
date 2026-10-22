@@ -14,7 +14,7 @@ describe("practitioner engine",()=>{
     expect(["STRONG","MODERATE","MIXED","WEAK","UNRESOLVED"]).toContain(result.response.strength);
     expect(result.response.directAnswer.length).toBeGreaterThan(20);
     expect(result.response.methodStatus.raml).toBe("ACTIVE");
-    expect(result.response.methodStatus.tukhi).toBe("VERIFIED_RULES_ACTIVE");
+    expect(result.response.methodStatus.tukhi).toBe("VERIFIED_RULES_AVAILABLE_NO_MATCH");
     expect(result.kernel.toukhi.activation.active).toBe(false);
     expect(result.kernel.toukhi.activation.logicalPages).toBe(252);
     expect(result.kernel.toukhi.verifiedRules.some((rule)=>rule.status==="VERIFIED_ACTIVE")).toBe(true);
@@ -34,7 +34,7 @@ describe("practitioner engine",()=>{
     expect(result.kernel.toukhi.annualParity?.digitSum).toBe(22);
     expect(result.kernel.toukhi.decisionDirection).toBe(-1);
     expect(result.kernel.toukhi.decisionRuleId).toBe("TK-YEAR-PARITY-006");
-    expect(result.synthesis.evidence[0].layer).toBe("TOUKHI");
+    expect(result.synthesis.evidence[0].layer).toBe("TOUKHI");\n    expect(result.response.methodStatus.tukhi).toBe("VERIFIED_RULE_FIRED");
     expect(["NO","CONDITIONAL"]).toContain(result.response.verdict);
   });
 });
