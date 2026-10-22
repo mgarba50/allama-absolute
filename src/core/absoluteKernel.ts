@@ -2,6 +2,7 @@ import { executeAbjadName, compareAbjadNames, type AbjadNameExecution, type Abja
 import { runStructuralFormula, type StructuralFormulaResult } from "./formulaKernel";
 import { executeRamlCore, type RamlCoreJudgment } from "./ramlMethodPack";
 import { executeFalakiCore, type FalakiCoreExecution } from "./falakiMethodPack";
+import { executeToukhiCandidate, type ToukhiCandidateExecution } from "./toukhiMethodPack";
 
 export interface AbsoluteKernelInput {
   question:string;
@@ -13,6 +14,8 @@ export interface AbsoluteKernelInput {
     latitude:number;
     longitude:number;
   };
+  /** Internal/source-audit control. Normal UI should not populate this. */
+  toukhiVerifiedPages?:readonly number[];
 }
 
 export interface AbsoluteKernelExecution {
@@ -26,12 +29,14 @@ export interface AbsoluteKernelExecution {
     subjectToOtherParty?:AbjadRelation;
   };
   falaki?:FalakiCoreExecution;
+  toukhi:ToukhiCandidateExecution;
   unresolvedMethodNeeds:readonly string[];
   audit:{
     formulaTrace:StructuralFormulaResult["trace"];
     ramlRules:RamlCoreJudgment["execution"]["matchedRules"];
     abjadTraces:readonly string[];
     falakiTrace:readonly string[];
+    toukhiBlockers:readonly string[];
     notes:readonly string[];
   };
 }
@@ -53,6 +58,13 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
     longitude:input.timing.longitude
   }) : undefined;
 
+  const toukhi=executeToukhiCandidate({
+    personName:input.subjectName,
+    motherName:input.motherName,
+    taksirText:input.subjectName,
+    verifiedPages:input.toukhiVerifiedPages ?? []
+  });
+
   const unresolvedMethodNeeds:string[]=[];
   if (subjectToOtherParty) {
     unresolvedMethodNeeds.push(
@@ -61,7 +73,7 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
   }
   if (input.motherName?.trim()) {
     unresolvedMethodNeeds.push(
-      "A sourced method is still required before mother-name arithmetic can alter a verdict. The kernel calculates it but does not invent a weighting."
+      "Mother-name arithmetic is calculated. It cannot alter the verdict until the relevant Toukhi/source interpretation rule is visually verified and activated."
     );
   }
   if (falaki) {
@@ -69,15 +81,18 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
       "A separate sourced Falaki interpretation pack is required before planetary hours, zodiac positions, or lunar mansions can change a verdict. Falaki Core currently computes facts only."
     );
   }
-  unresolvedMethodNeeds.push(
-    "Ṭūkhī-specific precedence/formulas are not active until they are extracted from an identifiable source text."
-  );
+  if (!toukhi.activation.active) {
+    unresolvedMethodNeeds.push(
+      `Ṭūkhī corpus is source-gated: ${toukhi.activation.verifiedPages}/${toukhi.activation.logicalPages} logical pages verified; recovered candidate formulas may run for arithmetic checks only.`
+    );
+  }
 
   const notes=[
     "The Raml decision is house-first and records every matched rule in precedence order.",
     "Abjad calculations are mechanically reproducible and table-scoped.",
     "Falaki calculations use real local solar boundaries and verified unequal planetary hours when timing coordinates are supplied.",
-    "No Abjad or Falaki correspondence is converted into a favorable/unfavorable judgment without a sourced interpretation rule."
+    "Recovered Toukhi formulas are isolated behind a complete-corpus activation gate.",
+    "No Abjad, Falaki, or Toukhi correspondence is converted into a favorable/unfavorable judgment without a sourced interpretation rule."
   ];
 
   const abjadTraces=[
@@ -92,12 +107,14 @@ export function runAbsoluteKernel(input:AbsoluteKernelInput):AbsoluteKernelExecu
     raml,
     abjad:{subject,mother,otherParty,subjectToOtherParty},
     falaki,
+    toukhi,
     unresolvedMethodNeeds,
     audit:{
       formulaTrace:structural.trace,
       ramlRules:raml.execution.matchedRules,
       abjadTraces,
       falakiTrace:falaki?.trace ?? [],
+      toukhiBlockers:toukhi.activation.blockers,
       notes
     }
   };
