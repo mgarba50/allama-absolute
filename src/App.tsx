@@ -182,15 +182,15 @@ export default function App() {
 
       <div className="aside-note">
         {locale==="ar"
-          ? "تظل الحسابات والتفاصيل الفنية مخفية في الاستخدام العادي، وتظهر فقط عند فتح وحدة التدقيق الخبير."
-          : "Normal use hides calculation machinery. Open Expert Audit only when you intentionally want to inspect the engine."}
+          ? "في الاستشارة العادية تظهر لك خلاصة القراءة فقط. ويمكن فتح التدقيق الخبير إذا أردت الاطلاع على التفاصيل الداخلية."
+          : "In a normal consultation, only the considered reading is shown. Expert Audit is available only when you intentionally want the underlying workings."}
       </div>
     </aside>
 
     <main className="practitioner-main">
       <header className="minimal-header">
-        <div><p className="eyebrow">PRIVATE PRACTITIONER</p><h1>{pageTitle}</h1></div>
-        <span className="status">{translate(locale,"localCore")}</span>
+        <div><p className="eyebrow">{view==="practitioner" ? (locale==="ar"?"استشارة خاصة":"PRIVATE CONSULTATION") : "EXPERT AUDIT"}</p><h1>{pageTitle}</h1></div>
+        <span className="status">{view==="practitioner" ? (locale==="ar"?"جلسة خاصة":"Private Session") : translate(locale,"localCore")}</span>
       </header>
 
       {expert&&<div className="command-wrap"><CommandPalette onCommand={executeCommand} locale={locale} /></div>}
