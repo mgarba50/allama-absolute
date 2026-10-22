@@ -34,7 +34,8 @@ describe("practitioner engine",()=>{
     expect(result.kernel.toukhi.annualParity?.digitSum).toBe(22);
     expect(result.kernel.toukhi.decisionDirection).toBe(-1);
     expect(result.kernel.toukhi.decisionRuleId).toBe("TK-YEAR-PARITY-006");
-    expect(result.synthesis.evidence[0].layer).toBe("TOUKHI");\n    expect(result.response.methodStatus.tukhi).toBe("VERIFIED_RULE_FIRED");
+    expect(result.synthesis.evidence[0].layer).toBe("TOUKHI");
+    expect(result.response.methodStatus.tukhi).toBe("VERIFIED_RULE_FIRED");
     expect(["NO","CONDITIONAL"]).toContain(result.response.verdict);
   });
 });
