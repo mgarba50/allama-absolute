@@ -206,15 +206,16 @@ export function toukhiActivationReport(verifiedPages:readonly number[]=[]):Toukh
   const quarantinedItems=RECOVERED_TOUKHI_ITEMS.filter((item)=>item.sourceStatus==="QUARANTINED_BAD_ATTRIBUTION").length;
 
   const blockers:string[]=[];
+  const warnings:string[]=[];
   if (verified!==TOUKHI_LOGICAL_PAGE_COUNT) blockers.push(`Only ${verified}/${TOUKHI_LOGICAL_PAGE_COUNT} logical pages are completely verified.`);
-  blockers.push(`All ${TOUKHI_SCREENED_PAGES.length} logical pages have been visually screened; screening does not count as complete transcription/verification.`);
-  if (recovered>0) blockers.push(`${recovered} page(s) contain legacy discovery hints that must be independently relocated and verified in the scan.`);
-  if (quarantinedItems>0) blockers.push(`${quarantinedItems} recovered item(s) are quarantined because their legacy page attribution failed visual checking.`);
   if (unreviewed>0) blockers.push(`${unreviewed} page(s) remain unreviewed by the completeness gate.`);
   if (!overlapPages.includes(101)) blockers.push("Expected split overlap at logical page 101 was not detected.");
+  warnings.push(`All ${TOUKHI_SCREENED_PAGES.length} logical pages have been visually screened; screening is discovery only and does not equal transcription/verification.`);
+  if (recovered>0) warnings.push(`${recovered} page(s) contain legacy discovery hints that must be independently relocated and verified in the scan.`);
+  if (quarantinedItems>0) warnings.push(`${quarantinedItems} legacy item(s) are quarantined because their old page attribution failed visual checking.`);
 
   return {
-    active:verified===TOUKHI_LOGICAL_PAGE_COUNT,
+    active:blockers.length===0,
     logicalPages:TOUKHI_LOGICAL_PAGE_COUNT,
     verifiedPages:verified,
     screenedPages:TOUKHI_SCREENED_PAGES.length,
