@@ -19,6 +19,11 @@ import {
   toukhiRecoveredGapRanges,
   toukhiRecoveredPageCount
 } from "../src/core/toukhiRecoveredIndex";
+import {
+  TOUKHI_SCREENING_MAP,
+  toukhiCriticalScreenRanges,
+  toukhiScreeningPagesCovered
+} from "../src/core/toukhiScanMap";
 
 describe("Toukhi corpus gate",()=>{
   it("models the five source parts as 252 logical pages with page 101 overlap",()=>{
