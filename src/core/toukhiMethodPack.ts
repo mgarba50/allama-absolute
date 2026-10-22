@@ -118,6 +118,7 @@ export function executeToukhiCandidate(input:{
     "The legacy AlToukhiArchive is used only as a discovery index because multiple page attributions failed direct visual checking.",
     "Only independently re-verified source rules may execute.",
     "The pages 9-22 elemental/name-balance machinery now executes structurally, but remains decision-ineligible until the complete corpus gate passes.",
+    "The page 24 reduced 1-9 name-number method now executes with raw zero preserved until this source's exact zero-remainder convention is verified.",
     "The pages 6-7 annual parity rule remains decision-ineligible until the complete 1-252 corpus gate passes."
   ];
 
