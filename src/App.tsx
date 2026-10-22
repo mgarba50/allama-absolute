@@ -132,7 +132,7 @@ export default function App() {
 
   const expert = !["practitioner","cases"].includes(view);
   const pageTitle =
-    view === "practitioner" ? (locale === "ar" ? "التحليل" : "New Analysis") :
+    view === "practitioner" ? (locale === "ar" ? "استشارة جديدة" : "New Consultation") :
     view === "absolute" ? translate(locale,"absolute") :
     view === "cast" ? translate(locale,"cast") :
     view === "houses" ? translate(locale,"houses") :
@@ -154,7 +154,7 @@ export default function App() {
       </div>
 
       <div className="primary-nav">
-        <NavigationButton id="practitioner" current={view} label={locale==="ar"?"تحليل جديد":"New Analysis"} onSelect={setView} />
+        <NavigationButton id="practitioner" current={view} label={locale==="ar"?"استشارة جديدة":"New Consultation"} onSelect={setView} />
         <NavigationButton id="cases" current={view} label={translate(locale,"cases")} onSelect={setView} />
       </div>
 
