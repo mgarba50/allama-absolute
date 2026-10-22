@@ -1,9 +1,13 @@
 import { toukhiActivationReport, type ToukhiActivationReport } from "./toukhiCorpus";
 import {
+  analyzeToukhiFullName,
   analyzeToukhiName,
+  analyzeToukhiReducedNameNumber,
   compareToukhiNames,
+  type ToukhiFullNameProfile,
   type ToukhiNameComparison,
-  type ToukhiNameProfile
+  type ToukhiNameProfile,
+  type ToukhiReducedNameNumber
 } from "./toukhiNameEngine";
 
 export interface ToukhiAnnualParityResult {
@@ -26,7 +30,10 @@ export interface ToukhiCandidateExecution {
   activation:ToukhiActivationReport;
   annualParity?:ToukhiAnnualParityResult;
   subjectName?:ToukhiNameProfile;
+  subjectReducedNumber?:ToukhiReducedNameNumber;
+  subjectWithMother?:ToukhiFullNameProfile;
   otherPartyName?:ToukhiNameProfile;
+  otherPartyReducedNumber?:ToukhiReducedNameNumber;
   nameComparison?:ToukhiNameComparison;
   decisionDirection:null;
   notes:readonly string[];
@@ -107,6 +114,7 @@ export function executeRecoveredTaksirTailHead(_text:string):never {
 
 export function executeToukhiCandidate(input:{
   personName?:string;
+  motherName?:string;
   otherParty?:string;
   birthYear?:number;
   targetYear?:number;
@@ -117,9 +125,10 @@ export function executeToukhiCandidate(input:{
     "All 252 logical pages have been visually screened, but complete source transcription/verification is still gated.",
     "The legacy AlToukhiArchive is used only as a discovery index because multiple page attributions failed direct visual checking.",
     "Only independently re-verified source rules may execute.",
-    "The pages 9-22 elemental/name-balance machinery now executes structurally, but remains decision-ineligible until the complete corpus gate passes.",
-    "The page 24 reduced 1-9 name-number method now executes with raw zero preserved until this source's exact zero-remainder convention is verified.",
-    "The pages 6-7 annual parity rule remains decision-ineligible until the complete 1-252 corpus gate passes."
+    "Pages 9-22 elemental/name-balance machinery executes structurally, but remains decision-ineligible until the complete corpus gate passes.",
+    "Page 24 reduced 1-9 name-number arithmetic executes with raw zero preserved until this source's exact zero-remainder convention is verified.",
+    "Pages 30-31 allow full-name composition with the mother's name as an explicit school variant; the selected lineage policy is recorded and must be consistent across comparisons.",
+    "Pages 6-7 annual parity remains decision-ineligible until the complete 1-252 corpus gate passes."
   ];
 
   const annualParity=Number.isInteger(input.birthYear) && Number.isInteger(input.targetYear)
@@ -129,8 +138,18 @@ export function executeToukhiCandidate(input:{
   const subjectName=input.personName?.trim()
     ? analyzeToukhiName(input.personName)
     : undefined;
+  const subjectReducedNumber=input.personName?.trim()
+    ? analyzeToukhiReducedNameNumber(input.personName)
+    : undefined;
+  const subjectWithMother=input.personName?.trim() && input.motherName?.trim()
+    ? analyzeToukhiFullName(input.personName,input.motherName,"MOTHER")
+    : undefined;
+
   const otherPartyName=input.otherParty?.trim()
     ? analyzeToukhiName(input.otherParty)
+    : undefined;
+  const otherPartyReducedNumber=input.otherParty?.trim()
+    ? analyzeToukhiReducedNameNumber(input.otherParty)
     : undefined;
   const nameComparison=input.personName?.trim() && input.otherParty?.trim()
     ? compareToukhiNames(input.personName,input.otherParty)
@@ -140,7 +159,10 @@ export function executeToukhiCandidate(input:{
     activation,
     annualParity,
     subjectName,
+    subjectReducedNumber,
+    subjectWithMother,
     otherPartyName,
+    otherPartyReducedNumber,
     nameComparison,
     decisionDirection:null,
     notes
