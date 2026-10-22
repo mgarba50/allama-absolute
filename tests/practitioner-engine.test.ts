@@ -14,7 +14,9 @@ describe("practitioner engine",()=>{
     expect(["STRONG","MODERATE","MIXED","WEAK","UNRESOLVED"]).toContain(result.response.strength);
     expect(result.response.directAnswer.length).toBeGreaterThan(20);
     expect(result.response.methodStatus.raml).toBe("ACTIVE");
-    expect(result.response.methodStatus.tukhi).toBe("NOT_ACTIVE_SOURCE_TEXT_REQUIRED");
+    expect(result.response.methodStatus.tukhi).toBe("CORPUS_GATE_LOCKED");
+    expect(result.kernel.toukhi.activation.active).toBe(false);
+    expect(result.kernel.toukhi.activation.logicalPages).toBe(252);
     expect(result.synthesis.audit.noInventedWeights).toBe(true);
     expect(result.synthesis.evidence.some((item)=>item.role==="DECISIVE")).toBe(true);
   });
