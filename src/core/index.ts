@@ -30,6 +30,7 @@ export * from "./analysis";
 export * from "./formulaKernel";
 export * from "./ramlMethodPack";
 export * from "./abjadMethodPack";
+export * from "./absoluteKernel";
 export * from "./deepSearch";
 export * from "./reports";
 export * from "./security";
